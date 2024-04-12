@@ -1,0 +1,7 @@
+.dashboardList {
+  width: 1022px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 각 행의 높이 */
+  grid-template-rows: 1fr 1fr; /* 각 열의 너비 */
+  gap: 15px;
+}
