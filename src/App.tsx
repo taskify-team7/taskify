@@ -1,13 +1,8 @@
-import styles from "./styles.module.css";
 import "./Global.css";
+import Router from "./Router";
 
 function App() {
-  return (
-    <div className="App">
-      안녕하세요
-      <div className={styles.test}>테스트입니다</div>
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;
