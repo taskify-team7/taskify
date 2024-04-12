@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import CreateBoardButton from "../../components/CreateBoardButton/CreateBoardButton";
 import styles from "./DashBoardPage.module.css";
 import DashBoardItem from "../../components/DashBoardItem/DashBoardItem";
+import InviteBox from "../../components/InviteBox/InviteBox";
 
 export default function DashboardPage() {
   const { dashboardId } = useParams();
@@ -16,7 +17,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div>
+    <div className={styles.body}>
       <div className={styles.dashboardList}>
         <CreateBoardButton />
         <DashBoardItem dashboardData={testData}></DashBoardItem>
@@ -25,6 +26,7 @@ export default function DashboardPage() {
         <DashBoardItem dashboardData={testData}></DashBoardItem>
         <DashBoardItem dashboardData={testData}></DashBoardItem>
       </div>
+      <InviteBox />
     </div>
   );
 }

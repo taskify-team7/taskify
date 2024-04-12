@@ -1,0 +1,75 @@
+.inviteBox {
+  width: 100%;
+  min-height: 400px;
+  max-height: 600px;
+  border-radius: 8px;
+  background: #fff;
+  padding: 32px 28px;
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.inviteBox_null {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  top: 35%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.inviteBox_title {
+  color: #333236;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.inviteBox_searchbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #d9d9d9;
+  gap: 8px;
+  border-radius: 6px;
+}
+
+.inviteBox_entry > img {
+  width: 24px;
+  height: 24px;
+}
+
+.inviteBox_entry > input {
+  font-size: 16px;
+}
+
+.inviteBox_entry > input::placeholder {
+  color: #9fa6b2;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.inviteBox_entry {
+  display: flex;
+  align-items: center;
+  gap: 30%;
+}
+
+.inviteBox_entry li {
+  color: #9fa6b2;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.inviteBox_invitList {
+  overflow-y: scroll;
+}
