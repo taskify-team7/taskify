@@ -10,12 +10,20 @@
   width: 164.557px;
   height: 189.796px;
   flex-shrink: 0;
+  @media screen and (max-width: 580px) {
+    width: 98.734px;
+    height: 113.878px;
+  }
 }
 
 .logoText {
   width: 200px;
   height: 55.186px;
   flex-shrink: 0;
+  @media screen and (max-width: 580px) {
+    width: 119.044px;
+    height: 33.112px;
+  }
 }
 
 .welcomeText {
@@ -26,6 +34,7 @@
   font-weight: 500;
   font-style: normal;
   line-height: normal;
+  margin-bottom: 30px;
 }
 
 .redirectors {

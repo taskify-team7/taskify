@@ -58,7 +58,7 @@ export default function LoginForm() {
         />
         <img
           onClick={() => setRevealPw((prev) => !prev)}
-          src={revealPw ? RevealSvg : HideSvg}
+          src={revealPw ? HideSvg : RevealSvg}
           alt="reveal"
           className={styles.reveal}
         />

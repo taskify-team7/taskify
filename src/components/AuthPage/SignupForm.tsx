@@ -89,7 +89,7 @@ export default function LoginForm() {
         />
         <img
           onClick={() => setRevealPw((prev) => !prev)}
-          src={revealPw ? RevealSvg : HideSvg}
+          src={revealPw ? HideSvg : RevealSvg}
           alt="reveal"
           className={styles.reveal}
         />
@@ -118,7 +118,7 @@ export default function LoginForm() {
         />
         <img
           onClick={() => setRevealConfirmPw((prev) => !prev)}
-          src={revealConfirmPw ? RevealSvg : HideSvg}
+          src={revealConfirmPw ? HideSvg : RevealSvg}
           alt="reveal"
           className={styles.reveal}
         />

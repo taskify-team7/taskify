@@ -4,6 +4,9 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  @media screen and (max-width: 580px) {
+    width: 351px;
+  }
 }
 .field {
   position: relative;
