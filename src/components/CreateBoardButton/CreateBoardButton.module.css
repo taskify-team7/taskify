@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  width: 332px;
+  height: 70px;
+  cursor: pointer;
+}
+
+.font {
+  color: #333236;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+}

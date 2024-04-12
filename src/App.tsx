@@ -1,11 +1,12 @@
 import styles from "./styles.module.css";
 import "./Global.css";
+import { RouterProvider } from "react-router-dom";
+import Router from "./Router";
 
 function App() {
   return (
     <div className="App">
-      안녕하세요
-      <div className={styles.test}>테스트입니다</div>
+      <Router></Router>
     </div>
   );
 }
