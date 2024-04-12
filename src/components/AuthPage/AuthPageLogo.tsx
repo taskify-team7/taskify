@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 export default function AuthPageLogo({ welcomeText }: { welcomeText: string }) {
   const navigate = useNavigate();
   return (
-    <>
+    <div>
       <div className={styles.container} onClick={() => navigate("/")}>
         <img className={styles.logoImage} src={LogoImageSvg} alt="logo" />
         <img className={styles.logoText} src={LogoTextSvg} alt="logo" />
       </div>
       <div className={styles.welcomeText}>{welcomeText}</div>
-    </>
+    </div>
   );
 }
