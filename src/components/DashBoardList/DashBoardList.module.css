@@ -1,0 +1,21 @@
+.dashboardList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 각 행의 높이 */
+  grid-template-rows: 1fr 1fr; /* 각 열의 너비 */
+  gap: 15px;
+}
+
+@media screen and (max-width: 744px) {
+  .dashboardList {
+    grid-template-columns: 1fr 1fr; /* 각 행의 높이 */
+    grid-template-rows: 1fr 1fr 1fr; /* 각 열의 너비 */
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .dashboardList {
+    grid-template-columns: 1fr; /* 각 행의 높이 */
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; /* 각 열의 너비 */
+  }
+}
