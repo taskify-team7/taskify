@@ -4,6 +4,39 @@
   grid-template-columns: 1fr 1fr 1fr; /* 각 행의 높이 */
   grid-template-rows: 1fr 1fr; /* 각 열의 너비 */
   gap: 15px;
+  position: relative;
+}
+
+.pagenationBtn {
+  position: absolute;
+  right: 0;
+  bottom: -70px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+.pagenationBtn p {
+  color: #333236;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 20px;
+}
+
+.pagenationBtn > button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+}
+
+.pagenationBtn > button:first-child {
+  border-radius: 4px 0px 0px 4px;
+}
+
+.pagenationBtn > button:last-child {
+  border-radius: 0px 4px 4px 0px;
 }
 
 @media screen and (max-width: 744px) {

@@ -9,7 +9,6 @@ export default function DashboardPage() {
   return (
     <div className={styles.body}>
       <DashBoardList />
-      <InviteBox />
     </div>
   );
 }
