@@ -6,7 +6,7 @@
   border-radius: 8px;
   border: 1px solid #d9d9d9;
   background: #fff;
-  width: 332px;
+  width: 100%;
   height: 70px;
   cursor: pointer;
 }
@@ -21,4 +21,10 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
+}
+
+@media screen and (max-width: 375px) {
+  .container {
+    height: 58px;
+  }
 }

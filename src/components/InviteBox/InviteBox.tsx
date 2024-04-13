@@ -1,9 +1,13 @@
 import React from "react";
 import styles from "./InviteBox.module.css";
-import InviteItem from "./InviteItem";
+import useBrowserSize from "../../hooks/useBrowserSize";
+import MobileInviteList from "./MobileInviteList";
+import PcInviteList from "./PcInviteList";
 
 function InviteBox() {
   const test = true;
+  const { windowWidth } = useBrowserSize();
+
   return (
     <div className={styles.inviteBox}>
       <h2 className={styles.inviteBox_title}>초대받은 대시보드</h2>
@@ -13,14 +17,7 @@ function InviteBox() {
             <img src="/Icons/search.svg" alt="search" />
             <input type="text" placeholder="검색" />
           </div>
-          <ul className={styles.inviteBox_entry}>
-            <li>이름</li>
-            <li>초대자</li>
-            <li>수락 여부</li>
-          </ul>
-          <div className={styles.inviteBox_invitList}>
-            <InviteItem />
-          </div>
+          {windowWidth <= 375 ? <MobileInviteList /> : <PcInviteList />}
         </>
       ) : (
         <div className={styles.inviteBox_null}>

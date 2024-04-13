@@ -41,35 +41,22 @@
   border-radius: 6px;
 }
 
-.inviteBox_entry > img {
-  width: 24px;
-  height: 24px;
+@media screen and (max-width: 744px) {
+  .inviteBox {
+    max-height: 600px;
+  }
+
+  .inviteBox_entry {
+    gap: 24%;
+  }
 }
 
-.inviteBox_entry > input {
-  font-size: 16px;
-}
+@media screen and (max-width: 375px) {
+  .inviteBox {
+    max-height: 850px;
+  }
 
-.inviteBox_entry > input::placeholder {
-  color: #9fa6b2;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.inviteBox_entry {
-  display: flex;
-  align-items: center;
-  gap: 30%;
-}
-
-.inviteBox_entry li {
-  color: #9fa6b2;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.inviteBox_invitList {
-  overflow-y: scroll;
+  .inviteBox_entry li:last-child {
+    display: none;
+  }
 }
