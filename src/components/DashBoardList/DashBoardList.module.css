@@ -13,7 +13,9 @@
   bottom: -70px;
   z-index: 10;
   display: flex;
+  justify-content: center;
   align-items: center;
+  gap: 5px;
 }
 
 .pagenationBtn p {
@@ -31,7 +33,7 @@
   background: #fff;
 }
 
-.pagenationBtn > button:first-child {
+.pagenationBtn > button:nth-child(2) {
   border-radius: 4px 0px 0px 4px;
 }
 
