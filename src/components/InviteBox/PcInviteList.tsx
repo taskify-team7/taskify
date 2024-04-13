@@ -1,7 +1,8 @@
+import { InviteDataType } from "../../interface/DashboardType";
 import InviteItem from "./InviteItem";
 import styles from "./PcInvite.module.css";
 
-function PcInviteList() {
+function PcInviteList({ inviteData }: { inviteData: InviteDataType[] }) {
   return (
     <>
       <ul className={styles.inviteBox_entry}>
@@ -10,8 +11,13 @@ function PcInviteList() {
         <li>수락 여부</li>
       </ul>
       <div className={styles.inviteBox_invitList}>
-        <InviteItem />
-        <InviteItem />
+        {inviteData.map((invite) => (
+          <InviteItem
+            key={invite.id}
+            dashboarData={invite?.dashboard}
+            inviterData={invite?.inviter}
+          />
+        ))}
       </div>
     </>
   );
