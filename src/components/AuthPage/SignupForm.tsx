@@ -4,7 +4,11 @@ import RevealSvg from "../../assets/reveal.svg";
 import HideSvg from "../../assets/hide.svg";
 import { useState } from "react";
 
-export default function LoginForm() {
+export default function LoginForm({
+  handleSignup,
+}: {
+  handleSignup: (arg0: object) => void;
+}) {
   const {
     register,
     handleSubmit,
@@ -18,7 +22,7 @@ export default function LoginForm() {
     <form
       className={styles.container}
       autoComplete="off"
-      onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
+      onSubmit={handleSubmit(handleSignup)}
     >
       <div className={styles.field}>
         <label className={styles.label} htmlFor="email">
@@ -101,11 +105,11 @@ export default function LoginForm() {
       </div>
       <div className={styles.field}>
         <label className={styles.label} htmlFor="confirmPassword">
-          비밀번호
+          비밀번호 확인
         </label>
         <input
           id="confirmPassword"
-          type={revealPw ? "text" : "confirmPassword"}
+          type={revealConfirmPw ? "text" : "password"}
           placeholder="비밀번호를 한번 더 입력해 주세요"
           className={`${styles.input} + ${
             errors.confirmPassword ? styles.isError : ""
