@@ -28,7 +28,7 @@ export default function AuthProvider({
   async function contextLogin(data: { email: string; password: string }) {
     try {
       const result = await logIn(data);
-      localStorage.setItem("user", result.user);
+      localStorage.setItem("user", JSON.stringify(result.user));
       localStorage.setItem("token", result.accessToken);
       alert(result.user.nickname + "님 반갑습니다");
     } catch (error: any) {

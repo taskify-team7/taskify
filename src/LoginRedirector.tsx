@@ -8,13 +8,6 @@ export default function LoginRedirector({ children }: { children: any }) {
   const { getUser, contextLogout } = useAuth();
 
   useEffect(() => {
-    const requestInterceptor = client.interceptors.request.use(function (
-      config
-    ) {
-      const token = localStorage.getItem("token");
-      config.headers.Authorization = token ? `Bearer ${token}` : "";
-      return config;
-    });
     const responseInterceptor = client.interceptors.response.use(
       function (response: any) {
         return response;
@@ -32,7 +25,6 @@ export default function LoginRedirector({ children }: { children: any }) {
       }
     );
     return () => {
-      client.interceptors.response.eject(requestInterceptor);
       client.interceptors.response.eject(responseInterceptor);
     };
   }, [contextLogout, navigate]);
