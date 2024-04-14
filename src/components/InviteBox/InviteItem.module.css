@@ -1,0 +1,70 @@
+.inviteBox_invitItem {
+  display: flex;
+  align-items: center;
+  padding: 15px 0px;
+  border-bottom: 1px solid #eee;
+}
+
+.inviteBox_invitItem:last-child {
+  border-bottom: none;
+}
+
+.inviteBox_invitItem p {
+  color: #333236;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.inviteBox_invitItem p:first-child {
+  margin-right: 22%;
+}
+
+.inviteBox_invitItem p:nth-child(2) {
+  margin-right: 30%;
+}
+
+.inviteBox_invitList_buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.a_button {
+  display: flex;
+  width: 84px;
+  height: 32px;
+  padding: 7px 29px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  background: var(--violet-violet_5534DA, #5534da);
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.c_button {
+  display: flex;
+  width: 84px;
+  height: 32px;
+  padding: 7px 29px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  background: white;
+  color: var(--violet-violet_5534DA, #5534da);
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+}
+
+@media screen and (max-width: 744px) {
+  .inviteBox_invitItem p:first-child {
+    margin-right: 10%;
+  }
+
+  .inviteBox_invitItem p:nth-child(2) {
+    margin-right: 25%;
+  }
+}
