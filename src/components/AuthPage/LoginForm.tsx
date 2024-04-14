@@ -3,20 +3,25 @@ import styles from "./Forms.module.css";
 import RevealSvg from "../../assets/reveal.svg";
 import HideSvg from "../../assets/hide.svg";
 import { useState } from "react";
+import { LoginFormValue } from "../../interface/auth";
 
-export default function LoginForm() {
+export default function LoginForm({
+  handleLogin,
+}: {
+  handleLogin: (obj1: { email: string; password: string }) => void;
+}) {
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
-  } = useForm({ mode: "onBlur" });
+  } = useForm<LoginFormValue>({ mode: "onBlur" });
   const [revealPw, setRevealPw] = useState(false);
 
   return (
     <form
       className={styles.container}
       autoComplete="off"
-      onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
+      onSubmit={handleSubmit((data) => handleLogin(data))}
     >
       <div className={styles.field}>
         <label className={styles.label} htmlFor="email">
