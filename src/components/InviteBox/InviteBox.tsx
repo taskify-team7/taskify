@@ -3,7 +3,7 @@ import styles from "./InviteBox.module.css";
 import useBrowserSize from "../../hooks/useBrowserSize";
 import MobileInviteList from "./MobileInviteList";
 import PcInviteList from "./PcInviteList";
-import { getInviteList } from "../../api/DashboardPageAPI";
+import { getInviteList } from "../../api/dashboard";
 import { useQuery } from "@tanstack/react-query";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import { InviteListDataType } from "../../interface/DashboardType";
