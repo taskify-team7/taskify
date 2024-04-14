@@ -8,12 +8,6 @@
   word-break: keep-all;
 }
 
-#root {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 :root {
   --violet: #5534da;
   --violet-light: #f1effd;

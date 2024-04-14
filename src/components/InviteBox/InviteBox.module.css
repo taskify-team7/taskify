@@ -1,0 +1,62 @@
+.inviteBox {
+  width: 100%;
+  min-height: 400px;
+  max-height: 600px;
+  border-radius: 8px;
+  background: #fff;
+  padding: 32px 28px;
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.inviteBox_null {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  top: 35%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.inviteBox_title {
+  color: #333236;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.inviteBox_searchbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #d9d9d9;
+  gap: 8px;
+  border-radius: 6px;
+}
+
+@media screen and (max-width: 744px) {
+  .inviteBox {
+    max-height: 600px;
+  }
+
+  .inviteBox_entry {
+    gap: 24%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .inviteBox {
+    max-height: 850px;
+  }
+
+  .inviteBox_entry li:last-child {
+    display: none;
+  }
+}

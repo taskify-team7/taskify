@@ -1,11 +1,15 @@
 import styles from "./styles.module.css";
 import "./Global.css";
+import Router from "./Router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
+  const queryClient = new QueryClient();
   return (
     <div className="App">
-      안녕하세요
-      <div className={styles.test}>테스트입니다</div>
+      <QueryClientProvider client={queryClient}>
+        <Router></Router>
+      </QueryClientProvider>
     </div>
   );
 }
