@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./DashBoardList.module.css";
 import CreateBoardButton from "../CreateBoardButton/CreateBoardButton";
 import DashBoardItem from "../DashBoardItem/DashBoardItem";
-import { getDashboardList } from "../../api/DashboardPageAPI";
+import { getDashboardList } from "../../api/dashboard";
 import { useQuery } from "@tanstack/react-query";
 
 interface DashboardList {
