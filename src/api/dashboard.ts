@@ -2,9 +2,9 @@ import client from "./axios";
 
 interface ApiPrameterType {
   navigationMethod: string;
-  cursorId: number;
-  page: number;
-  size: number;
+  cursorId: number | null;
+  page: number | null;
+  size: number | null;
 }
 
 export const getDashboardList = async (params: ApiPrameterType) => {

@@ -4,22 +4,7 @@ import CreateBoardButton from "../CreateBoardButton/CreateBoardButton";
 import DashBoardItem from "../DashBoardItem/DashBoardItem";
 import { getDashboardList } from "../../api/dashboard";
 import { useQuery } from "@tanstack/react-query";
-
-interface DashboardList {
-  id: number;
-  title: string;
-  color: string;
-  userId: number;
-  createdAt: string;
-  updatedAt: string;
-  createdByMe: boolean;
-}
-
-interface DashBoardDataType {
-  cursorId: number | null;
-  totalCount: number;
-  dashboards: DashboardList[];
-}
+import { DashBoardDataType } from "../../interface/DashboardType";
 
 function DashBoardList() {
   const [params, setParams] = useState({
@@ -35,7 +20,7 @@ function DashBoardList() {
   });
 
   if (isLoading) {
-    return <div>loding</div>;
+    return <div>loading</div>;
   }
 
   if (error) {
@@ -77,10 +62,7 @@ function DashBoardList() {
       <div className={styles.dashboardList}>
         <CreateBoardButton />
         {data?.dashboards.map((dashboard) => (
-          <DashBoardItem
-            key={dashboard.id}
-            dashboardData={dashboard}
-          ></DashBoardItem>
+          <DashBoardItem key={dashboard.id} dashboardData={dashboard} />
         ))}
         <div className={styles.pagenationBtn}>
           <p>{`${totalPage}페이지 중 ${params.page}`}</p>
