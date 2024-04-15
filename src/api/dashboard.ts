@@ -2,9 +2,9 @@ import client from "./axios";
 
 interface ApiPrameterType {
   navigationMethod: string;
-  cursorId: number;
-  page: number;
-  size: number;
+  cursorId: number | null;
+  page: number | null;
+  size: number | null;
 }
 
 export const getDashboardList = async (params: ApiPrameterType) => {
@@ -27,5 +27,10 @@ export const getInviteList = async () => {
     },
   });
 
+  return data;
+};
+
+export const getDashboard = async (id: string) => {
+  const { data } = await client.get(`dashboards/${id}`);
   return data;
 };

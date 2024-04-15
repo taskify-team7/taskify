@@ -1,0 +1,93 @@
+.container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+}
+
+.sidebar {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-right: 1px solid #d9d9d9;
+  @media screen and (max-width: 1200px) {
+    width: 160px;
+  }
+  @media screen and (max-width: 768px) {
+    width: 67px;
+  }
+}
+
+.logo {
+  width: 109px;
+  height: 33px;
+  margin: 20px 24px 0 24px;
+  cursor: pointer;
+}
+
+.head {
+  margin: 50px 24px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  span {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  img {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+}
+
+.dashboardList {
+  margin: 0 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboardListItem {
+  width: 276px;
+  height: 45px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  color: #787486;
+  cursor: pointer;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 16px;
+  flex-shrink: 0;
+  margin: 0 16px 0 12px;
+}
+
+.crown {
+  width: 17.59px;
+  height: 14px;
+  flex-shrink: 0;
+  margin-left: 7px;
+}
+
+.selected {
+  background: var(--violet-light);
+  color: #333236;
+}
+
+.contents {
+  flex: 1;
+}

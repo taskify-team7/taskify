@@ -133,7 +133,7 @@ export default function LoginForm({
         )}
       </div>
       <button type="submit" className={styles.submit} disabled={isSubmitting}>
-        로그인
+        회원가입
       </button>
     </form>
   );
