@@ -33,7 +33,7 @@ export interface DashboardList {
   createdByMe: boolean;
 }
 
-export interface DashBoardDataType {
+export interface DashBoardsDataType {
   cursorId: number | null;
   totalCount: number;
   dashboards: DashboardList[];

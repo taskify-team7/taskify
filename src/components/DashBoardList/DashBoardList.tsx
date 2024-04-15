@@ -4,7 +4,7 @@ import CreateBoardButton from "../CreateBoardButton/CreateBoardButton";
 import DashBoardItem from "../DashBoardItem/DashBoardItem";
 import { getDashboardList } from "../../api/dashboard";
 import { useQuery } from "@tanstack/react-query";
-import { DashBoardDataType } from "../../interface/DashboardType";
+import { DashBoardsDataType } from "../../interface/DashboardType";
 
 function DashBoardList() {
   const [params, setParams] = useState({
@@ -14,8 +14,8 @@ function DashBoardList() {
     size: 5,
   });
 
-  const { isLoading, error, data } = useQuery<DashBoardDataType>({
-    queryKey: ["dashboard", params.page],
+  const { isLoading, error, data } = useQuery<DashBoardsDataType>({
+    queryKey: ["dashboards", params.page],
     queryFn: () => getDashboardList(params),
   });
 

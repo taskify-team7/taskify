@@ -4,33 +4,17 @@ import LogoImage from "../../assets/mediumLogo.svg";
 import PlusIcon from "../../assets/plus.svg";
 import Crown from "../../assets/crown.svg";
 import { useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getDashboardList } from "../../api/dashboard";
-import { DashBoardDataType } from "../../interface/DashboardType";
+import { DashboardList } from "../../interface/DashboardType";
 
-export default function Sidebar({ children }: { children: ReactNode }) {
+export default function Sidebar({
+  children,
+  dashboards,
+}: {
+  children: ReactNode;
+  dashboards: DashboardList[] | null;
+}) {
   const navigate = useNavigate();
-  const { id = null } = useParams();
-
-  const { isLoading, error, data } = useQuery<DashBoardDataType>({
-    queryKey: ["dashboard"],
-    queryFn: () =>
-      getDashboardList({
-        navigationMethod: "infiniteScroll",
-        cursorId: null,
-        page: null,
-        size: 100,
-      }),
-  });
-
-  if (isLoading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    console.log(error);
-    return <div>errors</div>;
-  }
+  const { id } = useParams();
   return (
     <div className={styles.container}>
       <div className={styles.sidebar}>
@@ -45,7 +29,7 @@ export default function Sidebar({ children }: { children: ReactNode }) {
           <img src={PlusIcon} alt="plusicon" className={styles.plusIcon} />
         </div>
         <ul className={styles.dashboardList}>
-          {data?.dashboards.map((dashboard) => (
+          {dashboards?.map((dashboard) => (
             <li
               key={dashboard.id}
               onClick={() => navigate(`/dashboard/${dashboard.id}`)}
