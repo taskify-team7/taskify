@@ -1,22 +1,12 @@
-import React, { useRef } from "react";
 import styles from "./InviteBox.module.css";
 import useBrowserSize from "../../hooks/useBrowserSize";
 import MobileInviteList from "./MobileInviteList";
 import PcInviteList from "./PcInviteList";
-import { getInviteList } from "../../api/dashboard";
-import { useQuery } from "@tanstack/react-query";
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
-import { InviteListDataType } from "../../interface/DashboardType";
+import useInfiniteHook from "../../hooks/useInfiniteHook";
 
 function InviteBox() {
-  const ref = useRef<HTMLDivElement | null>(null);
   const { windowWidth } = useBrowserSize();
-  const pageRef = useIntersectionObserver(ref, {});
-
-  const { isLoading, error, data } = useQuery<InviteListDataType>({
-    queryKey: ["invite"],
-    queryFn: () => getInviteList(),
-  });
+  const { isLoading, error, data } = useInfiniteHook();
 
   if (isLoading) {
     return <div>loding</div>;
@@ -40,7 +30,6 @@ function InviteBox() {
           ) : (
             <PcInviteList inviteData={data?.invitations} />
           )}
-          <div ref={ref}></div>
         </>
       ) : (
         <div className={styles.inviteBox_null}>
