@@ -18,13 +18,12 @@ export default function Header({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const data = dashboards?.find((dashboard) => dashboard.id === Number(id));
-
-  const { error } = useQuery<DashBoardType | null>({
+  const { error, data } = useQuery<DashBoardType | null>({
     queryKey: ["dashboard", id],
     queryFn: id ? () => getDashboard(id) : () => null,
     enabled: id !== null,
     retry: false,
+    initialData: dashboards?.find((dashboard) => dashboard.id === Number(id)),
   });
   if (id && error) {
     console.log("wrong id provided");
