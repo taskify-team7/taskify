@@ -1,5 +1,4 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthProvider";
 import { ReactNode } from "react";
 import styles from "./Header.module.css";
 import { DashBoardType } from "../../interface/DashboardType";
@@ -49,6 +48,8 @@ export default function Header({
         <div className={styles.contents}>
           {data && (
             <>
+              <div>dd</div>
+              <div>dd</div>
               <div>dd</div>
             </>
           )}
