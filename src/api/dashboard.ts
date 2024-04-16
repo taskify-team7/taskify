@@ -30,7 +30,16 @@ export const getInviteList = async () => {
   return data;
 };
 
+
+export const createDashboard = async (title: string, color: string) => {
+  const { data } = await client.post("dashboards", {
+    title: title,
+    color: color,
+  });
+}
+
 export const getDashboard = async (id: string) => {
   const { data } = await client.get(`dashboards/${id}`);
+
   return data;
 };

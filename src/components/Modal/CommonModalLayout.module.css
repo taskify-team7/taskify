@@ -1,0 +1,29 @@
+.modal_container {
+  width: 540px;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.modal_title {
+  color: #333236;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+.contents > div:last-child {
+  width: 100%;
+  flex-direction: row-reverse;
+}
