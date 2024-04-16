@@ -14,3 +14,9 @@
   font-size: 24px;
   font-weight: 700;
 }
+
+@media screen and (max-width: 480px) {
+  .modal_container {
+    width: 330px;
+  }
+}
