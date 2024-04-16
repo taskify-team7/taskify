@@ -1,6 +1,6 @@
 .background {
-  width: 120vh;
-  height: 120vh;
+  width: 120%;
+  height: 120%;
   display: flex;
   justify-content: center;
   align-items: center;
