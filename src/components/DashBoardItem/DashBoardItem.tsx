@@ -1,19 +1,8 @@
+import { DashBoardType } from "../../interface/DashboardType";
 import styles from "./DashBoard.module.css";
 import { Link } from "react-router-dom";
 
-interface DashBoardItemProps {
-  dashboardData: {
-    id: number;
-    title: string;
-    color: string;
-    createdAt: string;
-    updatedAt: string;
-    createdByMe: boolean;
-    userId: number;
-  };
-}
-
-function DashBoardItem({ dashboardData }: DashBoardItemProps) {
+function DashBoardItem({ dashboardData }: { dashboardData: DashBoardType }) {
   return (
     <Link to={`/dashboard/${dashboardData.id}`}>
       <div className={styles.dashBoardItem}>

@@ -3,7 +3,7 @@
   flex-direction: column;
 }
 
-.navbar {
+.header {
   height: 70px;
   border-bottom: 1px solid #d9d9d9;
   display: flex;
@@ -21,4 +21,20 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+
+.crown {
+  width: 20.103px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-left: 8px;
+  @media (max-width: 1200px) {
+    display: none;
+  }
+}
+
+.contents {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

@@ -1,17 +1,17 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import styles from "./ColorElement.module.css";
+import styles from "./ColorSelector.module.css";
 
 type apiBodyValueType = {
   title: string;
   color: string;
 };
 
-interface ColorElementProps {
+interface ColorSelectorProps {
   color: string;
   setApiBodyValue: Dispatch<SetStateAction<apiBodyValueType>>;
 }
 
-function ColorElement({ color, setApiBodyValue }: ColorElementProps) {
+function ColorSelector({ color, setApiBodyValue }: ColorSelectorProps) {
   const [isCheck, setIsCheck] = useState(false);
 
   const setColor = () => {
@@ -34,4 +34,4 @@ function ColorElement({ color, setApiBodyValue }: ColorElementProps) {
   );
 }
 
-export default ColorElement;
+export default ColorSelector;

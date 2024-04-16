@@ -17,8 +17,13 @@ function ModalContainer({ children, handleModalClose }: ModalContainerProps) {
   };
 
   return (
-    <div className={styles.background} onKeyDown={escCloseModal} tabIndex={0}>
-      {children}
+    <div
+      className={styles.background}
+      onKeyDown={escCloseModal}
+      onClick={() => handleModalClose()}
+      tabIndex={0}
+    >
+      <div onClick={(e) => e.stopPropagation()}>{children}</div>
     </div>
   );
 }
