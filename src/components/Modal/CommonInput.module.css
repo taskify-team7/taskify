@@ -1,14 +1,6 @@
 .content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-  width: 100%;
-}
-
-.content_form {
-  display: flex;
-  flex-direction: column;
   gap: 10px;
   width: 100%;
 }
@@ -34,10 +26,4 @@
   font-family: Pretendard;
   font-size: 16px;
   font-weight: 400;
-}
-
-.content_colorList {
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
