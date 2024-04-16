@@ -31,6 +31,11 @@
   overflow-y: scroll;
 }
 
+.observer {
+  width: 100%;
+  height: 20px;
+}
+
 @media screen and (max-width: 744px) {
   .inviteBox_entry {
     gap: 24%;

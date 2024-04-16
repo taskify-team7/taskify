@@ -1,8 +1,10 @@
+import useInfiniteHook from "../../hooks/useInfiniteHook";
 import { InviteDataType } from "../../interface/DashboardType";
 import InviteItem from "./InviteItem";
 import styles from "./PcInvite.module.css";
 
 function PcInviteList({ inviteData }: { inviteData: InviteDataType[] }) {
+  const { ref } = useInfiniteHook();
   return (
     <>
       <ul className={styles.inviteBox_entry}>
@@ -18,6 +20,9 @@ function PcInviteList({ inviteData }: { inviteData: InviteDataType[] }) {
             inviterData={invite?.inviter}
           />
         ))}
+        {inviteData.length > 6 && (
+          <div ref={ref} className={styles.observer}></div>
+        )}
       </div>
     </>
   );
