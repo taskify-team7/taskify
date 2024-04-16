@@ -20,7 +20,7 @@ function ModalContainer({ children, handleModalClose }: ModalContainerProps) {
     <div
       className={styles.background}
       onKeyDown={escCloseModal}
-      onClick={() => handleModalClose}
+      onClick={() => handleModalClose()}
       tabIndex={0}
     >
       <div onClick={(e) => e.stopPropagation()}>{children}</div>
