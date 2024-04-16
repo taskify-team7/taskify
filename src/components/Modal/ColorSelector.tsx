@@ -7,7 +7,7 @@ interface ColorSelectorProps {
   selectColor: (color: string) => void;
 }
 
-function ColorList({ selectColor, selectedColor }: ColorSelectorProps) {
+function ColorSelector({ selectColor, selectedColor }: ColorSelectorProps) {
   return (
     <div className={styles.content_colorList}>
       {colors.map((color, i) => (
@@ -26,4 +26,4 @@ function ColorList({ selectColor, selectedColor }: ColorSelectorProps) {
   );
 }
 
-export default ColorList;
+export default ColorSelector;

@@ -22,3 +22,19 @@ export interface InviteListDataType {
   invitations: InviteDataType[];
   cursorId?: any;
 }
+
+export interface DashBoardType {
+  id: number;
+  title: string;
+  color: string;
+  userId: number;
+  createdAt: string;
+  updatedAt: string;
+  createdByMe: boolean;
+}
+
+export interface DashBoardsType {
+  cursorId: number | null;
+  totalCount: number;
+  dashboards: DashBoardType[];
+}

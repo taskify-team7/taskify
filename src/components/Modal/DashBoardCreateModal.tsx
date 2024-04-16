@@ -3,14 +3,25 @@ import ModalContainer from "./ModalContainer";
 import CommonModalLayout from "./CommonModalLayout";
 import styles from "./DashBoardCreateModal.module.css";
 import { createDashboard } from "../../api/dashboard";
+
 import CommonInput from "./CommonInput";
 import ColorSelector from "./ColorSelector";
+
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface DashBoardCreateModalProps {
   handleModalClose: () => void;
 }
 
 function DashBoardCreateModal({ handleModalClose }: DashBoardCreateModalProps) {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: () => createDashboard(apiBodyValue.title, apiBodyValue.color),
+    onSettled: async () => {
+      return await queryClient.invalidateQueries({ queryKey: ["dashboards"] });
+    },
+  });
+
   const [apiBodyValue, setApiBodyValue] = useState({
     title: "",
     color: "",
@@ -18,12 +29,16 @@ function DashBoardCreateModal({ handleModalClose }: DashBoardCreateModalProps) {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   const onCreate = () => {
-    createDashboard(apiBodyValue.title, apiBodyValue.color);
-    setApiBodyValue({
-      title: "",
-      color: "",
-    });
-    handleModalClose();
+    try {
+      mutate();
+      setApiBodyValue({
+        title: "",
+        color: "",
+      });
+      handleModalClose();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const selectColor = (color: string) => {

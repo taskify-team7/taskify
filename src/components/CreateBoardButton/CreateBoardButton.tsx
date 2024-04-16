@@ -4,12 +4,12 @@ import { createPortal } from "react-dom";
 import DashBoardCreateModal from "../Modal/DashBoardCreateModal";
 
 function CreateBoardButton() {
-  const { openModal, handleModalOpen, handleModalClose } = useModal();
+  const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
 
   return (
     <>
       {createPortal(
-        openModal && (
+        isModalOpen && (
           <DashBoardCreateModal handleModalClose={handleModalClose} />
         ),
         document.body
