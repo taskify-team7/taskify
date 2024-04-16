@@ -31,7 +31,7 @@ export default function Layout() {
   return (
     <LoginRedirector>
       <Sidebar dashboards={data?.dashboards || null}>
-        <Header>
+        <Header dashboards={data?.dashboards || null}>
           <Outlet />
         </Header>
       </Sidebar>

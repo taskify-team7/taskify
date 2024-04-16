@@ -5,35 +5,33 @@ import styles from "./Header.module.css";
 import { DashBoardType } from "../../interface/DashboardType";
 import { useQuery } from "@tanstack/react-query";
 import { getDashboard } from "../../api/dashboard";
+import Crown from "../../assets/crown.svg";
+import Profile from "./Profile";
 
-export default function Header({ children }: { children: ReactNode }) {
-  const { contextLogout } = useAuth();
+export default function Header({
+  children,
+  dashboards,
+}: {
+  children: ReactNode;
+  dashboards: DashBoardType[] | null;
+}) {
   const { id = null } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
 
-  // const queryClient = useQueryClient();
-  const { isLoading, error, data } = useQuery<DashBoardType | null>({
+  const data = dashboards?.find((dashboard) => dashboard.id === Number(id));
+
+  const { error } = useQuery<DashBoardType | null>({
     queryKey: ["dashboard", id],
     queryFn: id ? () => getDashboard(id) : () => null,
     enabled: id !== null,
     retry: false,
   });
-
-  if (isLoading) {
-    return <div></div>;
-  }
-
-  // if a wrong id is provided
   if (id && error) {
     console.log("wrong id provided");
     navigate("/dashboard");
   }
 
-  function handleLogout() {
-    contextLogout();
-    navigate("/login");
-  }
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -43,11 +41,18 @@ export default function Header({ children }: { children: ReactNode }) {
             : id
             ? data?.title
             : "내 대시보드"}
+          {data?.createdByMe && (
+            <img src={Crown} alt="crown" className={styles.crown} />
+          )}
         </div>
+
         <div className={styles.contents}>
-          <button onClick={handleLogout}>로그아웃버튼</button>
-          <button onClick={handleLogout}>로그아웃버튼</button>
-          <button onClick={handleLogout}>로그아웃버튼</button>
+          {data && (
+            <>
+              <div>dd</div>
+            </>
+          )}
+          <Profile />
         </div>
       </div>
       {children}
