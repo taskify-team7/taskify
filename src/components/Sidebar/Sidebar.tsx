@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import styles from "./Sidebar.module.css";
 import LogoImage from "../../assets/mediumLogo.svg";
+import SmallLogoImage from "../../assets/smallLogo.svg";
 import PlusIcon from "../../assets/plus.svg";
 import Crown from "../../assets/crown.svg";
 import { useNavigate, useParams } from "react-router-dom";
@@ -22,6 +23,12 @@ export default function Sidebar({
           src={LogoImage}
           alt="logo"
           className={styles.logo}
+          onClick={() => navigate("/dashboard")}
+        />
+        <img
+          src={SmallLogoImage}
+          alt="logo"
+          className={styles.smallLogo}
           onClick={() => navigate("/dashboard")}
         />
         <div className={styles.head}>
