@@ -1,20 +1,20 @@
 import { useState } from "react";
 
 export const useModal = () => {
-  const [openModal, setOpenModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalOpen = () => {
-    setOpenModal(true);
+    setIsModalOpen(true);
     document.body.style.overflow = "hidden";
   };
 
   const handleModalClose = () => {
-    setOpenModal(false);
+    setIsModalOpen(false);
     document.body.style.overflow = "auto";
   };
 
   return {
-    openModal,
+    isModalOpen,
     handleModalOpen,
     handleModalClose,
   };

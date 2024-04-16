@@ -2,7 +2,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthProvider";
 import { ReactNode, useEffect } from "react";
 import styles from "./Navbar.module.css";
-import { DashboardList } from "../../interface/DashboardType";
+import { DashBoardType } from "../../interface/DashboardType";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getDashboard } from "../../api/dashboard";
 
@@ -13,7 +13,7 @@ export default function Navbar({ children }: { children: ReactNode }) {
   const location = useLocation();
 
   const queryClient = useQueryClient();
-  const { isLoading, error, data } = useQuery<DashboardList | null>({
+  const { isLoading, error, data } = useQuery<DashBoardType | null>({
     queryKey: ["dashboard"],
     queryFn: id ? () => getDashboard(id) : () => null,
     retry: false,

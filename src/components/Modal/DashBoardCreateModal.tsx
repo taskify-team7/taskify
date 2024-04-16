@@ -4,6 +4,7 @@ import CommonModalLayout from "./CommonModalLayout";
 import NewDashboard from "./NewDashboard";
 import styles from "./DashBoardCreateModal.module.css";
 import { createDashboard } from "../../api/dashboard";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface DashBoardCreateModalProps {
   handleModalClose: () => void;
@@ -15,20 +16,30 @@ type apiBodyValueType = {
 };
 
 function DashBoardCreateModal({ handleModalClose }: DashBoardCreateModalProps) {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: () => createDashboard(apiBodyValue.title, apiBodyValue.color),
+    onSettled: async () => {
+      return await queryClient.invalidateQueries({ queryKey: ["dashboards"] });
+    },
+  });
+
   const [apiBodyValue, setApiBodyValue] = useState<apiBodyValueType>({
     title: "",
     color: "",
   });
 
-  console.log(apiBodyValue);
-
   const onCreate = () => {
-    createDashboard(apiBodyValue.title, apiBodyValue.color);
-    setApiBodyValue({
-      title: "",
-      color: "",
-    });
-    handleModalClose();
+    try {
+      mutate();
+      setApiBodyValue({
+        title: "",
+        color: "",
+      });
+      handleModalClose();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

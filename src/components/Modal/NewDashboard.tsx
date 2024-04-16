@@ -1,5 +1,5 @@
 import styles from "./NewDashboard.module.css";
-import ColorElement from "./ColorElement";
+import ColorSelector from "./ColorSelector";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 const colors = ["#7AC555", "#760DDE", "#FFA500", "#76A5EA", "#E876EA"];
@@ -41,7 +41,7 @@ function NewDashboard({ setApiBodyValue }: NewDashboardProps) {
       </div>
       <div className={styles.content_colorList}>
         {colors.map((color) => (
-          <ColorElement color={color} setApiBodyValue={setApiBodyValue} />
+          <ColorSelector color={color} setApiBodyValue={setApiBodyValue} />
         ))}
       </div>
     </div>

@@ -23,7 +23,7 @@ export interface InviteListDataType {
   cursorId?: any;
 }
 
-export interface DashboardList {
+export interface DashBoardType {
   id: number;
   title: string;
   color: string;
@@ -33,8 +33,8 @@ export interface DashboardList {
   createdByMe: boolean;
 }
 
-export interface DashBoardsDataType {
+export interface DashBoardsType {
   cursorId: number | null;
   totalCount: number;
-  dashboards: DashboardList[];
+  dashboards: DashBoardType[];
 }
