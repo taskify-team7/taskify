@@ -4,10 +4,16 @@ import styles from "./CommonInput.module.css";
 interface CommonInputProps {
   label: string;
   placeholder: string;
+  value?: string;
   inputOnChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function CommonInput({ label, inputOnChange, placeholder }: CommonInputProps) {
+function CommonInput({
+  label,
+  inputOnChange,
+  placeholder,
+  value,
+}: CommonInputProps) {
   return (
     <div className={styles.content}>
       <label htmlFor="name" className={styles.content_label}>
@@ -18,6 +24,7 @@ function CommonInput({ label, inputOnChange, placeholder }: CommonInputProps) {
         type="text"
         placeholder={placeholder}
         className={styles.content_input}
+        value={value}
         onChange={inputOnChange}
       />
     </div>

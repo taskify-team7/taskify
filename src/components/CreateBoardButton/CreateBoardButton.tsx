@@ -2,7 +2,6 @@ import styles from "./CreateBoardButton.module.css";
 import { useModal } from "../../hooks/useModal";
 import { createPortal } from "react-dom";
 import DashBoardCreateModal from "../Modal/DashBoardCreateModal";
-import ColumnCreateModal from "../Modal/ColumnCreateModal";
 
 function CreateBoardButton() {
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
@@ -11,8 +10,7 @@ function CreateBoardButton() {
     <>
       {createPortal(
         isModalOpen && (
-          <ColumnCreateModal handleModalClose={handleModalClose} />
-          // <DashBoardCreateModal />
+          <DashBoardCreateModal handleModalClose={handleModalClose} />
         ),
         document.body
       )}

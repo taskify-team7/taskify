@@ -1,0 +1,71 @@
+.contents {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+.contents > div:last-child {
+  width: 100%;
+}
+
+.modal_buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal_buttons > div:last-child {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.d_button {
+  color: #9fa6b2;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration-line: underline;
+}
+
+.a_button {
+  display: flex;
+  width: 120px;
+  height: 48px;
+  padding: 14px 46px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  background: var(--violet-violet_5534DA, #5534da);
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.c_button {
+  display: flex;
+  width: 120px;
+  height: 48px;
+  padding: 14px 46px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  background: white;
+  color: var(--violet-violet_5534DA, #5534da);
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+}
+
+@media screen and (max-width: 480px) {
+  .modal_buttons {
+    display: block;
+  }
+
+  .d_button {
+    margin-bottom: 10px;
+  }
+}
