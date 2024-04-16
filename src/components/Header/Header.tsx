@@ -1,33 +1,27 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthProvider";
-import { ReactNode, useEffect } from "react";
-import styles from "./Navbar.module.css";
+import { ReactNode } from "react";
+import styles from "./Header.module.css";
 import { DashBoardType } from "../../interface/DashboardType";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getDashboard } from "../../api/dashboard";
 
-export default function Navbar({ children }: { children: ReactNode }) {
+export default function Header({ children }: { children: ReactNode }) {
   const { contextLogout } = useAuth();
-  const { id } = useParams();
+  const { id = null } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery<DashBoardType | null>({
-    queryKey: ["dashboard"],
+    queryKey: ["dashboard", id],
     queryFn: id ? () => getDashboard(id) : () => null,
+    enabled: id !== null,
     retry: false,
   });
 
-  useEffect(() => {
-    queryClient.invalidateQueries({
-      queryKey: ["dashboard"],
-      refetchType: "all",
-    });
-  }, [id, queryClient]);
-
   if (isLoading) {
-    return <div>loading</div>;
+    return <div></div>;
   }
 
   // if a wrong id is provided
@@ -42,7 +36,7 @@ export default function Navbar({ children }: { children: ReactNode }) {
   }
   return (
     <div className={styles.container}>
-      <div className={styles.navbar}>
+      <div className={styles.header}>
         <div className={styles.title}>
           {location.pathname === "/mypage"
             ? "계정관리"

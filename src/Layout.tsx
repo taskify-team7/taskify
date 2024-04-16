@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 import LoginRedirector from "./LoginRedirector";
-import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 import { useQuery } from "@tanstack/react-query";
 import { getDashboardList } from "./api/dashboard";
 import { DashBoardsType } from "./interface/DashboardType";
+import Header from "./components/Header/Header";
 
 export default function Layout() {
   const { isLoading, error, data } = useQuery<DashBoardsType>({
@@ -31,9 +31,9 @@ export default function Layout() {
   return (
     <LoginRedirector>
       <Sidebar dashboards={data?.dashboards || null}>
-        <Navbar>
+        <Header>
           <Outlet />
-        </Navbar>
+        </Header>
       </Sidebar>
     </LoginRedirector>
   );
