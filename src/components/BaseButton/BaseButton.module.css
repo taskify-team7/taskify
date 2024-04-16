@@ -12,7 +12,13 @@
   background: #fff;
 }
 
-.baseButtonImg{
+.baseButtonImg {
   width: 20px;
   height: 20px;
+}
+
+@media (max-width: 375px) {
+  .baseButtonImg {
+    display: none;
+  }
 }
