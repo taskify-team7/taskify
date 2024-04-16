@@ -1,26 +1,21 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./ColorElement.module.css";
 
-type apiBodyValueType = {
-  title: string;
-  color: string;
-};
-
 interface ColorElementProps {
   color: string;
-  setApiBodyValue: Dispatch<SetStateAction<apiBodyValueType>>;
+  selectColor: (color: string) => void;
+  isColorChecked: boolean;
 }
 
-function ColorElement({ color, setApiBodyValue }: ColorElementProps) {
-  const [isCheck, setIsCheck] = useState(false);
-
+function ColorElement({
+  color,
+  selectColor,
+  isColorChecked,
+}: ColorElementProps) {
   const setColor = () => {
-    setIsCheck((prev) => !prev);
-
-    setApiBodyValue((prev) => ({
-      ...prev,
-      color: color,
-    }));
+    if (!isColorChecked) {
+      selectColor(color);
+    }
   };
 
   return (
@@ -29,7 +24,7 @@ function ColorElement({ color, setApiBodyValue }: ColorElementProps) {
       style={{ backgroundColor: color }}
       onClick={setColor}
     >
-      {isCheck && <img src="/Icons/modal_check.svg" alt="color"></img>}
+      {isColorChecked && <img src="/Icons/modal_check.svg" alt="color"></img>}
     </div>
   );
 }
