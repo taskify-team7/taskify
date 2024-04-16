@@ -36,7 +36,7 @@ export const createDashboard = async (title: string, color: string) => {
     title: title,
     color: color,
   });
-
+}
 
 export const getDashboard = async (id: string) => {
   const { data } = await client.get(`dashboards/${id}`);
