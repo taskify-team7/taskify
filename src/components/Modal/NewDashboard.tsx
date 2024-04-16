@@ -40,8 +40,12 @@ function NewDashboard({ setApiBodyValue }: NewDashboardProps) {
         />
       </div>
       <div className={styles.content_colorList}>
-        {colors.map((color) => (
-          <ColorSelector color={color} setApiBodyValue={setApiBodyValue} />
+        {colors.map((color, i) => (
+          <ColorSelector
+            key={i}
+            color={color}
+            setApiBodyValue={setApiBodyValue}
+          />
         ))}
       </div>
     </div>
