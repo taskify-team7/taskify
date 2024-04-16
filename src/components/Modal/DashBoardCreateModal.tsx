@@ -15,18 +15,18 @@ interface DashBoardCreateModalProps {
 
 function DashBoardCreateModal({ handleModalClose }: DashBoardCreateModalProps) {
   const queryClient = useQueryClient();
+  const [apiBodyValue, setApiBodyValue] = useState({
+    title: "",
+    color: "",
+  });
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+
   const { mutate } = useMutation({
     mutationFn: () => createDashboard(apiBodyValue.title, apiBodyValue.color),
     onSettled: async () => {
       return await queryClient.invalidateQueries({ queryKey: ["dashboards"] });
     },
   });
-
-  const [apiBodyValue, setApiBodyValue] = useState({
-    title: "",
-    color: "",
-  });
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   const onCreate = () => {
     try {
@@ -65,23 +65,25 @@ function DashBoardCreateModal({ handleModalClose }: DashBoardCreateModalProps) {
   return (
     <ModalContainer handleModalClose={handleModalClose}>
       <CommonModalLayout title="새로운 대시보드">
-        <CommonInput
-          label="대시보드 이름"
-          placeholder="뉴프로젝트"
-          inputOnChange={inputOnChange}
-        />
-        <ColorSelector
-          selectedColor={selectedColor}
-          selectColor={selectColor}
-        />
-        <div className={styles.modal_buttons}>
-          <button className={styles.a_button} onClick={onCreate}>
-            생성
-          </button>
-          <button className={styles.c_button} onClick={handleModalClose}>
-            취소
-          </button>
-        </div>
+        <form className={styles.contents}>
+          <CommonInput
+            label="대시보드 이름"
+            placeholder="뉴프로젝트"
+            inputOnChange={inputOnChange}
+          />
+          <ColorSelector
+            selectedColor={selectedColor}
+            selectColor={selectColor}
+          />
+          <div className={styles.modal_buttons}>
+            <button className={styles.a_button} onClick={onCreate}>
+              생성
+            </button>
+            <button className={styles.c_button} onClick={handleModalClose}>
+              취소
+            </button>
+          </div>
+        </form>
       </CommonModalLayout>
     </ModalContainer>
   );
