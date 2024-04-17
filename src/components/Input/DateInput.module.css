@@ -1,0 +1,46 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.content_label {
+  color: #333236;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 500;
+}
+.content_date {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 6px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  padding: 0px 10px;
+}
+
+.content_date img {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 5px;
+}
+
+.content_date_input {
+  height: 48px;
+  width: 950%;
+  border: none;
+  background: #fff;
+  color: #171717;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.content_date_input::placeholder {
+  color: #9fa6b2;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+}

@@ -1,0 +1,44 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.content_label {
+  color: #333236;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.content_user {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid #d9d9d9;
+}
+
+.content_user > img {
+  width: 26px;
+  height: 26px;
+}
+
+.content_user_input {
+  width: 95%;
+  height: 48px;
+  padding: 10px;
+  background: #fff;
+  color: #171717;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.content_user_input::placeholder {
+  color: #9fa6b2;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+}
