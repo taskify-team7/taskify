@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import styles from "./UserInput.module.css";
 import { CommonInputType } from "../../interface/Input";
 
@@ -23,7 +29,7 @@ function UserInput({
   //선택된 값
   const [selected, setSelected] = useState("");
 
-  const onChange = (e: any) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setOpenDropBox(true);
     setSelected(e.target.value);
