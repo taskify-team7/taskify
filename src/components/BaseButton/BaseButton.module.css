@@ -1,3 +1,5 @@
+@import '../../Global.css';
+
 .baseButton {
   display: flex;
   width: 120px;
@@ -20,5 +22,222 @@
 @media (max-width: 375px) {
   .baseButtonImg {
     display: none;
+  }
+}
+
+.login {
+  display: flex;
+  height: 50px;
+  padding: 14px 236px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--violet, #5534da);
+  color: #fff;
+  font-size: 18px;
+}
+
+@media (max-width: 375px) {
+  .login {
+    padding: 14px 152px;
+  }
+}
+
+.loginBlock {
+  display: flex;
+  height: 50px;
+  padding: 14px 236px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--gray-gray_9FA6B2, #9fa6b2);
+  color: #fff;
+  font-size: 18px;
+}
+
+@media (max-width: 375px) {
+  .loginBlock {
+    padding: 14px 152px;
+  }
+}
+
+.accept {
+  display: flex;
+  height: 32px;
+  padding: 7px 29px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  color: #fff;
+  background: var(--violet, #5534da);
+  font-size: 14px;
+}
+
+@media (min-width: 376px) and (max-width: 744px) {
+  .accept {
+    padding: 7px 23px;
+  }
+}
+
+@media (max-width: 375px) {
+  .accept {
+    padding: 7px 44px;
+    font-size: 12px;
+  }
+}
+
+.refuse {
+  display: flex;
+  height: 32px;
+  padding: 7px 29px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  color: var(--violet, #5534da);
+  background: #fff;
+  font-size: 14px;
+}
+
+@media (min-width: 376px) and (max-width: 744px) {
+  .refuse {
+    padding: 7px 23px;
+  }
+}
+
+@media (max-width: 375px) {
+  .refuse {
+    padding: 7px 44px;
+    font-size: 12px;
+  }
+}
+
+.delete {
+  display: flex;
+  height: 32px;
+  padding: 7px 29px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  color: var(--violet, #5534da);
+  background: #fff;
+  font-size: 14px;
+}
+
+@media (max-width: 375px) {
+  .delete {
+    padding: 7px 15px;
+    font-size: 12px;
+  }
+}
+
+.dashboardDelete {
+  display: flex;
+  height: 62px;
+  padding: 20px 95px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  background: var(--gray-gray_FAFAFA, #fafafa);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+@media (max-width: 375px) {
+  .dashboardDelete {
+    padding: 7px 84px;
+    font-size: 16px;
+  }
+}
+
+.newDashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  height: 70px;
+  padding: 24px 99px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  background: var(--white-white_FFFFFF, #fff);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media (min-width: 376px) and (max-width: 744px) {
+  .newDashboard {
+    height: 68px;
+    padding: 23px 56px;
+  }
+}
+
+@media (max-width: 375px) {
+  .newDashboard {
+    height: 58px;
+    padding: 19px 70px;
+    font-size: 14px;
+  }
+}
+
+.addColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  height: 70px;
+  padding: 24px 86px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  background: var(--white-white_FFFFFF, #fff);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+@media (min-width: 376px) and (max-width: 744px) {
+  .addColumn {
+    padding: 24px 180px;
+  }
+}
+
+@media (max-width: 375px) {
+  .addColumn {
+    height: 60px;
+    padding: 20px 60px;
+    font-size: 12px;
+  }
+}
+
+.addColumnButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  padding: 9px 146px;
+  border-radius: 6px;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  background: var(--white-white_FFFFFF, #fff);
+}
+
+@media (min-width: 376px) and (max-width: 744px) {
+  .addColumnButton {
+    padding: 9px 261px;
+  }
+}
+
+@media (max-width: 375px) {
+  .addColumnButton {
+    height: 32px;
+    padding: 6px 132px;
   }
 }
