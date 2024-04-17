@@ -1,7 +1,7 @@
 import React from "react";
 import ModalContainer from "./ModalContainer";
 import CommonModalLayout from "./CommonModalLayout";
-import CommonInput from "./CommonInput";
+import CommonInput from "../Input/CommonInput";
 import styles from "./ColumnCreatemodal.module.css";
 
 interface olumnCreateModalProps {

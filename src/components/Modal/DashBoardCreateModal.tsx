@@ -4,7 +4,7 @@ import CommonModalLayout from "./CommonModalLayout";
 import styles from "./DashBoardCreateModal.module.css";
 import { createDashboard } from "../../api/dashboard";
 
-import CommonInput from "./CommonInput";
+import CommonInput from "../Input/CommonInput";
 import ColorSelector from "./ColorSelector";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ColumnManagementModal.module.css";
 import ModalContainer from "./ModalContainer";
 import CommonModalLayout from "./CommonModalLayout";
-import CommonInput from "./CommonInput";
+import CommonInput from "../Input/CommonInput";
 
 interface ColumnManagementModalProps {
   handleModalClose: () => void;
