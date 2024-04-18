@@ -4,8 +4,8 @@ import Sidebar from "./components/Sidebar/Sidebar";
 
 import { useQuery } from "@tanstack/react-query";
 import { getDashboardList } from "./api/dashboard";
-import { DashBoardsType } from "./interface/DashboardType";
 import Header from "./components/Header/Header";
+import { DashBoardsType } from "./interface/DashboardType";
 
 export default function Layout() {
   const { isLoading, error, data } = useQuery<DashBoardsType>({
@@ -27,7 +27,6 @@ export default function Layout() {
     console.log(error);
     return <div>errors</div>;
   }
-  console.log(data);
   return (
     <LoginRedirector>
       <Sidebar dashboards={data?.dashboards || null}>
