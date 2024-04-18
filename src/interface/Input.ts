@@ -1,6 +1,6 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, InputHTMLAttributes } from "react";
 
-export interface CommonInputType {
+export interface CommonInputType extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   type?: string;
   placeholder?: string;

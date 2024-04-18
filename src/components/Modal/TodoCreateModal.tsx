@@ -12,11 +12,15 @@ interface TodoCreateModalProps {
   handleModalClose: () => void;
 }
 
+const onSubmit = (e: any) => {
+  e.preventDefault();
+};
+
 function TodoCreateModal({ handleModalClose }: TodoCreateModalProps) {
   return (
     <ModalContainer handleModalClose={handleModalClose}>
       <CommonModalLayout title="할 일 생성">
-        <form className={styles.contents}>
+        <form className={styles.contents} onSubmit={onSubmit}>
           <UserInput label="담당자" placeholder="이름을 입력해 주세요" />
           <CommonInput
             label="제목"
