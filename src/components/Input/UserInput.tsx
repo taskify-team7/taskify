@@ -8,13 +8,7 @@ import React, {
 import styles from "./UserInput.module.css";
 import { CommonInputType } from "../../interface/Input";
 
-function UserInput({
-  label,
-  inputOnChange,
-  placeholder,
-  value,
-  required,
-}: CommonInputType) {
+function UserInput({ label, placeholder }: CommonInputType) {
   const ref = useRef<HTMLDivElement>(null);
   const [openDropBox, setOpenDropBox] = useState(false);
   //비교할값

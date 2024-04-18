@@ -8,7 +8,11 @@ function CommonInput({
   value,
   required,
   type = "text",
+  validation,
+  errors,
+  name = "",
 }: CommonInputType) {
+  const error = errors?.[name];
   return (
     <div className={styles.content}>
       <label htmlFor={label} className={styles.content_label}>
@@ -22,7 +26,11 @@ function CommonInput({
         className={styles.content_input}
         value={value}
         onChange={inputOnChange}
+        {...validation}
       />
+      {errors && (
+        <p className={styles.errorMesage}>{error?.message?.toString()}</p>
+      )}
     </div>
   );
 }
