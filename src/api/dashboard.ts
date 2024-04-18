@@ -39,9 +39,9 @@ export const createDashboard = async (title: string, color: string) => {
 
 export const getDashboard = async (id: string) => {
   const { data } = await client.get(`dashboards/${id}`);
-
   return data;
 };
+
 
 export const createColumn = async (title: string, dashboardId: number) => {
   const { data } = await client.post(`columns`, {
@@ -58,4 +58,26 @@ export const dashboardInvite = async (email: string, dashboardId: number) => {
   });
 
   return data;
+}
+
+export const getColumns = async (id: string) => {
+  const { data } = await client.get("columns", { params: { dashboardId: id } });
+  return data.data;
+};
+
+export const getCards = async (id: string) => {
+  const { data } = await client.get("cards", {
+    params: { columnId: id, size: 10 },
+  });
+  return data.cards;
+};
+
+export const changeCard = async (id: string, body: object) => {
+  try {
+    const res = await client.put(`cards/${id}`, body);
+    return res;
+    // console.log(res);
+  } catch (err) {
+    console.log(err);
+  }
 };

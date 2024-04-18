@@ -23,8 +23,8 @@ function DashBoardCreateModal({ handleModalClose }: DashBoardCreateModalProps) {
 
   const { mutate } = useMutation({
     mutationFn: () => createDashboard(apiBodyValue.title, apiBodyValue.color),
-    onSettled: async () => {
-      return await queryClient.invalidateQueries({ queryKey: ["dashboards"] });
+    onSettled: () => {
+      return queryClient.invalidateQueries({ queryKey: ["dashboards"] });
     },
   });
 
