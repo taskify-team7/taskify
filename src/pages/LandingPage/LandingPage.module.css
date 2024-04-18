@@ -1,0 +1,427 @@
+.bodyWrapper {
+  width: 100%;
+  padding: 50px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+.mainBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+
+.mainImage {
+  width: 722px;
+  height: 422px;
+  background-image: url("../../../public/Image/mainImg.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.titleWrapper {
+  width: 800px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.titleText1 {
+  font-weight: 700;
+  font-size: 72px;
+  color: #ffffff;
+}
+
+.titleText2 {
+  font-weight: 700;
+  color: #5534da;
+  font-size: 65px;
+}
+
+.subText {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.loginButton {
+  width: 280px;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  background-color: #5534da;
+  font-size: 18px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.infoBlock1 {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #171717;
+}
+
+.infoBlock2 {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #171717;
+}
+
+.infoTextBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  padding: 30px;
+
+  width: 500px;
+}
+
+.pointText {
+  font-size: 22px;
+  font-weight: 500;
+  color: #9fa6b2;
+  line-height: 26.25px;
+}
+
+.pointDescription {
+  font-size: 48px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 64px;
+}
+
+.subImageWrapper1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 100%;
+  width: fit-content;
+}
+
+.subImageWrapper2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 100%;
+  width: fit-content;
+}
+
+.subImage1 {
+  background-image: url("../../../public/Image/priorityImg.svg");
+  width: 594px;
+  height: 497px;
+}
+
+.subImage2 {
+  background-image: url("../../../public/Image/todoImg.svg");
+  width: 436px;
+  height: 502px;
+  margin-left: 35px;
+}
+
+.textBox {
+  font-weight: 700;
+  font-size: 28px;
+  color: #ffffff;
+}
+
+.listWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.listBlock {
+  width: 100%;
+  height: 378px;
+  background-color: #4b4b4b;
+  border: none;
+  border-radius: 8px;
+}
+
+.imageContainer1 {
+  width: 100%;
+  height: 260px;
+  background-image: url("../../../public/Image/settingImg1.svg");
+  background-size: initial;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.imageContainer2 {
+  width: 100%;
+  height: 260px;
+  background-image: url("../../../public/Image/settingImg2.svg");
+  background-size: initial;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.imageContainer3 {
+  width: 100%;
+  height: 260px;
+  background-image: url("../../../public/Image/settingImg3.svg");
+  background-size: initial;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.imageDescription {
+  width: 100%;
+  height: 124px;
+  background-color: #171717;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+  border-radius: 0px 0px 8px 8px;
+}
+
+.descriptionTitle {
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.descriptionText {
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.settingWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
+  gap: 10px;
+}
+
+.infoBlockBox {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  width: 100%;
+}
+
+@media screen and (max-width: 480px) {
+  .titleWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mainBlock {
+    display: flex;
+    gap: 50px;
+  }
+
+  .titleText2 {
+    letter-spacing: -1px;
+    line-height: 51.2px;
+    font-size: 42px;
+  }
+
+  .mainImage {
+    width: 287px;
+    height: 168px;
+  }
+
+  .titleText1 {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 47.73px;
+    letter-spacing: -2px;
+    align-items: center;
+  }
+
+  .infoBlock1 {
+    display: flex;
+    flex-direction: column;
+    width: 343px;
+    height: 686px;
+    text-align: center;
+    position: relative;
+  }
+
+  .infoTextBox {
+    width: 343px;
+  }
+
+  .subImage1 {
+    width: 296.11px;
+    height: 248px;
+    background-size: cover;
+  }
+
+  .subImage2 {
+    width: 217.13px;
+    height: 250px;
+    background-size: cover;
+    margin-left: 0px;
+  }
+
+  .infoBlock2 {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 343px;
+    height: 686px;
+    text-align: center;
+  }
+
+  .pointText {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21.48px;
+  }
+
+  .pointDescription {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 50px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .infoBlockBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .listWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 343px;
+  }
+
+  .settingWrapper {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .subImageWrapper1 {
+    position: absolute;
+    right: 0%;
+  }
+
+  .subImageWrapper2 {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .bodyWrapper {
+    width: 375px;
+    padding: 0px 0px 50px 0px;
+  }
+
+  .textBox {
+    font-size: 22px;
+  }
+
+  .subText {
+    font-size: 12px;
+    letter-spacing: -1px;
+  }
+}
+
+@media screen and (max-width: 744px) and (min-width: 480px) {
+  .mainImage {
+    width: 537.25px;
+    height: 314.76px;
+  }
+
+  .infoBlock1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 972px;
+    position: relative;
+  }
+
+  .infoBlock2 {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    height: 972px;
+    position: relative;
+  }
+
+  .infoTextBox {
+    display: flex;
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    gap: 50px;
+  }
+
+  .infoBlockBox {
+    display: flex;
+    justify-content: center;
+  }
+
+  .subImageWrapper1 {
+    position: absolute;
+    right: 0%;
+  }
+
+  .listWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 378px;
+    gap: 40px;
+  }
+
+  .settingWrapper {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .bodyWrapper {
+    padding: 0px 50px 50px 50px;
+  }
+
+  .titleText1 {
+    font-size: 56px;
+    letter-spacing: -2px;
+    line-height: 100px;
+  }
+
+  .titleText2 {
+    font-size: 70px;
+    line-height: 65px;
+    letter-spacing: -1px;
+  }
+
+  .subText {
+    font-size: 16px;
+    letter-spacing: -1px;
+    line-height: 19.09px;
+  }
+
+  .textBox {
+    line-height: 33.41px;
+  }
+}

@@ -1,11 +1,8 @@
-import { useParams } from "react-router-dom";
-import styles from "./DashBoardPage.module.css";
+import styles from "./DashBoardsPage.module.css";
 import InviteBox from "../../components/InviteBox/InviteBox";
 import DashBoardList from "../../components/DashBoardList/DashBoardList";
 
-export default function DashboardPage() {
-  const { dashboardId } = useParams();
-
+export default function DashBoardsPage() {
   return (
     <div className={styles.body}>
       <DashBoardList />
