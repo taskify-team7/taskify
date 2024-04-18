@@ -41,12 +41,12 @@ export default function Columns() {
   }
 
   const { mutate } = useMutation({
-    mutationFn: ({ source, destination, draggableId }) => {
+    mutationFn: async ({ source, destination, draggableId }) => {
       const originalCard = allCards.find(
         (card) => card.id === Number(draggableId)
       );
       originalCard.columnId = destination.droppableId;
-      changeCard(draggableId, {
+      await changeCard(draggableId, {
         columnId: Number(originalCard.columnId),
         assigneeUserId: originalCard.assigneeUserId,
         title: originalCard.title,
@@ -75,12 +75,12 @@ export default function Columns() {
 
     onSettled: (data, error, variables) => {
       const { source, destination } = variables;
-      // queryClient.invalidateQueries({
-      //   queryKey: ["column", source.droppableId],
-      // });
-      // queryClient.invalidateQueries({
-      //   queryKey: ["column", destination.droppableId],
-      // });
+      queryClient.invalidateQueries({
+        queryKey: ["column", source.droppableId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["column", destination.droppableId],
+      });
     },
   });
 
