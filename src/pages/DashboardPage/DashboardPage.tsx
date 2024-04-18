@@ -1,15 +1,10 @@
-import { useParams } from "react-router-dom";
 import styles from "./DashBoardPage.module.css";
-import InviteBox from "../../components/InviteBox/InviteBox";
-import DashBoardList from "../../components/DashBoardList/DashBoardList";
+import Columns from "../../components/Column/Columns";
 
-export default function DashboardPage() {
-  const { dashboardId } = useParams();
-
+export default function DashBoardPage() {
   return (
-    <div className={styles.body}>
-      <DashBoardList />
-      <InviteBox />
+    <div className={styles.container}>
+      <Columns />
     </div>
   );
 }

@@ -3,9 +3,10 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from "./pages/SingupPage/SignupPage";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import MyPage from "./pages/MyPage/MyPage";
 import Layout from "./Layout";
+import DashBoardPage from "./pages/DashBoardPage/DashBoardPage";
+import DashBoardsPage from "./pages/DashBoardsPage/DashBoardsPage";
 
 const router = createBrowserRouter([
   {
@@ -32,11 +33,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "dashboard",
-        element: <DashboardPage />,
+        element: <DashBoardsPage />,
       },
       {
         path: "dashboard/:id",
-        element: <DashboardPage />,
+        element: <DashBoardPage />,
       },
       {
         path: "mypage",
