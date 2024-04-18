@@ -27,7 +27,7 @@
   align-items: center;
 }
 
-@media screen and (max-width: 481px) {
+@media screen and (max-width: 480px) {
   .footer {
     display: flex;
     flex-direction: column;

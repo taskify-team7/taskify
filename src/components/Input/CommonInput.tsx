@@ -1,23 +1,25 @@
-import React, { ChangeEvent } from "react";
 import styles from "./CommonInput.module.css";
+import { CommonInputType } from "../../interface/Input";
 
-interface CommonInputProps {
-  label: string;
-  placeholder: string;
-  inputOnChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-}
-
-function CommonInput({ label, inputOnChange, placeholder }: CommonInputProps) {
+function CommonInput({
+  label,
+  inputOnChange,
+  placeholder,
+  value,
+  required,
+}: CommonInputType) {
   return (
     <div className={styles.content}>
       <label htmlFor="name" className={styles.content_label}>
         {label}
+        {required && <span className={styles.required}>*</span>}
       </label>
       <input
         id="name"
         type="text"
         placeholder={placeholder}
         className={styles.content_input}
+        value={value}
         onChange={inputOnChange}
       />
     </div>
