@@ -12,9 +12,6 @@
 
   &:active {
     background-color: #9fa6b2;
-
-    &:disabled {
-    }
   }
 }
 

@@ -2,19 +2,16 @@ import styles from "./ArrowLeftButton.module.css";
 
 interface arrowButtonProps {
   onClick?: () => void;
-  image?: string;
 }
 
-const ArrowLeftButton = ({ onClick, image }: arrowButtonProps) => {
+const ArrowLeftButton = ({ onClick }: arrowButtonProps) => {
   return (
     <button className={styles.arrowButton} onClick={onClick}>
-      {image && (
-        <img
-          className={styles.arrowButtonImg}
-          src={image}
-          alt="arrowButtonImg"
-        />
-      )}
+      <img
+        className={styles.arrowButtonImg}
+        src="/Icons/leftArrow.svg"
+        alt="arrowButtonImg"
+      />
     </button>
   );
 };
