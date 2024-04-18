@@ -222,7 +222,7 @@
   width: 100%;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 482px) {
   .titleWrapper {
     display: flex;
     flex-direction: column;
