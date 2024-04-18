@@ -36,7 +36,6 @@ export default function Columns() {
     },
   });
   if (!wow.pending) {
-    console.log(wow.data);
     wow.data.map((arr) => arr.map((c) => allCards.push(c)));
   }
 
