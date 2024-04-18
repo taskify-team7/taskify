@@ -51,3 +51,11 @@ export const createColumn = async (title: string, dashboardId: number) => {
 
   return data;
 };
+
+export const dashboardInvite = async (email: string, dashboardId: number) => {
+  const { data } = await client.post(`dashboards/${dashboardId}/invitations`, {
+    email: email,
+  });
+
+  return data;
+};
