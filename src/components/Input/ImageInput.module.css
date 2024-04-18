@@ -12,11 +12,38 @@
   font-weight: 500;
 }
 
-.content_input {
+.content_image_input {
   display: none;
+  position: relative;
 }
 
 .content_image {
+  position: relative;
+  width: 76px;
+  height: 76px;
+}
+
+.pickedImage {
+  width: 76px;
+  height: 76px;
+  border-radius: 6px;
+}
+
+.imageCover {
+  display: none;
+  position: absolute;
+  padding: 23px;
+  width: 76px;
+  height: 76px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.content_image:hover .imageCover {
+  display: block;
+}
+
+.content_image_button {
   width: 76px;
   height: 76px;
   display: flex;
