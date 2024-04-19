@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 
 function DateInput({ label, inputOnChange, placeholder }: CommonInputType) {
-  const [startDate, setStartDate] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
   const filterPassedTime = (time: any) => {
     const currentDate = new Date();
@@ -17,7 +17,7 @@ function DateInput({ label, inputOnChange, placeholder }: CommonInputType) {
 
   const onChange = (date: Date | null) => {
     const formattedDate = format(date || new Date(), "yyyy-MM-dd HH:mm");
-    setStartDate(formattedDate);
+    setDueDate(formattedDate);
   };
 
   return (
@@ -31,7 +31,7 @@ function DateInput({ label, inputOnChange, placeholder }: CommonInputType) {
           id={label}
           placeholderText={placeholder}
           className={styles.content_date_input}
-          selected={startDate ? new Date(startDate) : new Date()}
+          selected={dueDate ? new Date(dueDate) : new Date()}
           onChange={(date) => onChange(date)}
           showTimeSelect
           filterTime={filterPassedTime}
