@@ -1,3 +1,7 @@
-export default function Column() {
-  return <div></div>;
+import React from "react";
+
+function Column() {
+  return <div>Column</div>;
 }
+
+export default Column;
