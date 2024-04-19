@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./DateInput.module.css";
 import { CommonInputType } from "../../interface/Input";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns";
 
 function DateInput({ label, inputOnChange, placeholder }: CommonInputType) {
+  const [dueDate, setDueDate] = useState("");
+
+  const filterPassedTime = (time: any) => {
+    const currentDate = new Date();
+    const selectedDate = new Date(time);
+
+    return currentDate.getTime() < selectedDate.getTime();
+  };
+
+  const onChange = (date: Date | null) => {
+    const formattedDate = format(date || new Date(), "yyyy-MM-dd HH:mm");
+    setDueDate(formattedDate);
+  };
+
   return (
     <div className={styles.content}>
       <label htmlFor="name" className={styles.content_label}>
@@ -10,13 +27,23 @@ function DateInput({ label, inputOnChange, placeholder }: CommonInputType) {
       </label>
       <div className={styles.content_date}>
         <img src="/Icons/calendar.svg" alt="date" />
-        <input
+        <DatePicker
+          id={label}
+          placeholderText={placeholder}
+          className={styles.content_date_input}
+          selected={dueDate ? new Date(dueDate) : new Date()}
+          onChange={(date) => onChange(date)}
+          showTimeSelect
+          filterTime={filterPassedTime}
+          dateFormat="Pp"
+        />
+        {/* <input
           id="name"
           type="text"
           placeholder={placeholder}
           className={styles.content_date_input}
           onChange={inputOnChange}
-        />
+        /> */}
       </div>
     </div>
   );
