@@ -1,9 +1,8 @@
 import React from "react";
-import styles from "./LadingPage.module.css";
+import styles from "./LandingPage.module.css";
 import LandingNavbar from "../../components/LandingNavbar/LandingNavbar";
 import Footer from "../../components/LandingFooter/Footer";
 import { Link } from "react-router-dom";
-
 
 export default function Home() {
   return (
