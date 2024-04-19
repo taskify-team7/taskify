@@ -18,11 +18,13 @@
   align-items: center;
   border-radius: 6px;
   border: 1px solid #d9d9d9;
+  position: relative;
 }
 
 .content_user > img {
   width: 26px;
   height: 26px;
+  cursor: pointer;
 }
 
 .content_user_input {
@@ -34,10 +36,60 @@
   font-family: Pretendard;
   font-size: 16px;
   font-weight: 400;
+  border-radius: 6px;
 }
 
 .content_user_input::placeholder {
   color: #9fa6b2;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.content_dropbox {
+  position: absolute;
+  top: calc(27% + 10px);
+  width: 238px;
+  border-radius: 6px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+}
+
+.content_dropbox_item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  cursor: pointer;
+  padding: 7px 0pc 7px 20px;
+}
+
+.imageArea {
+  width: 22px;
+  height: 22px;
+}
+
+.content_dropbox_item > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.content_dropbox_item > div > span {
+  width: 26px;
+  height: 26px;
+  background: #a3c4a2;
+  border-radius: 50%;
+  font-size: 13px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content_dropbox_item > div > p {
+  color: #333236;
   font-family: Pretendard;
   font-size: 16px;
   font-weight: 400;

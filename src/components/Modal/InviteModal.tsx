@@ -1,52 +1,50 @@
 import React from "react";
+import styles from "./InviteModal.module.css";
 import ModalContainer from "./ModalContainer";
 import CommonModalLayout from "./CommonModalLayout";
 import CommonInput from "../Input/CommonInput";
-import styles from "./ColumnCreatemodal.module.css";
 import { useForm } from "react-hook-form";
-import { createColumn } from "../../api/dashboard";
+import { dashboardInvite } from "../../api/dashboard";
 
-interface olumnCreateModalProps {
+interface InviteModalProps {
   handleModalClose: () => void;
   dashboardId: number;
 }
 
-function ColumnCreateModal({
-  handleModalClose,
-  dashboardId,
-}: olumnCreateModalProps) {
+function InviteModal({ handleModalClose, dashboardId }: InviteModalProps) {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm({ mode: "onBlur" });
 
-  const titleValidation = register("title", {
+  const emailValidation = register("email", {
     required: {
       value: true,
-      message: "제목을 입력해 주세요",
+      message: "이메일을 입력해 주세요",
     },
   });
 
-  const onSubmit = async (e: any) => {
-    console.log(e);
-    const result = await createColumn(e.title, dashboardId);
+  const onSubmit = async (data: any) => {
+    console.log(data);
+    const result = await dashboardInvite(data.email, dashboardId);
     handleModalClose();
   };
 
   return (
     <ModalContainer handleModalClose={handleModalClose}>
-      <CommonModalLayout title="새 컬럼 생성">
+      <CommonModalLayout title="초대하기">
         <form className={styles.contents} onSubmit={handleSubmit(onSubmit)}>
           <CommonInput
-            label="이름"
-            name="title"
-            placeholder="새로운 프로젝트"
-            validation={titleValidation}
+            label="이메일"
+            name="email"
+            placeholder="이메일을 입력해 주세요"
+            type="email"
+            validation={emailValidation}
             errors={errors}
           />
           <div className={styles.modal_buttons}>
-            <button className={styles.a_button}>생성</button>
+            <button className={styles.a_button}>초대</button>
             <button className={styles.c_button} onClick={handleModalClose}>
               취소
             </button>
@@ -57,4 +55,4 @@ function ColumnCreateModal({
   );
 }
 
-export default ColumnCreateModal;
+export default InviteModal;

@@ -42,6 +42,24 @@ export const getDashboard = async (id: string) => {
   return data;
 };
 
+
+export const createColumn = async (title: string, dashboardId: number) => {
+  const { data } = await client.post(`columns`, {
+    title: title,
+    dashboardId: dashboardId,
+  });
+
+  return data;
+};
+
+export const dashboardInvite = async (email: string, dashboardId: number) => {
+  const { data } = await client.post(`dashboards/${dashboardId}/invitations`, {
+    email: email,
+  });
+
+  return data;
+}
+
 export const getColumns = async (id: string) => {
   const { data } = await client.get("columns", { params: { dashboardId: id } });
   return data.data;

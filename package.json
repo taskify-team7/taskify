@@ -14,6 +14,7 @@
     "@types/react-dom": "^18.0.0",
     "axios": "^1.6.8",
     "react": "^18.2.0",
+    "react-datepicker": "^6.9.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.3",
@@ -45,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-datepicker": "^6.2.0"
   }
 }
