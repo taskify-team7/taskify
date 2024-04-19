@@ -7,10 +7,12 @@ import MyPage from "./pages/MyPage/MyPage";
 import Layout from "./Layout";
 import DashBoardsPage from "./pages/DashBoardsPage/DashBoardsPage";
 import DashBoardPage from "./pages/DashBoardPage/DashBoardPage";
+import DashBoardRedirector from "./DashBoardRedirector";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <DashBoardRedirector />,
     errorElement: <NotFoundPage />,
     children: [
       {

@@ -17,19 +17,19 @@ function ImageInput({ label, inputOnChange, value }: CommonInputType) {
     }
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
+    fileReader.onloadend = () => {
       setPickedImage(fileReader.result);
     };
   };
 
   return (
     <div className={styles.content}>
-      <label htmlFor="iamge" className={styles.content_label}>
+      <label htmlFor="image" className={styles.content_label}>
         {label}
       </label>
       <div className={styles.content_image}>
         <input
-          id="iamge"
+          id="image"
           type="file"
           accept="image/png, image/jpeg"
           className={styles.content_image_input}

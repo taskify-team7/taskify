@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import styles from "./TodoCreateModal.module.css";
 import ModalContainer from "./ModalContainer";
 import CommonModalLayout from "./CommonModalLayout";
