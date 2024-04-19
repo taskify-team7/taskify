@@ -7,6 +7,7 @@ import TagInput from "../Input/TagInput";
 import ImageInput from "../Input/ImageInput";
 import UserInput from "../Input/UserInput";
 import { useForm } from "react-hook-form";
+import { createCard } from "../../api/dashboard";
 
 interface TodoCreateModalProps {
   handleModalClose: () => void;
@@ -32,7 +33,7 @@ function TodoCreateModal({
       title: "",
       description: "",
       tags: [],
-      image: "",
+      imageUrl: "",
     },
   });
 
@@ -52,11 +53,14 @@ function TodoCreateModal({
 
   const tagValidation = register("tags");
 
-  const imageValidation = register("image");
+  const imageValidation = register("imageUrl");
 
   const onSubmit = async (e: any) => {
     console.log(e);
-    console.log("test");
+    if (dashboardId && columnId) {
+      const res = await createCard(e, dashboardId, columnId);
+      console.log(res);
+    }
   };
 
   return (
@@ -84,6 +88,7 @@ function TodoCreateModal({
             label="마감일"
             placeholder="날짜를 입력해 주세요"
             control={control}
+            setValue={setValue}
           />
           <TagInput
             label="태그"

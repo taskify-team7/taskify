@@ -14,22 +14,26 @@ function ImageInput({ label, value, validation, setValue }: ImageInputType) {
     if (!file) {
       return;
     }
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onloadend = () => {
-      setValue("image", fileReader.result);
-      setPickedImage(fileReader.result);
-    };
+    // const fileReader = new FileReader();
+    // fileReader.readAsDataURL(file);
+    // fileReader.onloadend = () => {
+    //   setPickedImage(fileReader.result);
+    // };
+    const image = window.URL.createObjectURL(file);
+
+    const blobId = image.slice(5); // "blob:" 다음의 문자열을 추출
+    setPickedImage(image);
+    setValue("imageUrl", blobId);
   };
 
   return (
     <div className={styles.content}>
-      <label htmlFor="image" className={styles.content_label}>
+      <label htmlFor="imageUrl" className={styles.content_label}>
         {label}
       </label>
       <div className={styles.content_image}>
         <input
-          id="image"
+          id="imageUrl"
           type="file"
           accept="image/png, image/jpeg"
           className={styles.content_image_input}

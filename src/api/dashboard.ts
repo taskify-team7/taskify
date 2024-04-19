@@ -80,3 +80,26 @@ export const changeCard = async (id: string, body: object) => {
     console.log(err);
   }
 };
+
+export const createCard = async (
+  cardData: any,
+  dashboardId: number,
+  columnId: number
+) => {
+  try {
+    const res = await client.post(`cards/`, {
+      assigneeUserId: 1567,
+      dashboardId: dashboardId,
+      columnId: columnId,
+      title: cardData.title,
+      description: cardData.description,
+      dueDate: cardData.dueDate,
+      tags: [...cardData.tags],
+      imageUrl: cardData.imageUrl,
+    });
+    return res;
+    // console.log(res);
+  } catch (err) {
+    console.log(err);
+  }
+};

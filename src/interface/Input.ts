@@ -15,6 +15,7 @@ export interface TagInputType extends CommonInputType {
 
 export interface DateInputType extends CommonInputType {
   control: any;
+  setValue: any;
 }
 
 export interface ImageInputType extends CommonInputType {
