@@ -1,23 +1,15 @@
-import React, { useState } from "react";
 import styles from "./DateInput.module.css";
-import { CommonInputType } from "../../interface/Input";
+import { DateInputType } from "../../interface/Input";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { format } from "date-fns";
+import { Controller } from "react-hook-form";
 
-function DateInput({ label, inputOnChange, placeholder }: CommonInputType) {
-  const [dueDate, setDueDate] = useState("");
-
+function DateInput({ label, control }: DateInputType) {
   const filterPassedTime = (time: any) => {
     const currentDate = new Date();
     const selectedDate = new Date(time);
 
     return currentDate.getTime() < selectedDate.getTime();
-  };
-
-  const onChange = (date: Date | null) => {
-    const formattedDate = format(date || new Date(), "yyyy-MM-dd HH:mm");
-    setDueDate(formattedDate);
   };
 
   return (
@@ -27,23 +19,24 @@ function DateInput({ label, inputOnChange, placeholder }: CommonInputType) {
       </label>
       <div className={styles.content_date}>
         <img src="/Icons/calendar.svg" alt="date" />
-        <DatePicker
-          id={label}
-          placeholderText={placeholder}
-          className={styles.content_date_input}
-          selected={dueDate ? new Date(dueDate) : new Date()}
-          onChange={(date) => onChange(date)}
-          showTimeSelect
-          filterTime={filterPassedTime}
-          dateFormat="Pp"
+        <Controller
+          name="expiryDate"
+          defaultValue={new Date()}
+          control={control}
+          render={({ field: { onChange, onBlur, value, ref } }) => (
+            <DatePicker
+              ref={ref}
+              placeholderText="날짜를 입력해 주세요"
+              className={styles.content_date_input}
+              selected={value}
+              dateFormat="Pp"
+              showTimeSelect
+              onChange={onChange}
+              onBlur={onBlur}
+              filterTime={filterPassedTime}
+            />
+          )}
         />
-        {/* <input
-          id="name"
-          type="text"
-          placeholder={placeholder}
-          className={styles.content_date_input}
-          onChange={inputOnChange}
-        /> */}
       </div>
     </div>
   );

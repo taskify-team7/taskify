@@ -1,23 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import styles from "./ImageInput.module.css";
-import { CommonInputType } from "../../interface/Input";
+import { ImageInputType } from "../../interface/Input";
 
-function ImageInput({ label, inputOnChange, value }: CommonInputType) {
-  const imageInput = useRef<any>();
+function ImageInput({ label, value, validation, setValue }: ImageInputType) {
+  const imageInput = useRef<HTMLInputElement | null>(null);
   const [pickedImage, setPickedImage] = useState<any>();
-
   const handleImageInput = () => {
-    imageInput.current.click();
+    imageInput.current?.click();
   };
 
-  const handleImageChange = (e: any) => {
-    const file = e.target.files[0];
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (!file) {
       return;
     }
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onloadend = () => {
+      setValue("image", fileReader.result);
       setPickedImage(fileReader.result);
     };
   };
@@ -35,7 +35,10 @@ function ImageInput({ label, inputOnChange, value }: CommonInputType) {
           className={styles.content_image_input}
           value={value}
           onChange={handleImageChange}
-          ref={imageInput}
+          ref={(e) => {
+            validation?.ref(e);
+            imageInput.current = e;
+          }}
         />
         {pickedImage ? (
           <>

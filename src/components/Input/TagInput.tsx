@@ -1,13 +1,19 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 import styles from "./TagInput.module.css";
-import { CommonInputType } from "../../interface/Input";
+import { TagInputType } from "../../interface/Input";
 
 interface TagListType {
   color: string;
   text: string;
 }
 
-function TagInput({ label, inputOnChange, placeholder }: CommonInputType) {
+function TagInput({
+  label,
+  placeholder,
+  validation,
+  setValue,
+  getValues,
+}: TagInputType) {
   const colorList = ["F9EEE3", "E7F7DB", "F7DBF0", "DBE6F7"];
   const [tagList, setTagList] = useState<TagListType[]>([]);
 
@@ -31,6 +37,8 @@ function TagInput({ label, inputOnChange, placeholder }: CommonInputType) {
           ...prev,
           { color: colorList[randoColorIndex], text: inputValue },
         ]);
+        const previousTags = getValues("tags");
+        setValue("tags", [...previousTags, inputValue]);
         setInputState("");
       }
     }
@@ -76,6 +84,7 @@ function TagInput({ label, inputOnChange, placeholder }: CommonInputType) {
           onChange={onChange}
           onKeyDown={onKeyboardAction}
           value={inputState}
+          {...validation?.ref}
         />
       </div>
     </div>

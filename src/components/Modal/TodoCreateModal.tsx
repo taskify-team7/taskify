@@ -8,11 +8,6 @@ import ImageInput from "../Input/ImageInput";
 import UserInput from "../Input/UserInput";
 import { useForm } from "react-hook-form";
 
-interface TagListType {
-  color: string;
-  text: string;
-}
-
 interface TodoCreateModalProps {
   handleModalClose: () => void;
   dashboardId?: number;
@@ -28,7 +23,18 @@ function TodoCreateModal({
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({ mode: "onBlur" });
+    control,
+    setValue,
+    getValues,
+  } = useForm({
+    mode: "onBlur",
+    defaultValues: {
+      title: "",
+      description: "",
+      tags: [],
+      image: "",
+    },
+  });
 
   const titleValidation = register("title", {
     required: {
@@ -44,6 +50,10 @@ function TodoCreateModal({
     },
   });
 
+  const tagValidation = register("tags");
+
+  const imageValidation = register("image");
+
   const onSubmit = async (e: any) => {
     console.log(e);
     console.log("test");
@@ -58,21 +68,35 @@ function TodoCreateModal({
             label="제목"
             name="title"
             placeholder="제목을 입력해 주세요"
-            required
             validation={titleValidation}
             errors={errors}
+            required={true}
           />
           <CommonInput
             label="설명"
             name="description"
             placeholder="설명을 입력해 주세요"
-            required
             validation={descriptionValidation}
             errors={errors}
+            required={true}
           />
-          <DateInput label="마감일" placeholder="날짜를 입력해 주세요" />
-          <TagInput label="태그" placeholder="입력 후 Enter" />
-          <ImageInput label="이미지" />
+          <DateInput
+            label="마감일"
+            placeholder="날짜를 입력해 주세요"
+            control={control}
+          />
+          <TagInput
+            label="태그"
+            placeholder="입력 후 Enter"
+            validation={tagValidation}
+            setValue={setValue}
+            getValues={getValues}
+          />
+          <ImageInput
+            label="이미지"
+            validation={imageValidation}
+            setValue={setValue}
+          />
           <div className={styles.modal_buttons}>
             <button className={styles.a_button}>생성</button>
             <button className={styles.c_button} onClick={handleModalClose}>
