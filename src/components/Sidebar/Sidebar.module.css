@@ -1,5 +1,5 @@
 .container {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -145,5 +145,7 @@
 }
 
 .contents {
-  flex: 1;
+  flex-grow: 1;
+  /* flex-shrink: 1; */
+  width: calc(100% - 300px);
 }

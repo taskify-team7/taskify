@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import client from "./api/axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "./contexts/AuthProvider";
 
-export default function LoginRedirector({ children }: { children: any }) {
+export default function LoginRedirector({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const { getUser, contextLogout } = useAuth();
 

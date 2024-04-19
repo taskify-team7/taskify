@@ -1,12 +1,12 @@
-import React from "react";
 import ModalContainer from "./ModalContainer";
 import CommonModalLayout from "./CommonModalLayout";
 import CommonInput from "../Input/CommonInput";
 import styles from "./ColumnCreatemodal.module.css";
 import { useForm } from "react-hook-form";
 import { createColumn } from "../../api/dashboard";
+import { useQueryClient } from "@tanstack/react-query";
 
-interface olumnCreateModalProps {
+interface columnCreateModalProps {
   handleModalClose: () => void;
   dashboardId: number;
 }
@@ -14,10 +14,12 @@ interface olumnCreateModalProps {
 function ColumnCreateModal({
   handleModalClose,
   dashboardId,
-}: olumnCreateModalProps) {
+}: columnCreateModalProps) {
+  const queryClient = useQueryClient();
+
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm({ mode: "onBlur" });
 
@@ -29,8 +31,11 @@ function ColumnCreateModal({
   });
 
   const onSubmit = async (e: any) => {
-    console.log(e);
-    const result = await createColumn(e.title, dashboardId);
+    // console.log(e);
+    await createColumn(e.title, dashboardId);
+    await queryClient.invalidateQueries({
+      queryKey: ["columns", dashboardId + ""],
+    });
     handleModalClose();
   };
 
@@ -46,7 +51,9 @@ function ColumnCreateModal({
             errors={errors}
           />
           <div className={styles.modal_buttons}>
-            <button className={styles.a_button}>생성</button>
+            <button className={styles.a_button} disabled={isSubmitting}>
+              생성
+            </button>
             <button className={styles.c_button} onClick={handleModalClose}>
               취소
             </button>
