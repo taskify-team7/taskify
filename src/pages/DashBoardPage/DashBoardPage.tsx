@@ -1,4 +1,7 @@
 // @ts-nocheck
+import { DragDropContext } from "react-beautiful-dnd";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { changeCard } from "../../api/dashboard";
 import styles from "./DashBoardPage.module.css";
 import Columns from "../../components/Column/Columns";
 import { useModal } from "../../hooks/useModal";
@@ -38,6 +41,55 @@ export default function DashBoardPage() {
   if (!wow.pending) {
     wow.data.map((arr) => arr.map((c) => allCards.push(c)));
   }
+
+  const queryClient = useQueryClient();
+  const { mutate: moveCard } = useMutation({
+    mutationFn: async ({ source, destination, draggableId }) => {
+      const originalCard = allCards.find(
+        (card) => card.id === Number(draggableId)
+      );
+      originalCard.columnId = destination.droppableId;
+      await changeCard(draggableId, {
+        columnId: Number(originalCard.columnId),
+        assigneeUserId: originalCard.assigneeUserId,
+        title: originalCard.title,
+        description: originalCard.description,
+        dueDate: originalCard.dueDate,
+        tags: [...originalCard.tags],
+        imageUrl: originalCard.imageUrl,
+      });
+    },
+    onMutate: async ({ source, destination, draggableId }) => {
+      const startList =
+        queryClient.getQueryData<CardType[]>(["column", source.droppableId]) ||
+        [];
+      const endList =
+        queryClient.getQueryData<CardType[]>([
+          "column",
+          destination.droppableId,
+        ]) || [];
+      const newEndList = endList;
+      newEndList.splice(destination.index, 0, startList[source.index]);
+      newEndList.sort((a, b) => a.id - b.id);
+      const newStartList = startList.filter(
+        (_: any, idx: any) => idx !== source.index
+      );
+      queryClient.setQueryData(["column", source.droppableId], newStartList);
+      queryClient.setQueryData(["column", destination.droppableId], newEndList);
+      // return { source, destination, startList, endList };
+    },
+
+    onSettled: (data, error, variables) => {
+      const { source, destination } = variables;
+      queryClient.invalidateQueries({
+        queryKey: ["column", source.droppableId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["column", destination.droppableId],
+      });
+    },
+  });
+
   if (id && error) {
     console.log("cannot load columns with the provided dashboard id" + id);
     navigate("/dashboard");
@@ -54,10 +106,18 @@ export default function DashBoardPage() {
         ),
         document.body
       )}
-      <div className={styles.container}>
-        <Columns columns={columns} allCards={allCards} />
-        <button onClick={handleModalOpen}>새로운 칼럼 추가하기</button>
-      </div>
+      <DragDropContext
+        onDragEnd={({ source, destination, draggableId }) => {
+          if (destination === undefined || destination === null) return null;
+          if (source.droppableId === destination.droppableId) return null;
+          moveCard({ source, destination, draggableId });
+        }}
+      >
+        <div className={styles.container}>
+          <Columns columns={columns} allCards={allCards} />
+          <button onClick={handleModalOpen}>새로운 칼럼 추가하기</button>
+        </div>
+      </DragDropContext>
     </>
   );
 }

@@ -1,34 +1,30 @@
 .container {
-}
-
-.column {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
   width: 354px;
+  height: 100%;
 }
 
-.cards {
+.cards-droppableArea {
   width: 314px;
-  height: 500px;
-  padding: 20px;
+  height: 100%;
+  margin-top: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: solid 1px black;
-  /* gap: 20px; */
+  overflow-y: hidden;
 }
 
-.card {
-  margin: 10px;
-  cursor: pointer;
-  width: 170px;
-  height: 30px;
+.card-draggableItem {
+  width: 100%;
+  margin-top: 16px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: solid 1px black;
+  cursor: pointer;
 }
 
 .columnHeader {
@@ -87,4 +83,27 @@
   width: 24px;
   height: 24px;
   cursor: pointer;
+}
+
+.createCardButton {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  background: var(--white-white_FFFFFF, #fff);
+}
+
+.plusIcon {
+  margin: 12px 149px;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: var(--violet-light);
+  color: var(--violet);
+  text-align: center;
+  font-size: 18px;
 }

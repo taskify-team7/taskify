@@ -1,5 +1,5 @@
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import styles from "./Columns.module.css";
+import styles from "./Column.module.css";
 import { useQueryClient } from "@tanstack/react-query";
 import { useModal } from "../../hooks/useModal";
 import { createPortal } from "react-dom";
@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { CardType, ColumnType } from "../../interface/DashboardType";
 import SettingsSvg from "../../assets/settings.svg";
 import ColumnManagementModal from "../Modal/ColumnManagementModal";
+import Card from "./Card";
 
 export default function Column({ col }: { col: ColumnType }) {
   const { id } = useParams();
@@ -44,7 +45,7 @@ export default function Column({ col }: { col: ColumnType }) {
         ),
         document.body
       )}
-      <div className={styles.column}>
+      <div className={styles.container}>
         <div className={styles.columnHeader}>
           <div className={styles.titleArea}>
             <div className={styles.dot}></div>
@@ -63,14 +64,19 @@ export default function Column({ col }: { col: ColumnType }) {
             onClick={handleSettingsModalOpen}
           />
         </div>
-        <button onClick={handleCreateModalOpen}>+</button>
         <Droppable key={col.id + ""} droppableId={col.id + ""}>
           {(provided) => (
             <div
-              className={styles.cards}
+              className={styles["cards-droppableArea"]}
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
+              <div
+                className={styles.createCardButton}
+                onClick={handleCreateModalOpen}
+              >
+                <div className={styles.plusIcon}>+</div>
+              </div>
               {(
                 queryClient.getQueryData<CardType[]>(["column", col.id + ""]) ||
                 []
@@ -78,12 +84,12 @@ export default function Column({ col }: { col: ColumnType }) {
                 <Draggable key={card.id} draggableId={card.id + ""} index={i}>
                   {(provided) => (
                     <div
-                      className={styles.card}
+                      className={styles["card-draggableItem"]}
                       ref={provided.innerRef}
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                     >
-                      {card.title}
+                      <Card card={card} />
                     </div>
                   )}
                 </Draggable>
