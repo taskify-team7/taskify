@@ -6,6 +6,7 @@ function CommonInput({
   inputOnChange,
   placeholder,
   value,
+  type = 'text',
   required,
 }: CommonInputType) {
   return (
@@ -16,7 +17,7 @@ function CommonInput({
       </label>
       <input
         id="name"
-        type="text"
+        type={type}
         placeholder={placeholder}
         className={styles.content_input}
         value={value}

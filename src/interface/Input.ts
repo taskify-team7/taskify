@@ -5,5 +5,6 @@ export interface CommonInputType {
   placeholder?: string;
   required?: boolean;
   value?: string;
+  type?: string;
   inputOnChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
