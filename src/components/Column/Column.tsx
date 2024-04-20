@@ -10,7 +10,7 @@ import SettingsSvg from "../../assets/settings.svg";
 import ColumnManagementModal from "../Modal/ColumnManagementModal";
 import Card from "./Card";
 
-export default function Column({ col }: { col: ColumnType }) {
+function Column({ col }: { col: ColumnType }) {
   const { id } = useParams();
   const {
     isModalOpen: isCreateModalOpen,
@@ -101,6 +101,6 @@ export default function Column({ col }: { col: ColumnType }) {
       </div>
     </>
   );
-
+}
 
 export default Column;

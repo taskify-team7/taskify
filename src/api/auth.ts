@@ -35,3 +35,20 @@ export async function uploadMyImage(data: object) {
   const result = response.data;
   return result;
 }
+
+export const changeImageURL = async (imageFile: File) => {
+  const formData = new FormData();
+  formData.append("image", imageFile);
+
+  try {
+    const res = await client.post("users/me/image", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    return res.data.profileImageUrl;
+  } catch (e: any) {
+    console.log(e);
+  }
+};

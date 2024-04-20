@@ -1,13 +1,11 @@
-import React, { useState } from "react";
 import styles from "./DateInput.module.css";
-import { CommonInputType } from "../../interface/Input";
+import { DateInputType } from "../../interface/Input";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Controller } from "react-hook-form";
 import { format } from "date-fns";
 
-function DateInput({ label, inputOnChange, placeholder }: CommonInputType) {
-  const [dueDate, setDueDate] = useState("");
-
+function DateInput({ label, control, setValue }: DateInputType) {
   const filterPassedTime = (time: any) => {
     const currentDate = new Date();
     const selectedDate = new Date(time);
@@ -15,10 +13,7 @@ function DateInput({ label, inputOnChange, placeholder }: CommonInputType) {
     return currentDate.getTime() < selectedDate.getTime();
   };
 
-  const onChange = (date: Date | null) => {
-    const formattedDate = format(date || new Date(), "yyyy-MM-dd HH:mm");
-    setDueDate(formattedDate);
-  };
+  const defaultDate = new Date();
 
   return (
     <div className={styles.content}>
@@ -27,23 +22,30 @@ function DateInput({ label, inputOnChange, placeholder }: CommonInputType) {
       </label>
       <div className={styles.content_date}>
         <img src="/Icons/calendar.svg" alt="date" />
-        <DatePicker
-          id={label}
-          placeholderText={placeholder}
-          className={styles.content_date_input}
-          selected={dueDate ? new Date(dueDate) : new Date()}
-          onChange={(date) => onChange(date)}
-          showTimeSelect
-          filterTime={filterPassedTime}
-          dateFormat="Pp"
+        <Controller
+          name="dueDate"
+          defaultValue={format(defaultDate, "yyyy-MM-dd HH:mm")}
+          control={control}
+          render={({ field: { onChange, onBlur, value, ref } }) => (
+            <DatePicker
+              ref={ref}
+              placeholderText="날짜를 입력해 주세요"
+              className={styles.content_date_input}
+              selected={value ? new Date(value) : new Date()}
+              dateFormat="yyyy-MM-dd HH:mm"
+              showTimeSelect
+              onChange={(date: Date) => {
+                const formattedDate = format(
+                  date || new Date(),
+                  "yyyy-MM-dd HH:mm"
+                );
+                setValue("dueDate", formattedDate);
+              }}
+              onBlur={onBlur}
+              filterTime={filterPassedTime}
+            />
+          )}
         />
-        {/* <input
-          id="name"
-          type="text"
-          placeholder={placeholder}
-          className={styles.content_date_input}
-          onChange={inputOnChange}
-        /> */}
       </div>
     </div>
   );

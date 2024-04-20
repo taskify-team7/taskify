@@ -70,20 +70,6 @@
   margin-left: 20px;
 }
 
-.cardDetail_tag {
-  display: flex;
-  padding: 4px 6px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  background: #f9eee3;
-  color: #d58d49;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 12px;
-  font-weight: 400;
-}
-
 .cardDetail_text {
   color: #000;
   font-family: Pretendard;
@@ -100,106 +86,13 @@
 .cardDetail_img img {
   width: 90%;
   height: 90%;
-}
-
-.cardDetail_comentForm > label {
-  color: #333236;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.cardDetail_comentForm_input {
-  gap: 10px;
-  height: 110px;
-  padding: 16px;
-  border-radius: 6px;
-  border: 1px solid #d9d9d9;
-  background: #fff;
-  position: relative;
-  margin-top: 10px;
-}
-
-.cardDetail_comentForm_input > input {
-  width: 100%;
-  height: 50%;
-}
-
-.cardDetail_comentForm_input > button {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
+  border-radius: 8px;
 }
 
 .cardDetail_coments {
   display: flex;
   flex-direction: column;
   gap: 30px;
-}
-
-.cardDetail_coment {
-  display: flex;
-  gap: 10px;
-}
-
-.cardDetail_coment_profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  width: 34px;
-  height: 34px;
-  background: #fdd446;
-  color: #fff;
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-}
-.cardDetail_coment_main {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  gap: 10px;
-  max-width: 90%;
-}
-
-.cardDetail_coment_user {
-  display: flex;
-  gap: 8px;
-}
-
-.cardDetail_coment_user p:first-child {
-  color: #333236;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.cardDetail_coment_user p:last-child {
-  color: #9fa6b2;
-  font-family: Pretendard;
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.cardDetail_coment_text p {
-  color: #333236;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.cardDetail_coment_btns {
-  display: flex;
-  gap: 12px;
-}
-
-.cardDetail_coment_btns > button {
-  color: #9fa6b2;
-  font-family: Pretendard;
-  font-size: 12px;
-  font-weight: 400;
-  text-decoration-line: underline;
 }
 
 .cardDetail_sidebar {
@@ -241,6 +134,20 @@
   font-family: Pretendard;
   font-size: 14px;
   font-weight: 400;
+}
+
+.cardDetail_coment_profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  background: #fdd446;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .cardDetail_mobile_userBox {
@@ -325,5 +232,19 @@
     border-radius: 8px;
     border: 1px solid #d9d9d9;
     background: #fff;
+  }
+
+  .cardDetail_mobile_profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background: #fdd446;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
   }
 }

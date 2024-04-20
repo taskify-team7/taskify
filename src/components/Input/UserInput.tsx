@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import styles from "./UserInput.module.css";
 import { CommonInputType } from "../../interface/Input";
+import { useQueryClient } from "@tanstack/react-query";
 
 function UserInput({ label, placeholder }: CommonInputType) {
   const ref = useRef<HTMLDivElement>(null);

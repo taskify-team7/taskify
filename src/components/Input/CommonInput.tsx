@@ -3,14 +3,14 @@ import { CommonInputType } from "../../interface/Input";
 
 function CommonInput({
   label,
-  inputOnChange,
   placeholder,
   value,
-  required,
   type = "text",
   validation,
   errors,
   name = "",
+  required,
+  inputOnChange,
 }: CommonInputType) {
   const error = errors?.[name];
   return (

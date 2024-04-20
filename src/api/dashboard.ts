@@ -80,3 +80,44 @@ export const changeCard = async (id: string, body: object) => {
     console.log(err);
   }
 };
+
+export const createCard = async (
+  cardData: any,
+  dashboardId: number,
+  columnId: number
+) => {
+  try {
+    const res = await client.post(`cards/`, {
+      assigneeUserId: 1567,
+      dashboardId: dashboardId,
+      columnId: columnId,
+      title: cardData.title,
+      description: cardData.description,
+      dueDate: cardData.dueDate,
+      tags: [...cardData.tags],
+      imageUrl: cardData.imageUrl,
+    });
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const changeColumnImageURL = async (
+  imageFile: File,
+  columnId: number
+) => {
+  const formData = new FormData();
+  formData.append("image", imageFile);
+
+  try {
+    const res = await client.post(`columns/${columnId}/card-image`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return res.data.imageUrl;
+  } catch (e: any) {
+    console.log(e);
+  }
+};
