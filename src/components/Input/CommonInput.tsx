@@ -12,7 +12,7 @@ function CommonInput({
   required,
   inputOnChange,
 }: CommonInputType) {
-  const error = errors?.[name];
+  const error = errors?.[validation?.name || ""];
   return (
     <div className={styles.content}>
       <label htmlFor={label} className={styles.content_label}>

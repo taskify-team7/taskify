@@ -1,19 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./CommentBox.module.css";
 import { CommentsType } from "../../interface/CardType";
 import { formatDate } from "../../utils/FormatDateUtil";
-import { deleteComment } from "../../api/card";
+import { deleteComment, updateComment } from "../../api/card";
+import CommonInput from "../Input/CommonInput";
+import { useForm } from "react-hook-form";
 
 interface CommentBoxType {
   comment: CommentsType;
 }
 
 function CommentBox({ comment }: CommentBoxType) {
+  const [isEditInputState, setIsEditInputState] = useState(false);
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+  } = useForm({
+    mode: "onBlur",
+  });
+
+  const editComentValidation = register("editComment", {
+    required: {
+      value: true,
+      message: "댓글을 입력해 주세요",
+    },
+  });
+
   const formattedDate = formatDate(comment.updatedAt);
-  console.log(comment);
+
+  const handleEditInputOpen = () => {
+    setValue("editComment", comment.content);
+    setIsEditInputState(true);
+  };
 
   const handleDeleteComment = async () => {
     const res = await deleteComment(comment.id);
+  };
+
+  const handleEditComment = async (e: any) => {
+    const res = await updateComment(comment.id, e.editComment);
     console.log(res);
   };
 
@@ -31,15 +59,36 @@ function CommentBox({ comment }: CommentBoxType) {
           <p>{comment.author.nickname}</p>
           <p>{formattedDate}</p>
         </div>
-        <div className={styles.cardDetail_coment_text}>
-          <p>{comment.content}</p>
-        </div>
-        <div className={styles.cardDetail_coment_btns}>
-          <button type="button">수정</button>
-          <button type="button" onClick={() => handleDeleteComment()}>
-            삭제
-          </button>
-        </div>
+        {isEditInputState ? (
+          <div className={styles.comment_edit}>
+            <form onSubmit={handleSubmit(handleEditComment)}>
+              <CommonInput validation={editComentValidation} errors={errors} />
+              <div className={styles.comment_edit_btns}>
+                <button type="submit">수정</button>
+                <button
+                  type="button"
+                  onClick={() => setIsEditInputState(false)}
+                >
+                  취소
+                </button>
+              </div>
+            </form>
+          </div>
+        ) : (
+          <>
+            <div className={styles.cardDetail_coment_text}>
+              <p>{comment.content}</p>
+            </div>
+            <div className={styles.cardDetail_coment_btns}>
+              <button type="button" onClick={handleEditInputOpen}>
+                수정
+              </button>
+              <button type="button" onClick={() => handleDeleteComment()}>
+                삭제
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

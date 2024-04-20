@@ -39,3 +39,11 @@ export const deleteComment = async (commentId: number) => {
 
   return data;
 };
+
+export const updateComment = async (commentId: number, content: string) => {
+  const { data } = await client.put(`/comments/${commentId}`, {
+    content: content,
+  });
+
+  return data;
+};
