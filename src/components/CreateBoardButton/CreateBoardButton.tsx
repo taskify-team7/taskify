@@ -2,6 +2,7 @@ import styles from "./CreateBoardButton.module.css";
 import { useModal } from "../../hooks/useModal";
 import { createPortal } from "react-dom";
 import DashBoardCreateModal from "../Modal/DashBoardCreateModal";
+import CardDetail from "../CardDetail/CardDetail";
 
 function CreateBoardButton() {
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
@@ -11,6 +12,7 @@ function CreateBoardButton() {
       {createPortal(
         isModalOpen && (
           <DashBoardCreateModal handleModalClose={handleModalClose} />
+          // <CardDetail handleModalClose={handleModalClose} />
         ),
         document.body
       )}
