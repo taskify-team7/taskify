@@ -1,13 +1,19 @@
 import React from "react";
 import ModalContainer from "../Modal/ModalContainer";
 import styles from "./CardDetail.module.css";
-import BaseButton from "../BaseButton/BaseButton";
+import ComentInput from "../Input/ComentInput";
+import CommentBox from "./CommentBox";
+import Tag from "./Tag";
+import { CardType } from "../../interface/DashboardType";
 
 interface CardDetailProps {
   handleModalClose: () => void;
+  card: CardType;
 }
 
-function CardDetail({ handleModalClose }: CardDetailProps) {
+function CardDetail({ handleModalClose, card }: CardDetailProps) {
+  console.log(card);
+
   return (
     <ModalContainer handleModalClose={handleModalClose}>
       <div className={styles.cardDetail}>
@@ -15,7 +21,11 @@ function CardDetail({ handleModalClose }: CardDetailProps) {
           <h2>새로운 일정 관리</h2>
           <div className={styles.cardDetail_header_option}>
             <img src="/Icons/kebab.svg" alt="menu" />
-            <img src="/Icons/modal_close.svg" alt="close" />
+            <img
+              src="/Icons/modal_close.svg"
+              alt="close"
+              onClick={() => handleModalClose()}
+            />
           </div>
         </div>
         <div className={styles.cardDetail_mobile_userBox}>
@@ -36,8 +46,7 @@ function CardDetail({ handleModalClose }: CardDetailProps) {
             <div className={styles.cardDetail_labels}>
               <div className={styles.cardDetail_columnName}>To do</div>
               <div className={styles.cardDetail_tags}>
-                <div className={styles.cardDetail_tag}>프로젝트</div>
-                <div className={styles.cardDetail_tag}>일반</div>
+                <Tag TagName="test" />
               </div>
             </div>
             <div className={styles.cardDetail_text}>
@@ -51,36 +60,11 @@ function CardDetail({ handleModalClose }: CardDetailProps) {
             <div className={styles.cardDetail_img}>
               <img src="/Image/todoImg.svg" alt="content_image" />
             </div>
-            <form action="" className={styles.cardDetail_comentForm}>
-              <label>댓글</label>
-              <div className={styles.cardDetail_comentForm_input}>
-                <input type="text" placeholder="댓글 작성하기" />
-                <BaseButton
-                  text="입력"
-                  onClick={() => console.log()}
-                  styleType="refuse"
-                />
-              </div>
+            <form>
+              <ComentInput />
             </form>
             <div className={styles.cardDetail_coments}>
-              <div className={styles.cardDetail_coment}>
-                <div className={styles.cardDetail_coment_profile}>C</div>
-                <div className={styles.cardDetail_coment_main}>
-                  <div className={styles.cardDetail_coment_user}>
-                    <p>정만철</p>
-                    <p>2022.12.27 14:00</p>
-                  </div>
-                  <div className={styles.cardDetail_coment_text}>
-                    <p>
-                      오늘안에 CCC까지 만들 수 있을까요?오늘안에 CCC까지 만들 수
-                    </p>
-                  </div>
-                  <div className={styles.cardDetail_coment_btns}>
-                    <button type="button">수정</button>
-                    <button type="button">삭제</button>
-                  </div>
-                </div>
-              </div>
+              <CommentBox />
             </div>
           </div>
           <div className={styles.cardDetail_sidebar}>
