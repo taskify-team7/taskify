@@ -86,6 +86,7 @@
 .cardDetail_img img {
   width: 90%;
   height: 90%;
+  border-radius: 8px;
 }
 
 .cardDetail_coments {
@@ -231,5 +232,19 @@
     border-radius: 8px;
     border: 1px solid #d9d9d9;
     background: #fff;
+  }
+
+  .cardDetail_mobile_profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background: #fdd446;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
   }
 }
