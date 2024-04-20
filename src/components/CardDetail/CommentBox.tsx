@@ -1,17 +1,31 @@
 import React from "react";
 import styles from "./CommentBox.module.css";
+import { CommentsType } from "../../interface/CardType";
+import { formatDate } from "../../utils/FormatDateUtil";
 
-function CommentBox() {
+interface CommentBoxType {
+  comment: CommentsType;
+}
+
+function CommentBox({ comment }: CommentBoxType) {
+  const formattedDate = formatDate(comment.updatedAt);
+
   return (
     <div className={styles.cardDetail_coment}>
-      <div className={styles.cardDetail_coment_profile}>C</div>
+      <div className={styles.cardDetail_coment_profile}>
+        {comment.author.profileImageUrl ? (
+          <img src={comment.author.profileImageUrl} alt="profile" />
+        ) : (
+          comment.author.nickname[0]
+        )}
+      </div>
       <div className={styles.cardDetail_coment_main}>
         <div className={styles.cardDetail_coment_user}>
-          <p>정만철</p>
-          <p>2022.12.27 14:00</p>
+          <p>{comment.author.nickname}</p>
+          <p>{formattedDate}</p>
         </div>
         <div className={styles.cardDetail_coment_text}>
-          <p>오늘안에 CCC까지 만들 수 있을까요?오늘안에 CCC까지 만들 수</p>
+          <p>{comment.content}</p>
         </div>
         <div className={styles.cardDetail_coment_btns}>
           <button type="button">수정</button>
