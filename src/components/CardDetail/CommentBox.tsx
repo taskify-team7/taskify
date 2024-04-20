@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./CommentBox.module.css";
 import { CommentsType } from "../../interface/CardType";
 import { formatDate } from "../../utils/FormatDateUtil";
+import { deleteComment } from "../../api/card";
 
 interface CommentBoxType {
   comment: CommentsType;
@@ -9,6 +10,12 @@ interface CommentBoxType {
 
 function CommentBox({ comment }: CommentBoxType) {
   const formattedDate = formatDate(comment.updatedAt);
+  console.log(comment);
+
+  const handleDeleteComment = async () => {
+    const res = await deleteComment(comment.id);
+    console.log(res);
+  };
 
   return (
     <div className={styles.cardDetail_coment}>
@@ -29,7 +36,9 @@ function CommentBox({ comment }: CommentBoxType) {
         </div>
         <div className={styles.cardDetail_coment_btns}>
           <button type="button">수정</button>
-          <button type="button">삭제</button>
+          <button type="button" onClick={() => handleDeleteComment()}>
+            삭제
+          </button>
         </div>
       </div>
     </div>

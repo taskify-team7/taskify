@@ -33,3 +33,9 @@ export const getComments = async (
 
   return data;
 };
+
+export const deleteComment = async (commentId: number) => {
+  const { data } = await client.delete(`/comments/${commentId}`);
+
+  return data;
+};
