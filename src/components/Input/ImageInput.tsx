@@ -1,29 +1,34 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 import styles from "./ImageInput.module.css";
 import { ImageInputType } from "../../interface/Input";
+import { changeColumnImageURL } from "../../api/dashboard";
 
-function ImageInput({ label, value, validation, setValue }: ImageInputType) {
+function ImageInput({
+  label,
+  value,
+  validation,
+  setValue,
+  columnId,
+}: ImageInputType) {
   const imageInput = useRef<HTMLInputElement | null>(null);
   const [pickedImage, setPickedImage] = useState<any>();
   const handleImageInput = () => {
     imageInput.current?.click();
   };
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) {
       return;
     }
-    // const fileReader = new FileReader();
-    // fileReader.readAsDataURL(file);
-    // fileReader.onloadend = () => {
-    //   setPickedImage(fileReader.result);
-    // };
-    const image = window.URL.createObjectURL(file);
 
-    const blobId = image.slice(5); // "blob:" 다음의 문자열을 추출
-    setPickedImage(image);
-    setValue("imageUrl", blobId);
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onloadend = () => {
+      setPickedImage(fileReader.result);
+    };
+    const image = await changeColumnImageURL(file, columnId);
+    setValue("imageUrl", image);
   };
 
   return (

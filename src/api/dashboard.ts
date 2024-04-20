@@ -86,6 +86,8 @@ export const createCard = async (
   dashboardId: number,
   columnId: number
 ) => {
+  console.log(cardData);
+  console.log(dashboardId, columnId);
   try {
     const res = await client.post(`cards/`, {
       assigneeUserId: 1567,
@@ -101,5 +103,24 @@ export const createCard = async (
     // console.log(res);
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const changeColumnImageURL = async (
+  imageFile: File,
+  columnId: number
+) => {
+  const formData = new FormData();
+  formData.append("image", imageFile);
+
+  try {
+    const res = await client.post(`columns/${columnId}/card-image`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return res.data.imageUrl;
+  } catch (e: any) {
+    console.log(e);
   }
 };

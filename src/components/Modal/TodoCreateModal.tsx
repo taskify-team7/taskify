@@ -56,10 +56,10 @@ function TodoCreateModal({
   const imageValidation = register("imageUrl");
 
   const onSubmit = async (e: any) => {
-    console.log(e);
     if (dashboardId && columnId) {
+      //리스폰스 값
       const res = await createCard(e, dashboardId, columnId);
-      console.log(res);
+      handleModalClose();
     }
   };
 
@@ -101,6 +101,7 @@ function TodoCreateModal({
             label="이미지"
             validation={imageValidation}
             setValue={setValue}
+            columnId={columnId || 0}
           />
           <div className={styles.modal_buttons}>
             <button className={styles.a_button}>생성</button>

@@ -20,4 +20,5 @@ export interface DateInputType extends CommonInputType {
 
 export interface ImageInputType extends CommonInputType {
   setValue: any;
+  columnId: number;
 }
