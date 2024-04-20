@@ -1,10 +1,12 @@
 import React from "react";
 import ModalContainer from "../Modal/ModalContainer";
 import styles from "./CardDetail.module.css";
-import ComentInput from "../Input/ComentInput";
+import CommentInput from "../Input/CommentInput";
 import CommentBox from "./CommentBox";
 import Tag from "./Tag";
 import { CardType } from "../../interface/DashboardType";
+import { useForm } from "react-hook-form";
+import { createComment } from "../../api/card";
 
 interface CardDetailProps {
   handleModalClose: () => void;
@@ -12,6 +14,30 @@ interface CardDetailProps {
 }
 
 function CardDetail({ handleModalClose, card }: CardDetailProps) {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+  } = useForm({
+    mode: "onBlur",
+  });
+
+  const comentValidation = register("comment", {
+    required: {
+      value: true,
+      message: "댓글을 입력해 주세요",
+    },
+  });
+
+  const onSubmit = async (e: any) => {
+    const { id: cardId, dashboardId, columnId } = card;
+    console.log(e);
+    const res = await createComment(e.comment, cardId, columnId, dashboardId);
+    console.log(res);
+    setValue("comment", "");
+  };
+
   return (
     <ModalContainer handleModalClose={handleModalClose}>
       <div className={styles.cardDetail}>
@@ -60,8 +86,8 @@ function CardDetail({ handleModalClose, card }: CardDetailProps) {
             <div className={styles.cardDetail_img}>
               <img src={card.imageUrl} alt="content_image" />
             </div>
-            <form>
-              <ComentInput />
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <CommentInput validation={comentValidation} errors={errors} />
             </form>
             <div className={styles.cardDetail_coments}>
               <CommentBox />

@@ -86,8 +86,6 @@ export const createCard = async (
   dashboardId: number,
   columnId: number
 ) => {
-  console.log(cardData);
-  console.log(dashboardId, columnId);
   try {
     const res = await client.post(`cards/`, {
       assigneeUserId: 1567,
@@ -100,7 +98,6 @@ export const createCard = async (
       imageUrl: cardData.imageUrl,
     });
     return res;
-    // console.log(res);
   } catch (err) {
     console.log(err);
   }

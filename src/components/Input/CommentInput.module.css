@@ -26,3 +26,12 @@
   right: 16px;
   bottom: 16px;
 }
+
+.errorMesage {
+  position: absolute;
+  left: 16px;
+  bottom: 25px;
+  color: red;
+  font-size: 13px;
+  font-weight: 400;
+}
