@@ -4,6 +4,7 @@ import LandingNavbar from "../../components/LandingNavbar/LandingNavbar";
 import Footer from "../../components/LandingFooter/Footer";
 import { Link } from "react-router-dom";
 
+
 export default function Home() {
   return (
     <div className={styles.bodyWrapper}>
