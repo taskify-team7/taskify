@@ -33,6 +33,12 @@
   font-weight: 400;
 }
 
+@media (max-width: 767px) {
+  .content_input {
+    height: 42px;
+  }
+}
+
 .content_input::placeholder {
   color: #9fa6b2;
   font-family: Pretendard;
