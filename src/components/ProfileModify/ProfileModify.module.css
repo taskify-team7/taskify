@@ -1,0 +1,59 @@
+.container {
+  width: 620px;
+  height: 355px;
+
+  padding: 32px 28px;
+
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  .container {
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+  }
+}
+
+.mainText {
+  color: var(--black-black_333236, #333236);
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 32px;
+}
+
+.totalInputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.imgInputContainer {
+  width: 182px;
+  height: 182px;
+}
+
+.commonInputContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.BtnContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 4px;
+}

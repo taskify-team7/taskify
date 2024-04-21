@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useRef, useState } from "react";
-import styles from "./ImageInput.module.css";
-import { ImageInputType } from "../../interface/Input";
-import { changeColumnImageURL } from "../../api/dashboard";
+import React, { ChangeEvent, useRef, useState } from 'react';
+import styles from './ImageInput.module.css';
+import { ImageInputType } from '../../interface/Input';
+import { changeColumnImageURL } from '../../api/dashboard';
 
 function ImageInput({
   label,
@@ -9,9 +9,19 @@ function ImageInput({
   validation,
   setValue,
   columnId,
+  divStyleType = 'content_image',
+  coverStyleType = 'imageCover',
+  pickStyleType = 'pickedImage',
+  imgBtnStyleType = 'content_image_button',
 }: ImageInputType) {
   const imageInput = useRef<HTMLInputElement | null>(null);
   const [pickedImage, setPickedImage] = useState<any>();
+
+  const imgDivClassName = `${styles[divStyleType]}`;
+  const imgCoverClassName = `${styles[coverStyleType]}`;
+  const imgPickedClassName = `${styles[pickStyleType]}`;
+  const imgBtnClassName = `${styles[imgBtnStyleType]}`;
+
   const handleImageInput = () => {
     imageInput.current?.click();
   };
@@ -28,7 +38,7 @@ function ImageInput({
       setPickedImage(fileReader.result);
     };
     const image = await changeColumnImageURL(file, columnId);
-    setValue("imageUrl", image);
+    setValue('imageUrl', image);
   };
 
   return (
@@ -36,7 +46,7 @@ function ImageInput({
       <label htmlFor="imageUrl" className={styles.content_label}>
         {label}
       </label>
-      <div className={styles.content_image}>
+      <div className={imgDivClassName}>
         <input
           id="imageUrl"
           type="file"
@@ -51,11 +61,11 @@ function ImageInput({
         />
         {pickedImage ? (
           <>
-            <div className={styles.imageCover} onClick={handleImageInput}>
+            <div className={imgCoverClassName} onClick={handleImageInput}>
               <img src="/Icons/edit_pen.svg" alt="edit" />
             </div>
             <img
-              className={styles.pickedImage}
+              className={imgPickedClassName}
               src={pickedImage}
               alt="add_Image"
             />
@@ -64,7 +74,7 @@ function ImageInput({
           <>
             <button
               type="button"
-              className={styles.content_image_button}
+              className={imgBtnClassName}
               onClick={handleImageInput}
             >
               <img src="/Icons/add_icon.svg" alt="add_Image" />
