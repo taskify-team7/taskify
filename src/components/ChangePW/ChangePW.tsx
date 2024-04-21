@@ -2,51 +2,87 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import CommonInput from '../Input/CommonInput';
 import BaseButton from '../BaseButton/BaseButton';
 import style from './ChangePW.module.css';
+import { useForm } from 'react-hook-form';
+
+interface FormValues {
+  password: string;
+  newPassword: string;
+  newPasswordConfirmation: string;
+}
 
 export default function ChangePW() {
-  const [currentPassword, setCurrentPassword] = useState<string>('');
-  const [newPassword, setNewPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const [isPasswordMismatch, setIsPasswordMismatch] = useState<boolean>(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    setError,
+    clearErrors,
+  } = useForm<FormValues>({
+    mode: 'onBlur',
+    defaultValues: {
+      password: '',
+      newPassword: '',
+      newPasswordConfirmation: '',
+    },
+  });
 
-  // 비밀번호 변경 요청 함수
-  const handlePasswordChange = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // 여기서 현재 비밀번호 검증 로직 구현
-    // 비밀번호가 틀린 경우 모달 표시 로직 추가
+  const newPassword = watch('newPassword');
+  const newPasswordConfirmation = watch('newPasswordConfirmation');
+
+  const onSubmit = (data: FormValues) => {
+    if (newPassword !== newPasswordConfirmation) {
+      setError('newPasswordConfirmation', {
+        type: 'manual',
+        message: '새 비밀번호가 일치하지 않습니다.',
+      });
+      return;
+    }
+    clearErrors('newPasswordConfirmation');
+    const submissionData = {
+      password: data.password,
+      newPassword: data.newPassword,
+    };
+    console.log(submissionData);
   };
-
-  // 새 비밀번호와 비밀번호 확인의 일치 여부 확인
-  useEffect(() => {
-    setIsPasswordMismatch(newPassword !== confirmPassword);
-  }, [newPassword, confirmPassword]);
 
   return (
     <div className={style.containor}>
-      <h2>비밀번호 변경</h2>
-      <form className={style.formContainor} onSubmit={handlePasswordChange}>
+      <h2 className={style.mainText}>비밀번호 변경</h2>
+      <form className={style.formContainor} onSubmit={handleSubmit(onSubmit)}>
         <CommonInput
-          label="현재 비밀번호"
-          value={currentPassword}
+          label="비밀번호"
+          placeholder="현재 비밀번호 입력"
           type="password"
-          inputOnChange={(e) => setCurrentPassword(e.target.value)}
+          name="password"
+          validation={register('password', {
+            required: '비밀번호는 필수 입력 사항입니다.',
+          })}
+          errors={errors}
         />
         <CommonInput
           label="새 비밀번호"
-          value={newPassword}
+          placeholder="새 비밀번호 입력"
           type="password"
-          inputOnChange={(e) => setNewPassword(e.target.value)}
+          name="newPassword"
+          validation={register('newPassword', {
+            required: '비밀번호는 필수 입력 사항입니다.',
+          })}
+          errors={errors}
         />
         <CommonInput
           label="새 비밀번호 확인"
-          value={confirmPassword}
+          placeholder="새 비밀번호 입력"
           type="password"
-          inputOnChange={(e) => setConfirmPassword(e.target.value)}
+          name="newPasswordConfirmation"
+          validation={register('newPasswordConfirmation', {
+            required: '비밀번호는 필수 입력 사항입니다.',
+          })}
+          errors={errors}
         />
-        {isPasswordMismatch && (
-          <div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>
-        )}
-        <BaseButton text="변경" styleType="accept" type="submit" />
+        <div className={style.buttonContainor}>
+          <BaseButton text="변경" styleType="accept" type="submit" />
+        </div>
       </form>
     </div>
   );

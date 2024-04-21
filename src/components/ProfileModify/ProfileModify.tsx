@@ -12,7 +12,7 @@ export default function ProfileModify() {
       <div>프로필</div>
       <form>
         <div>
-          <ImageInput label={''} />
+          sdf
         </div>
         <div>
           <CommonInput label={'이메일'} />
