@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ModalContainer from "../Modal/ModalContainer";
 import styles from "./CardDetail.module.css";
 import CommentInput from "../Input/CommentInput";
@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import { CommentRequestType } from "../../interface/CardType";
 import { createComment, getComments } from "../../api/card";
+import OptionBox from "./OptionBox";
 
 interface CardDetailProps {
   handleModalClose: () => void;
@@ -16,6 +17,9 @@ interface CardDetailProps {
 }
 
 function CardDetail({ handleModalClose, card }: CardDetailProps) {
+  //옵션을 열고 닫는 상태를 관리하는 useState
+  const [isOptionBoxState, setIsOptionBoxState] = useState(false);
+
   const { data: commentsData } = useQuery<CommentRequestType>({
     queryKey: ["comments", card.id],
     queryFn: () => getComments(10, null, card.columnId, card.id),
@@ -51,7 +55,12 @@ function CardDetail({ handleModalClose, card }: CardDetailProps) {
         <div className={styles.cardDetail_header}>
           <h2>{card.title}</h2>
           <div className={styles.cardDetail_header_option}>
-            <img src="/Icons/kebab.svg" alt="menu" />
+            {isOptionBoxState && <OptionBox />}
+            <img
+              src="/Icons/kebab.svg"
+              alt="menu"
+              onClick={() => setIsOptionBoxState((prev) => !prev)}
+            />
             <img
               src="/Icons/modal_close.svg"
               alt="close"

@@ -23,11 +23,13 @@
 .cardDetail_header_option {
   display: flex;
   gap: 24px;
+  position: relative;
 }
 
 .cardDetail_header_option img {
   width: 32px;
   height: 32px;
+  cursor: pointer;
 }
 
 .cardDetail_main {
