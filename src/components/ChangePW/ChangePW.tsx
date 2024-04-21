@@ -66,7 +66,7 @@ export default function ChangePW() {
       await logIn(LoginData);
       await changePassword(submissionData);
       alert("비밀번호가 변경되었습니다.");
-      
+
     } catch (error) {
       console.log(error.response.data.message);
       setIsModalOpen(true);
@@ -79,9 +79,9 @@ export default function ChangePW() {
       {isModalOpen && (
         <PasswordErrorModal handleModalClose={handleModalClose} />
       )}
-      <div className={style.containor}>
+      <div className={style.container}>
         <h2 className={style.mainText}>비밀번호 변경</h2>
-        <form className={style.formContainor} onSubmit={handleSubmit(onSubmit)}>
+        <form className={style.formContainer} onSubmit={handleSubmit(onSubmit)}>
           <CommonInput
             label="비밀번호"
             placeholder="현재 비밀번호 입력"
@@ -112,7 +112,7 @@ export default function ChangePW() {
             })}
             errors={errors}
           />
-          <div className={style.buttonContainor}>
+          <div className={style.buttonContainer}>
             <BaseButton text="변경" styleType="accept" type="submit" />
           </div>
         </form>

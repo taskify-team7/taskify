@@ -1,4 +1,4 @@
-.containor {
+.container {
   width: 38.75rem;
   height: 28.375rem;
   border-radius: 8px;
@@ -6,18 +6,37 @@
 
   padding: 2rem 1.75rem;
 }
+@media (max-width: 1023px) and (min-width: 768px) {
+  .container{
+    width: 34rem;
+  }  
+}
+
+@media (max-width: 767px) {
+  .container{
+    width: 17.75rem;
+    height: 24.0625rem;
+  }  
+}
+
 
 .mainText {
   color: var(--black-black_333236, #333236);
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   margin-bottom: 2rem;
 }
 
-.formContainor {
+@media (max-width: 767px) {
+  .mainText{
+    font-size: 1.25rem;
+  }  
+}
+
+.formContainer {
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -25,7 +44,14 @@
   gap: 10px;
 }
 
-.buttonContainor {
+@media (max-width: 767px) {
+  .formContainer{
+    gap: .5rem;
+  }  
+}
+
+
+.buttonContainer {
   width: 100%;
   display: flex;
   flex-direction: column;
