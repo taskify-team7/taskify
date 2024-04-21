@@ -4,8 +4,12 @@ import BaseButton from '../BaseButton/BaseButton';
 import CommonInput from '../Input/CommonInput';
 import { useForm } from 'react-hook-form';
 import ProfileImgInput from '../Input/ProfileImgInput';
+import { changeMyInfo } from '../../api/auth';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProfileModify() {
+  const navigator = useNavigate();
+
   let userEmail = '';
   const userString = localStorage.getItem('user');
   if (userString) {
@@ -26,15 +30,20 @@ export default function ProfileModify() {
     },
   });
 
-  const imageValidation = register("imageUrl");
+  const imageValidation = register('imageUrl');
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     const profileData = {
       nickname: data.nickName,
       profileImageUrl: data.imageUrl,
+    };
+    try {
+      const res = await changeMyInfo(profileData);
+      alert('프로필이 변경되었습니다.');
+      navigator('/dashboard');      
+    } catch (error) {
+      console.log(error);
     }
-    console.log(profileData);
-    
   };
 
   return (
@@ -43,10 +52,7 @@ export default function ProfileModify() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={style.totalInputContainer}>
           <div className={style.imgInputContainer}>
-            <ProfileImgInput
-              validation={imageValidation}
-              setValue={setValue}
-            />
+            <ProfileImgInput validation={imageValidation} setValue={setValue} />
           </div>
           <div className={style.commonInputContainer}>
             <CommonInput
