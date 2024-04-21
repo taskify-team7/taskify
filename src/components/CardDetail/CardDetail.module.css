@@ -1,0 +1,250 @@
+.cardDetail {
+  width: 730px;
+  height: 760px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px 25px;
+  overflow-y: scroll;
+}
+
+.cardDetail_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardDetail_header h2 {
+  color: #333236;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.cardDetail_header_option {
+  display: flex;
+  gap: 24px;
+}
+
+.cardDetail_header_option img {
+  width: 32px;
+  height: 32px;
+}
+
+.cardDetail_main {
+  display: flex;
+  width: 100%;
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.cardDetail_content {
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cardDetail_labels {
+  display: flex;
+}
+
+.cardDetail_columnName {
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 11px;
+  background: #f1effd;
+  color: #5534da;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.cardDetail_tags {
+  display: flex;
+  gap: 6px;
+  border-left: 1px solid #d9d9d9;
+  padding-left: 20px;
+  margin-left: 20px;
+}
+
+.cardDetail_text {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+}
+
+.cardDetail_img {
+  width: 100%;
+  overflow: hidden;
+}
+
+.cardDetail_img img {
+  width: 90%;
+  height: 90%;
+  border-radius: 8px;
+}
+
+.cardDetail_coments {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.cardDetail_sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 200px;
+  height: 155px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+}
+
+.cardDetail_sidebar_label {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.cardDetail_sidebar_user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cardDetail_sidebar_user > p {
+  color: #333236;
+  font-family: Pretendard;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.cardDetail_sidebar_date {
+  color: #333236;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.cardDetail_coment_profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  background: #fdd446;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.cardDetail_mobile_userBox {
+  display: none;
+}
+
+.cardDetail_mobile_label {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 10px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.cardDetail_mobile_user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #333236;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.cardDetail_mobile_profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  background: #fdd446;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.cardDetail_mibile_date {
+  color: #333236;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+@media (max-width: 744px) {
+  .cardDetail {
+    width: 680px;
+  }
+
+  .cardDetail_sidebar {
+    width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardDetail {
+    width: 327px;
+  }
+  .cardDetail_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .cardDetail_header h2 {
+    margin-top: 40px;
+  }
+  .cardDetail_header_option img {
+    width: 24px;
+    height: 24px;
+  }
+  .cardDetail_sidebar {
+    display: none;
+  }
+  .cardDetail_mobile_userBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+    background: #fff;
+  }
+
+  .cardDetail_mobile_profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background: #fdd446;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}

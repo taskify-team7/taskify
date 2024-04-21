@@ -17,7 +17,7 @@ function ColumnManagementModal({
         <form className={styles.contents}>
           <CommonInput
             label="이름"
-            placeholder="새로운 프로젝트"
+            placeholder="칼럼 이름을 입력하세요"
             value={"test"}
           />
           <div className={styles.modal_buttons}>

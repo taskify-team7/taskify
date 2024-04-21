@@ -1,0 +1,11 @@
+.containor {
+  width: 38.75rem;
+  background-color: blueviolet;
+}
+
+.formContainor{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}

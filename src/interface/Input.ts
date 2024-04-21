@@ -1,10 +1,24 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, InputHTMLAttributes } from "react";
+import { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
 
-export interface CommonInputType {
-  label: string;
-  placeholder?: string;
-  required?: boolean;
-  value?: string;
-  type?: string;
+export interface CommonInputType extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
   inputOnChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  validation?: UseFormRegisterReturn;
+  errors?: FieldErrors;
+}
+
+export interface TagInputType extends CommonInputType {
+  setValue: any;
+  getValues: any;
+}
+
+export interface DateInputType extends CommonInputType {
+  control: any;
+  setValue: any;
+}
+
+export interface ImageInputType extends CommonInputType {
+  setValue: any;
+  columnId: number;
 }

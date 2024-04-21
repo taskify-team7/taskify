@@ -1,35 +1,77 @@
-import React, { useRef } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import styles from "./ImageInput.module.css";
-import { CommonInputType } from "../../interface/Input";
+import { ImageInputType } from "../../interface/Input";
+import { changeColumnImageURL } from "../../api/dashboard";
 
-function ImageInput({ label, inputOnChange, value }: CommonInputType) {
-  const imageInput = useRef<any>();
-
+function ImageInput({
+  label,
+  value,
+  validation,
+  setValue,
+  columnId,
+}: ImageInputType) {
+  const imageInput = useRef<HTMLInputElement | null>(null);
+  const [pickedImage, setPickedImage] = useState<any>();
   const handleImageInput = () => {
-    imageInput.current.click();
+    imageInput.current?.click();
+  };
+
+  const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onloadend = () => {
+      setPickedImage(fileReader.result);
+    };
+    const image = await changeColumnImageURL(file, columnId);
+    setValue("imageUrl", image);
   };
 
   return (
     <div className={styles.content}>
-      <label htmlFor="iamge" className={styles.content_label}>
+      <label htmlFor="imageUrl" className={styles.content_label}>
         {label}
       </label>
-      <input
-        id="iamge"
-        type="file"
-        accept="image/png, image/jpeg"
-        className={styles.content_input}
-        value={value}
-        onChange={inputOnChange}
-        ref={imageInput}
-      />
-      <button
-        type="button"
-        className={styles.content_image}
-        onClick={handleImageInput}
-      >
-        <img src="/Icons/add_icon.svg" alt="add_Image" />
-      </button>
+      <div className={styles.content_image}>
+        <input
+          id="imageUrl"
+          type="file"
+          accept="image/png, image/jpeg"
+          className={styles.content_image_input}
+          value={value}
+          onChange={handleImageChange}
+          ref={(e) => {
+            validation?.ref(e);
+            imageInput.current = e;
+          }}
+        />
+        {pickedImage ? (
+          <>
+            <div className={styles.imageCover} onClick={handleImageInput}>
+              <img src="/Icons/edit_pen.svg" alt="edit" />
+            </div>
+            <img
+              className={styles.pickedImage}
+              src={pickedImage}
+              alt="add_Image"
+            />
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              className={styles.content_image_button}
+              onClick={handleImageInput}
+            >
+              <img src="/Icons/add_icon.svg" alt="add_Image" />
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 }
