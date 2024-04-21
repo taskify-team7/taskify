@@ -3,7 +3,7 @@ import CommonInput from '../Input/CommonInput';
 import BaseButton from '../BaseButton/BaseButton';
 import style from './ChangePW.module.css';
 import { useForm } from 'react-hook-form';
-import { logIn } from '../../api/auth';
+import { changePassword, logIn } from '../../api/auth';
 import PasswordErrorModal from '../Modal/PasswordErrorModal';
 
 interface FormValues {
@@ -48,14 +48,7 @@ export default function ChangePW() {
       email: userEmail,
       password: data.password,
     };
-
-    try {
-      await logIn(LoginData);
-    } catch (error) {
-      console.log(error.response.data.message);
-      setIsModalOpen(true);
-    }
-
+    
     if (newPassword !== newPasswordConfirmation) {
       setError('newPasswordConfirmation', {
         type: 'manual',
@@ -68,7 +61,17 @@ export default function ChangePW() {
       password: data.password,
       newPassword: data.newPassword,
     };
-    console.log(submissionData);
+
+    try {
+      await logIn(LoginData);
+      await changePassword(submissionData);
+      alert("비밀번호가 변경되었습니다.");
+      
+    } catch (error) {
+      console.log(error.response.data.message);
+      setIsModalOpen(true);
+    }
+
   };
 
   return (
