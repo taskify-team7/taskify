@@ -1,9 +1,9 @@
 import React from 'react';
 import style from './ProfileModify.module.css';
 import BaseButton from '../BaseButton/BaseButton';
-import ImageInput from '../Input/ImageInput';
 import CommonInput from '../Input/CommonInput';
 import { useForm } from 'react-hook-form';
+import ProfileImgInput from '../Input/ProfileImgInput';
 
 export default function ProfileModify() {
   let userEmail = '';
@@ -43,14 +43,9 @@ export default function ProfileModify() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={style.totalInputContainer}>
           <div className={style.imgInputContainer}>
-            <ImageInput
+            <ProfileImgInput
               validation={imageValidation}
               setValue={setValue}
-              columnId={0}
-              divStyleType="profileDiv"
-              coverStyleType="profileImgCover"
-              pickStyleType="profilePickImg"
-              imgBtnStyleType="profileImgBtn"
             />
           </div>
           <div className={style.commonInputContainer}>

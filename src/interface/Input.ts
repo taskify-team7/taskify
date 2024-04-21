@@ -22,8 +22,8 @@ export interface DateInputType extends CommonInputType {
 export interface ImageInputType extends CommonInputType {
   setValue: any;
   columnId: number;
-  divStyleType?: 'content_image' | 'profileDiv';
-  coverStyleType?: 'imageCover' | 'profileImgCover';
-  pickStyleType?: 'pickedImage' | 'profilePickImg'
-  imgBtnStyleType?: 'content_image_button' | 'profileImgBtn'
+}
+
+export interface ProfileImgInputType extends CommonInputType{
+  setValue: any;
 }

@@ -1,0 +1,88 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.content_image_input {
+  display: none;
+  position: relative;
+}
+
+.profileDiv {
+  position: relative;
+  width: 182px;
+  height: 182px;
+}
+
+@media (max-width: 767px) {
+  .profileDiv {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.profilePickImg {
+  width: 182px;
+  height: 182px;
+  border-radius: 6px;
+}
+
+@media (max-width: 767px) {
+  .profilePickImg {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.profileImgCover {
+  display: none;
+  position: absolute;
+  padding: 23px;
+  width: 182px;
+  height: 182px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+@media (max-width: 767px) {
+  .profileImgCover {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.penImg {
+  width: 182px;
+  height: 182px;
+  transform: translate(-23px, -23px);
+}
+
+@media (max-width: 767px) {
+  .penImg {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.profileDiv:hover .profileImgCover {
+  display: block;
+}
+
+.profileImgBtn {
+  width: 182px;
+  height: 182px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background: #f5f5f5;
+}
+
+@media (max-width: 767px) {
+  .profileImgBtn {
+    width: 100px;
+    height: 100px;
+  }
+}
