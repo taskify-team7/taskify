@@ -42,6 +42,11 @@ export const getDashboard = async (id: string) => {
   return data;
 };
 
+export const getMembers = async (id: string) => {
+  const { data } = await client.get("members", { params: { dashboardId: id } });
+  return data.members;
+};
+
 export const createColumn = async (title: string, dashboardId: number) => {
   const { data } = await client.post(`columns`, {
     title: title,
