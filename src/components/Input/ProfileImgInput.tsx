@@ -4,7 +4,6 @@ import { ProfileImgInputType } from '../../interface/Input';
 import { changeImageURL } from '../../api/auth';
 
 function ProfileImgInput({
-  label,
   value,
   validation,
   setValue,

@@ -1,15 +1,11 @@
-import React from 'react';
 import style from './ProfileModify.module.css';
 import BaseButton from '../BaseButton/BaseButton';
 import CommonInput from '../Input/CommonInput';
 import { useForm } from 'react-hook-form';
 import ProfileImgInput from '../Input/ProfileImgInput';
 import { changeMyInfo } from '../../api/auth';
-import { useNavigate } from 'react-router-dom';
 
 export default function ProfileModify() {
-  const navigator = useNavigate();
-
   let userEmail = '';
   const userString = localStorage.getItem('user');
   if (userString) {
@@ -40,7 +36,6 @@ export default function ProfileModify() {
     try {
       const res = await changeMyInfo(profileData);
       alert('프로필이 변경되었습니다.');
-      navigator('/dashboard');      
     } catch (error) {
       console.log(error);
     }
