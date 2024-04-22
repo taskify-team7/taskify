@@ -8,32 +8,40 @@ import React, {
 import styles from "./UserInput.module.css";
 import { CommonInputType } from "../../interface/Input";
 import { useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import { MembersType } from "../../interface/ModalType";
 
 function UserInput({ label, placeholder }: CommonInputType) {
+  const { id = null } = useParams();
+  const userQueryClient = useQueryClient();
+  const userData = userQueryClient.getQueryData([
+    "members",
+    id,
+  ]) as MembersType[];
   const ref = useRef<HTMLDivElement>(null);
+  // 드롭박스 열고 닫는 상태값
   const [openDropBox, setOpenDropBox] = useState(false);
-  //비교할값
-  const userData = ["윤병현", "안주언", "류광현", "이진우"];
   //초기값
-  const [filterData, setFilterData] = useState<string[]>([
-    "윤병현",
-    "안주언",
-    "류광현",
-    "이진우",
-  ]);
+  const [filterData, setFilterData] = useState(userData);
   //선택된 값
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState({
+    id: 0,
+    name: "",
+  });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setOpenDropBox(true);
-    setSelected(e.target.value);
-    const res = userData.filter((data) => data.includes(e.target.value));
+
+    const res = userData.filter((data) =>
+      data.nickname.includes(e.target.value)
+    );
     setFilterData(res);
+    setSelected((prev) => ({ id: res[0]?.id, name: e.target.value }));
   };
 
-  const selectedHandler = (name: string) => {
-    setSelected(name);
+  const selectedHandler = (id: number, name: string) => {
+    setSelected((prev) => ({ id: id, name: name }));
     setOpenDropBox(false);
   };
 
@@ -67,7 +75,8 @@ function UserInput({ label, placeholder }: CommonInputType) {
           className={styles.content_user_input}
           onChange={onChange}
           onClick={() => setOpenDropBox(true)}
-          value={selected}
+          value={selected.name}
+          autoComplete="off"
         />
         <img
           src="/Icons/arrow_drop.svg"
@@ -75,22 +84,28 @@ function UserInput({ label, placeholder }: CommonInputType) {
           onClick={() => setOpenDropBox((prev) => !prev)}
         />
       </div>
-      {openDropBox && (
+      {openDropBox && filterData.length > 0 && (
         <ul className={styles.content_dropbox}>
           {filterData.map((data, i) => (
             <li
               className={styles.content_dropbox_item}
               key={i}
-              onClick={() => selectedHandler(data)}
+              onClick={() => selectedHandler(data.id, data.nickname)}
             >
               <div className={styles.imageArea}>
-                {selected === data && (
+                {selected.name === data.nickname && (
                   <img src="/Icons/check.svg" alt="ckeck" />
                 )}
               </div>
               <div>
-                <span>윤</span>
-                <p>{data}</p>
+                <div className={styles.user_profile}>
+                  {data.profileImageUrl ? (
+                    <img src={data.profileImageUrl} alt="profile" />
+                  ) : (
+                    data.nickname[0]
+                  )}
+                </div>
+                <p>{data.nickname}</p>
               </div>
             </li>
           ))}
