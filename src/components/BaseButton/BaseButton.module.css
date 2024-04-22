@@ -1,4 +1,4 @@
-@import '../../Global.css';
+@import "../../Global.css";
 
 .baseButton {
   display: flex;
@@ -222,11 +222,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
-  padding: 9px 146px;
+  width: 314px;
+  height: 47px;
+  flex-shrink: 0;
+  margin-top: 68px;
+  padding: 9px 0;
   border-radius: 6px;
   border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
   background: var(--white-white_FFFFFF, #fff);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
 }
 
 @media (min-width: 376px) and (max-width: 744px) {
