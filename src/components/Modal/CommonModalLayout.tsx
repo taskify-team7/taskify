@@ -3,7 +3,7 @@ import styles from "./CommonModalLayout.module.css";
 
 interface CommonModalLayoutProps {
   children: ReactNode;
-  title: string;
+  title?: string;
 }
 
 function CommonModalLayout({ children, title }: CommonModalLayoutProps) {

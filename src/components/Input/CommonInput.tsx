@@ -1,15 +1,16 @@
-import styles from "./CommonInput.module.css";
-import { CommonInputType } from "../../interface/Input";
+import styles from './CommonInput.module.css';
+import { CommonInputType } from '../../interface/Input';
 
 function CommonInput({
   label,
   placeholder,
   value,
-  type = "text",
+  type = 'text',
   validation,
   errors,
-  name = "",
+  name = '',
   required,
+  disabled = false,
   inputOnChange,
 }: CommonInputType) {
   const error = errors?.[name];
@@ -26,6 +27,7 @@ function CommonInput({
         className={styles.content_input}
         value={value}
         onChange={inputOnChange}
+        disabled={disabled}
         {...validation}
       />
       {errors && (
