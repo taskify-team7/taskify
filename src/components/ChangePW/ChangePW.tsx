@@ -5,6 +5,7 @@ import style from './ChangePW.module.css';
 import { useForm } from 'react-hook-form';
 import { changePassword, logIn } from '../../api/auth';
 import PasswordErrorModal from '../Modal/PasswordErrorModal';
+import { createPortal } from 'react-dom';
 
 interface FormValues {
   password: string;
@@ -48,7 +49,7 @@ export default function ChangePW() {
       email: userEmail,
       password: data.password,
     };
-    
+
     if (newPassword !== newPasswordConfirmation) {
       setError('newPasswordConfirmation', {
         type: 'manual',
@@ -65,19 +66,20 @@ export default function ChangePW() {
     try {
       await logIn(LoginData);
       await changePassword(submissionData);
-      alert("비밀번호가 변경되었습니다.");
-
+      alert('비밀번호가 변경되었습니다.');
     } catch (error) {
       console.log(error.response.data.message);
       setIsModalOpen(true);
     }
-
   };
 
   return (
     <>
-      {isModalOpen && (
-        <PasswordErrorModal handleModalClose={handleModalClose} />
+      {createPortal(
+        isModalOpen && (
+          <PasswordErrorModal handleModalClose={handleModalClose} />
+        ),
+        document.body
       )}
       <div className={style.container}>
         <h2 className={style.mainText}>비밀번호 변경</h2>
