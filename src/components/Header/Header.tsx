@@ -74,7 +74,9 @@ export default function Header({
         <div className={styles.contents}>
           {data && (
             <>
-              <div className={styles.button}>
+              <div className={styles.button} onClick={() => {
+                navigate(`/dashboard/${id}/edit`, {state: {data: {data}}})
+              }}>
                 <img src="/Icons/settings.svg" alt="invite" />
                 <span>관리</span>
               </div>

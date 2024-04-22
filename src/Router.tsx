@@ -8,6 +8,7 @@ import Layout from "./Layout";
 import DashBoardsPage from "./pages/DashBoardsPage/DashBoardsPage";
 import DashBoardPage from "./pages/DashBoardPage/DashBoardPage";
 import DashBoardRedirector from "./DashBoardRedirector";
+import DashBoardEditPage from "./pages/DashBoardEditPage/DashBoardEditPage";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
         path: "dashboard/:id",
         element: <DashBoardPage />,
       },
+      {
+        path: "dashboard/:id/edit",
+        element: <DashBoardEditPage />
+      }, 
       {
         path: "mypage",
         element: <MyPage />,
