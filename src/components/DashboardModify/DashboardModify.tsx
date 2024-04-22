@@ -6,6 +6,7 @@ import { DashBoardType } from '../../interface/DashboardType';
 import { useParams } from 'react-router-dom';
 import { dashboardModify } from '../../api/dashboard';
 import { useQueryClient } from '@tanstack/react-query';
+import style from './DashboardModify.module.css';
 
 function DashboardModify() {
   const { id } = useParams();
@@ -30,8 +31,7 @@ function DashboardModify() {
   };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    // 리렌더링을 하기 위한 기본동작 억제 해제 
-    // e.preventDefault(); 
+    e.preventDefault(); 
     try {
       if (selectedColor && dashboardData) {
         await dashboardModify(title, selectedColor, Number(id));
@@ -60,10 +60,10 @@ function DashboardModify() {
   };
 
   return (
-    <div>
+    <div className={style.container}>
       {dashboardData && (
         <form onSubmit={onSubmit}>
-          <div>
+          <div className={style.titleNBtn}>
             <h2>{dashboardData?.title}</h2>
             <ColorSelector
               selectedColor={selectedColor}
@@ -76,7 +76,7 @@ function DashboardModify() {
             value={title}
             inputOnChange={handleTitle}
           />
-          <div>
+          <div className={style.buttonContainer}>
             <BaseButton text="변경" type="submit" styleType="accept" />
           </div>
         </form>
