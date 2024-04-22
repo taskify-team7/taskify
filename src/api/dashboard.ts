@@ -56,6 +56,14 @@ export const createColumn = async (title: string, dashboardId: number) => {
   return data;
 };
 
+export const dashboardModify = async (title: string, color: string, dashboardId: number) => {
+  const {data} = await client.put(`dashboards/${dashboardId}`, {
+    title: title,
+    color: color,
+  })
+  return data;
+};
+
 export const dashboardInvite = async (email: string, dashboardId: number) => {
   const { data } = await client.post(`dashboards/${dashboardId}/invitations`, {
     email: email,
