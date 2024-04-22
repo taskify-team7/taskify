@@ -1,0 +1,100 @@
+.container {
+  width: 620px;
+  height: 355px;
+
+  padding: 32px 28px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  .container {
+    width: 544px;
+    height: 355px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+    min-width: 284px;
+    height: 422px;
+
+    padding: 28px 20px;
+  }
+}
+
+.mainText {
+  color: var(--black-black_333236, #333236);
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 767px) {
+  .mainText {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+}
+
+.totalInputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+  .totalInputContainer {
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    margin-bottom: 16px;
+  }
+}
+
+.imgInputContainer {
+  width: 182px;
+  height: 182px;
+}
+
+@media (max-width: 767px) {
+  .imgInputContainer {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.commonInputContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+@media (max-width: 767px) {
+  .commonInputContainer {
+    gap: 16px;
+  }
+}
+
+.BtnContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 4px;
+}
+@media (max-width: 767px) {
+  .BtnContainer {
+    margin-top: 0;
+  }
+}

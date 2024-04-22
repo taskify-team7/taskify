@@ -2,7 +2,8 @@ import style from './BaseButton.module.css';
 import add from '../../assets/addButton.svg';
 
 interface BaseButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset"; 
   text?: string;
   leftImage?: string;
   rightImage?: string;
@@ -21,6 +22,7 @@ interface BaseButtonProps {
 
 function BaseButton({
   onClick,
+  type,
   text,
   leftImage,
   styleType = 'baseButton',
@@ -30,7 +32,7 @@ function BaseButton({
   const addButton = rightImage === 'addButton' ? add : undefined;
 
   return (
-    <button className={buttonClassName} onClick={onClick}>
+    <button type={type} className={buttonClassName} onClick={onClick}>
       {leftImage && (
         <img className={style.baseButtonImg} src={leftImage} alt="button-img" />
       )}{' '}
