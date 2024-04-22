@@ -3,7 +3,7 @@ import styles from "./Column.module.css";
 import { useQueryClient } from "@tanstack/react-query";
 import { useModal } from "../../hooks/useModal";
 import { createPortal } from "react-dom";
-import TodoCreateModal from "../Modal/TodoCreateModal";
+import TodoModal from "../Modal/TodoModal";
 import { useParams } from "react-router-dom";
 import { CardType, ColumnType } from "../../interface/DashboardType";
 import SettingsSvg from "../../assets/settings.svg";
@@ -27,7 +27,7 @@ function Column({ col }: { col: ColumnType }) {
     <>
       {createPortal(
         isCreateModalOpen && (
-          <TodoCreateModal
+          <TodoModal
             handleModalClose={handleCreateModalClose}
             dashboardId={Number(id)}
             columnId={col.id}

@@ -1,4 +1,4 @@
-import styles from "./TodoCreateModal.module.css";
+import styles from "./TodoModal.module.css";
 import ModalContainer from "./ModalContainer";
 import CommonModalLayout from "./CommonModalLayout";
 import CommonInput from "../Input/CommonInput";
@@ -7,18 +7,24 @@ import TagInput from "../Input/TagInput";
 import ImageInput from "../Input/ImageInput";
 import UserInput from "../Input/UserInput";
 import { useForm } from "react-hook-form";
-import { createCard } from "../../api/dashboard";
+import { createCard, updateCard } from "../../api/dashboard";
+import { CardType } from "../../interface/DashboardType";
+import BaseButton from "../BaseButton/BaseButton";
 
 interface TodoCreateModalProps {
   handleModalClose: () => void;
   dashboardId?: number;
   columnId?: number;
+  cardData?: CardType;
+  type?: string;
 }
 
 function TodoCreateModal({
   handleModalClose,
   dashboardId,
   columnId,
+  cardData,
+  type,
 }: TodoCreateModalProps) {
   const {
     register,
@@ -30,11 +36,11 @@ function TodoCreateModal({
   } = useForm({
     mode: "onBlur",
     defaultValues: {
-      assigneeUserId: "",
-      title: "",
-      description: "",
+      assigneeUserId: cardData?.assignee.id || "",
+      title: cardData?.title || "",
+      description: cardData?.description || "",
       tags: [],
-      imageUrl: "",
+      imageUrl: cardData?.imageUrl || "",
     },
   });
 
@@ -64,7 +70,15 @@ function TodoCreateModal({
   const imageValidation = register("imageUrl");
 
   const onSubmit = async (e: any) => {
-    console.log(e);
+    console.log("Test");
+    //카드 수정
+    if (type && cardData?.id) {
+      const res = await updateCard(e, cardData?.id);
+      console.log(res);
+      handleModalClose();
+    }
+
+    // 새로운 카드 생성
     if (dashboardId && columnId) {
       //리스폰스 값
       const res = await createCard(e, dashboardId, columnId);
@@ -75,7 +89,7 @@ function TodoCreateModal({
 
   return (
     <ModalContainer handleModalClose={handleModalClose}>
-      <CommonModalLayout title="할 일 생성">
+      <CommonModalLayout title={type || "할 일 생성"}>
         <form className={styles.contents} onSubmit={handleSubmit(onSubmit)}>
           <UserInput
             label="담당자"
@@ -83,6 +97,7 @@ function TodoCreateModal({
             validation={managerValidation}
             setValue={setValue}
             errors={errors}
+            value={cardData?.assignee.nickname}
           />
           <CommonInput
             label="제목"
@@ -105,6 +120,7 @@ function TodoCreateModal({
             placeholder="날짜를 입력해 주세요"
             control={control}
             setValue={setValue}
+            value={cardData?.dueDate}
           />
           <TagInput
             label="태그"
@@ -112,18 +128,27 @@ function TodoCreateModal({
             validation={tagValidation}
             setValue={setValue}
             getValues={getValues}
+            value={cardData?.tags || []}
           />
           <ImageInput
             label="이미지"
             validation={imageValidation}
             setValue={setValue}
             columnId={columnId || 0}
+            value={cardData?.imageUrl}
           />
           <div className={styles.modal_buttons}>
-            <button className={styles.a_button}>생성</button>
-            <button className={styles.c_button} onClick={handleModalClose}>
-              취소
-            </button>
+            <BaseButton
+              type="submit"
+              text={type ? "수정" : "생성"}
+              styleType={"accept"}
+            />
+            <BaseButton
+              type="button"
+              text="취소"
+              styleType={"refuse"}
+              onClick={handleModalClose}
+            />
           </div>
         </form>
       </CommonModalLayout>

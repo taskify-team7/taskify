@@ -14,6 +14,7 @@ import OptionBox from "./OptionBox";
 interface CardDetailProps {
   handleModalClose: () => void;
   ConfirmModalOpenHandler: () => void;
+  todoEditModalOpenHandler: () => void;
   card: CardType;
 }
 
@@ -21,6 +22,7 @@ function CardDetail({
   handleModalClose,
   card,
   ConfirmModalOpenHandler,
+  todoEditModalOpenHandler,
 }: CardDetailProps) {
   //옵션을 열고 닫는 상태를 관리하는 useState
   const [isOptionBoxState, setIsOptionBoxState] = useState(false);
@@ -48,7 +50,6 @@ function CardDetail({
 
   const onSubmit = async (e: any) => {
     const { id: cardId, dashboardId, columnId } = card;
-    console.log(e);
     const res = await createComment(e.comment, cardId, columnId, dashboardId);
     console.log(res);
     setValue("comment", "");
@@ -64,6 +65,7 @@ function CardDetail({
               <OptionBox
                 handleModalClose={handleModalClose}
                 ConfirmModalOpenHandler={ConfirmModalOpenHandler}
+                todoEditModalOpenHandler={todoEditModalOpenHandler}
               />
             )}
             <img

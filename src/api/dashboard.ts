@@ -122,6 +122,17 @@ export const deleteCard = async (cardId: number) => {
   }
 };
 
+export const updateCard = async (cardData: any, cardId: number) => {
+  try {
+    const res = await client.put(`cards/${cardId}`, {
+      ...cardData,
+    });
+    return res;
+  } catch (e: any) {
+    console.log(e);
+  }
+};
+
 export const changeColumnImageURL = async (
   imageFile: File,
   columnId: number

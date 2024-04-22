@@ -13,6 +13,7 @@ export interface CommonInputType extends InputHTMLAttributes<HTMLInputElement> {
 export interface TagInputType extends CommonInputType {
   setValue: any;
   getValues: any;
+  value: string[];
 }
 
 export interface DateInputType extends CommonInputType {

@@ -16,6 +16,7 @@ function UserInput({
   placeholder,
   validation,
   setValue,
+  value,
 }: CommonInputType) {
   const { id = null } = useParams();
   const userQueryClient = useQueryClient();
@@ -29,7 +30,7 @@ function UserInput({
   //초기값
   const [filterData, setFilterData] = useState(userData);
   //input State
-  const [inputState, setInputState] = useState("");
+  const [inputState, setInputState] = useState(value);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
