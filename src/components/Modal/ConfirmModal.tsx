@@ -25,7 +25,7 @@ function ConfirmModal({ handleModalClose, cardId }: ConfirmModalProps) {
         <div className={styles.modal_buttons}>
           <BaseButton
             onClick={handleDeleteCard}
-            text="생성"
+            text="삭제"
             styleType="accept"
           />
           <BaseButton

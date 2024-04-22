@@ -111,8 +111,9 @@ function CardDetail({
             <div className={styles.cardDetail_text}>
               <p>{card.description}</p>
             </div>
+
             <div className={styles.cardDetail_img}>
-              <img src={card.imageUrl} alt="content_image" />
+              {card.imageUrl && <img src={card.imageUrl} alt="content_image" />}
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <CommentInput validation={comentValidation} errors={errors} />
