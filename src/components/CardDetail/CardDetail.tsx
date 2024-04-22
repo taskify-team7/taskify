@@ -13,10 +13,15 @@ import OptionBox from "./OptionBox";
 
 interface CardDetailProps {
   handleModalClose: () => void;
+  ConfirmModalOpenHandler: () => void;
   card: CardType;
 }
 
-function CardDetail({ handleModalClose, card }: CardDetailProps) {
+function CardDetail({
+  handleModalClose,
+  card,
+  ConfirmModalOpenHandler,
+}: CardDetailProps) {
   //옵션을 열고 닫는 상태를 관리하는 useState
   const [isOptionBoxState, setIsOptionBoxState] = useState(false);
 
@@ -55,7 +60,12 @@ function CardDetail({ handleModalClose, card }: CardDetailProps) {
         <div className={styles.cardDetail_header}>
           <h2>{card.title}</h2>
           <div className={styles.cardDetail_header_option}>
-            {isOptionBoxState && <OptionBox />}
+            {isOptionBoxState && (
+              <OptionBox
+                handleModalClose={handleModalClose}
+                ConfirmModalOpenHandler={ConfirmModalOpenHandler}
+              />
+            )}
             <img
               src="/Icons/kebab.svg"
               alt="menu"

@@ -103,6 +103,15 @@ export const createCard = async (
   }
 };
 
+export const deleteCard = async (cardId: number) => {
+  try {
+    const res = await client.delete(`cards/${cardId}`);
+    return res;
+  } catch (e: any) {
+    console.log(e);
+  }
+};
+
 export const changeColumnImageURL = async (
   imageFile: File,
   columnId: number
