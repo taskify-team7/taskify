@@ -11,6 +11,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { getCards, getColumns } from "../../api/dashboard";
 import { ColumnType } from "../../interface/DashboardType";
+import BaseButton from "../../components/BaseButton/BaseButton";
+import AddIcon from "../../assets/addButton.svg";
 
 export default function DashBoardPage() {
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
@@ -115,7 +117,12 @@ export default function DashBoardPage() {
       >
         <div className={styles.container}>
           <Columns columns={columns} allCards={allCards} />
-          <button onClick={handleModalOpen}>새로운 칼럼 추가하기</button>
+          <BaseButton
+            onClick={handleModalOpen}
+            styleType="addColumnButton"
+            text="새로운 칼럼 추가하기"
+            rightImage={"addButton"}
+          />
         </div>
       </DragDropContext>
     </>
