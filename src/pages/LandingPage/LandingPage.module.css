@@ -342,7 +342,7 @@
   }
 
   .bodyWrapper {
-    width: 375px;
+    width: 100vw;
     padding: 0px 0px 50px 0px;
   }
 
@@ -356,7 +356,7 @@
   }
 }
 
-@media screen and (max-width: 744px) and (min-width: 481px) {
+@media screen and (max-width: 1200px) and (min-width: 481px) {
   .mainImage {
     width: 537.25px;
     height: 314.76px;

@@ -101,4 +101,6 @@ export default function Column({ col }: { col: ColumnType }) {
       </div>
     </>
   );
-}
+
+
+export default Column;
