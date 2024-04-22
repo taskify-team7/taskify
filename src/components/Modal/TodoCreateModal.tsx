@@ -30,10 +30,18 @@ function TodoCreateModal({
   } = useForm({
     mode: "onBlur",
     defaultValues: {
+      assigneeUserId: "",
       title: "",
       description: "",
       tags: [],
       imageUrl: "",
+    },
+  });
+
+  const managerValidation = register("assigneeUserId", {
+    required: {
+      value: true,
+      message: "담당자를 선택해 주세요",
     },
   });
 
@@ -56,9 +64,11 @@ function TodoCreateModal({
   const imageValidation = register("imageUrl");
 
   const onSubmit = async (e: any) => {
+    console.log(e);
     if (dashboardId && columnId) {
       //리스폰스 값
       const res = await createCard(e, dashboardId, columnId);
+      console.log(res);
       handleModalClose();
     }
   };
@@ -67,7 +77,13 @@ function TodoCreateModal({
     <ModalContainer handleModalClose={handleModalClose}>
       <CommonModalLayout title="할 일 생성">
         <form className={styles.contents} onSubmit={handleSubmit(onSubmit)}>
-          <UserInput label="담당자" placeholder="이름을 입력해 주세요" />
+          <UserInput
+            label="담당자"
+            placeholder="이름을 입력해 주세요"
+            validation={managerValidation}
+            setValue={setValue}
+            errors={errors}
+          />
           <CommonInput
             label="제목"
             name="title"

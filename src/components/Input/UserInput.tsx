@@ -11,7 +11,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { MembersType } from "../../interface/ModalType";
 
-function UserInput({ label, placeholder }: CommonInputType) {
+function UserInput({
+  label,
+  placeholder,
+  validation,
+  setValue,
+}: CommonInputType) {
   const { id = null } = useParams();
   const userQueryClient = useQueryClient();
   const userData = userQueryClient.getQueryData([
@@ -23,25 +28,29 @@ function UserInput({ label, placeholder }: CommonInputType) {
   const [openDropBox, setOpenDropBox] = useState(false);
   //초기값
   const [filterData, setFilterData] = useState(userData);
-  //선택된 값
-  const [selected, setSelected] = useState({
-    id: 0,
-    name: "",
-  });
+  //input State
+  const [inputState, setInputState] = useState("");
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setOpenDropBox(true);
+    console.log(e.target.value);
 
     const res = userData.filter((data) =>
       data.nickname.includes(e.target.value)
     );
+    setInputState(e.target.value);
     setFilterData(res);
-    setSelected((prev) => ({ id: res[0]?.id, name: e.target.value }));
+
+    if (e.target.value === res[0]?.nickname) {
+      setValue("assigneeUserId", res[0]?.userId);
+    }
   };
 
   const selectedHandler = (id: number, name: string) => {
-    setSelected((prev) => ({ id: id, name: name }));
+    setInputState(name);
+
+    setValue("assigneeUserId", id);
     setOpenDropBox(false);
   };
 
@@ -75,8 +84,9 @@ function UserInput({ label, placeholder }: CommonInputType) {
           className={styles.content_user_input}
           onChange={onChange}
           onClick={() => setOpenDropBox(true)}
-          value={selected.name}
+          value={inputState}
           autoComplete="off"
+          {...validation?.ref}
         />
         <img
           src="/Icons/arrow_drop.svg"
@@ -90,10 +100,10 @@ function UserInput({ label, placeholder }: CommonInputType) {
             <li
               className={styles.content_dropbox_item}
               key={i}
-              onClick={() => selectedHandler(data.id, data.nickname)}
+              onClick={() => selectedHandler(data.userId, data.nickname)}
             >
               <div className={styles.imageArea}>
-                {selected.name === data.nickname && (
+                {inputState === data.nickname && (
                   <img src="/Icons/check.svg" alt="ckeck" />
                 )}
               </div>

@@ -93,7 +93,7 @@ export const createCard = async (
 ) => {
   try {
     const res = await client.post(`cards/`, {
-      assigneeUserId: 1567,
+      assigneeUserId: parseInt(cardData.assigneeUserId),
       dashboardId: dashboardId,
       columnId: columnId,
       title: cardData.title,
