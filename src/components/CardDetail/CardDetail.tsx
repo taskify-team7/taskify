@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ModalContainer from "../Modal/ModalContainer";
 import styles from "./CardDetail.module.css";
 import CommentInput from "../Input/CommentInput";
@@ -6,7 +6,10 @@ import CommentBox from "./CommentBox";
 import Tag from "./Tag";
 import { CardType } from "../../interface/DashboardType";
 import { useForm } from "react-hook-form";
-import { createComment } from "../../api/card";
+import { useQuery } from "@tanstack/react-query";
+import { CommentRequestType } from "../../interface/CardType";
+import { createComment, getComments } from "../../api/card";
+import OptionBox from "./OptionBox";
 
 interface CardDetailProps {
   handleModalClose: () => void;
@@ -14,6 +17,14 @@ interface CardDetailProps {
 }
 
 function CardDetail({ handleModalClose, card }: CardDetailProps) {
+  //옵션을 열고 닫는 상태를 관리하는 useState
+  const [isOptionBoxState, setIsOptionBoxState] = useState(false);
+
+  const { data: commentsData } = useQuery<CommentRequestType>({
+    queryKey: ["comments", card.id],
+    queryFn: () => getComments(10, null, card.columnId, card.id),
+  });
+
   const {
     register,
     formState: { errors },
@@ -44,7 +55,12 @@ function CardDetail({ handleModalClose, card }: CardDetailProps) {
         <div className={styles.cardDetail_header}>
           <h2>{card.title}</h2>
           <div className={styles.cardDetail_header_option}>
-            <img src="/Icons/kebab.svg" alt="menu" />
+            {isOptionBoxState && <OptionBox />}
+            <img
+              src="/Icons/kebab.svg"
+              alt="menu"
+              onClick={() => setIsOptionBoxState((prev) => !prev)}
+            />
             <img
               src="/Icons/modal_close.svg"
               alt="close"
@@ -57,9 +73,11 @@ function CardDetail({ handleModalClose, card }: CardDetailProps) {
             <label className={styles.cardDetail_mobile_label}>담당자</label>
             <div className={styles.cardDetail_mobile_user}>
               <div className={styles.cardDetail_mobile_profile}>
-                {card.assignee.profileImageUrl
-                  ? card.assignee.profileImageUrl
-                  : card.assignee.nickname[0]}
+                {card.assignee.profileImageUrl ? (
+                  <img src={card.assignee.profileImageUrl} alt="profile" />
+                ) : (
+                  card.assignee.nickname[0]
+                )}
               </div>
               <p>{card.assignee.nickname}</p>
             </div>
@@ -90,7 +108,9 @@ function CardDetail({ handleModalClose, card }: CardDetailProps) {
               <CommentInput validation={comentValidation} errors={errors} />
             </form>
             <div className={styles.cardDetail_coments}>
-              <CommentBox />
+              {commentsData?.comments.map((comment) => (
+                <CommentBox key={comment.id} comment={comment} />
+              ))}
             </div>
           </div>
           <div className={styles.cardDetail_sidebar}>
@@ -98,9 +118,11 @@ function CardDetail({ handleModalClose, card }: CardDetailProps) {
               <label className={styles.cardDetail_sidebar_label}>담당자</label>
               <div className={styles.cardDetail_sidebar_user}>
                 <div className={styles.cardDetail_coment_profile}>
-                  {card.assignee.profileImageUrl
-                    ? card.assignee.profileImageUrl
-                    : card.assignee.nickname[0]}
+                  {card.assignee.profileImageUrl ? (
+                    <img src={card.assignee.profileImageUrl} alt="profile" />
+                  ) : (
+                    card.assignee.nickname[0]
+                  )}
                 </div>
                 <p>{card.assignee.nickname}</p>
               </div>

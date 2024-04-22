@@ -27,6 +27,7 @@
 
 .cardDetail_coment_user {
   display: flex;
+  align-items: center;
   gap: 8px;
 }
 
@@ -62,4 +63,50 @@
   font-size: 12px;
   font-weight: 400;
   text-decoration-line: underline;
+}
+
+.comment_edit {
+  width: 100%;
+}
+
+.comment_edit form {
+  width: 112%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.comment_edit_btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.comment_edit_btns > button:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: var(--violet);
+  border-radius: 5px;
+  color: white;
+}
+
+.comment_edit_btns > button:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  color: black;
+}
+
+@media (max-width: 480px) {
+  .comment_edit form {
+    width: 105%;
+    flex-direction: column;
+    align-items: flex-end;
+  }
 }

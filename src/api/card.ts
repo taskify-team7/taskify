@@ -15,3 +15,35 @@ export const createComment = async (
 
   return data;
 };
+
+export const getComments = async (
+  size = 10,
+  cursorId: number | null,
+  columnId: number,
+  cardId: number
+) => {
+  const { data } = await client.get("comments", {
+    params: {
+      size: size,
+      cursorId: cursorId,
+      columnId: columnId,
+      cardId: cardId,
+    },
+  });
+
+  return data;
+};
+
+export const deleteComment = async (commentId: number) => {
+  const { data } = await client.delete(`/comments/${commentId}`);
+
+  return data;
+};
+
+export const updateComment = async (commentId: number, content: string) => {
+  const { data } = await client.put(`/comments/${commentId}`, {
+    content: content,
+  });
+
+  return data;
+};
