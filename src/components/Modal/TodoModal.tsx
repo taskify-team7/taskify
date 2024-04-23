@@ -73,7 +73,7 @@ function TodoCreateModal({
   const onSubmit = async (e: any) => {
     //카드 수정
     if (type && cardData?.id) {
-      const res = await updateCard(e, cardData?.id);
+      const res = await updateCard(e, columnId, cardData?.id);
       await queryClient.invalidateQueries({
         queryKey: ["column", columnId + ""],
       });

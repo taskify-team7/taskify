@@ -143,10 +143,26 @@ export const deleteCard = async (cardId: number) => {
   }
 };
 
-export const updateCard = async (cardData: any, cardId: number) => {
+export const updateCard = async (
+  cardData: any,
+  columnId: number,
+  cardId: number
+) => {
   try {
+    const requestData: any = {
+      assigneeUserId: parseInt(cardData.assigneeUserId),
+      columnId: columnId,
+      title: cardData.title,
+      description: cardData.description,
+      dueDate: cardData.dueDate,
+      tags: [...cardData.tags],
+    };
+    // imageUrl 값이 존재하고 string 타입인 경우에만 imageUrl 속성을 추가합니다.
+    if (cardData.imageUrl && typeof cardData.imageUrl === "string") {
+      requestData.imageUrl = cardData.imageUrl;
+    }
     const res = await client.put(`cards/${cardId}`, {
-      ...cardData,
+      ...requestData,
     });
     return res;
   } catch (e: any) {
