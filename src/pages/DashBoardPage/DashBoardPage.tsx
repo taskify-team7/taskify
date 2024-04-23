@@ -83,6 +83,7 @@ export default function DashBoardPage() {
 
     onSettled: (data, error, variables) => {
       const { source, destination } = variables;
+      // console.log(source.droppableId);
       queryClient.invalidateQueries({
         queryKey: ["column", source.droppableId],
       });

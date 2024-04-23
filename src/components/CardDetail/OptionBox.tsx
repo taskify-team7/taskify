@@ -12,7 +12,7 @@ function OptionBox({
   ConfirmModalOpenHandler,
   todoEditModalOpenHandler,
 }: OptionBoxProps) {
-  const handletModalOpen = (type: string) => {
+  const handleModalOpen = (type: string) => {
     // 이전 모달 닫아주는 함수
     handleModalClose();
 
@@ -27,13 +27,13 @@ function OptionBox({
     <div className={styles.optionbox}>
       <div
         className={styles.optionbox_item}
-        onClick={() => handletModalOpen("edit")}
+        onClick={() => handleModalOpen("edit")}
       >
         수정하기
       </div>
       <div
         className={styles.optionbox_item}
-        onClick={() => handletModalOpen("delete")}
+        onClick={() => handleModalOpen("delete")}
       >
         삭제하기
       </div>
