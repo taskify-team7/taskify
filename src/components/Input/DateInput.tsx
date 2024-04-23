@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Controller } from "react-hook-form";
 import { format } from "date-fns";
 
-function DateInput({ label, control, setValue }: DateInputType) {
+function DateInput({ label, control, setValue, value }: DateInputType) {
   const filterPassedTime = (time: any) => {
     const currentDate = new Date();
     const selectedDate = new Date(time);
@@ -24,7 +24,7 @@ function DateInput({ label, control, setValue }: DateInputType) {
         <img src="/Icons/calendar.svg" alt="date" />
         <Controller
           name="dueDate"
-          defaultValue={format(defaultDate, "yyyy-MM-dd HH:mm")}
+          defaultValue={value || format(defaultDate, "yyyy-MM-dd HH:mm")}
           control={control}
           render={({ field: { onChange, onBlur, value, ref } }) => (
             <DatePicker

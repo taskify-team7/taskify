@@ -2,20 +2,17 @@ import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 import styles from "./TagInput.module.css";
 import { TagInputType } from "../../interface/Input";
 
-interface TagListType {
-  color: string;
-  text: string;
-}
-
 function TagInput({
   label,
   placeholder,
   validation,
   setValue,
   getValues,
+  value,
 }: TagInputType) {
   const colorList = ["F9EEE3", "E7F7DB", "F7DBF0", "DBE6F7"];
-  const [tagList, setTagList] = useState<TagListType[]>([]);
+  const randoColorIndex = Math.floor(Math.random() * colorList.length);
+  const [tagList, setTagList] = useState<string[]>(value);
 
   //이 컴포넌트에서만 사용하는 인풋 상태
   const [inputState, setInputState] = useState("");
@@ -32,11 +29,8 @@ function TagInput({
       // 한글 입력 오류 해결 조건문
       if (inputValue.trim() !== "" && !e.nativeEvent.isComposing) {
         //랜덤 색상 값
-        const randoColorIndex = Math.floor(Math.random() * colorList.length);
-        setTagList((prev) => [
-          ...prev,
-          { color: colorList[randoColorIndex], text: inputValue },
-        ]);
+
+        setTagList((prev) => [...prev, inputValue]);
         const previousTags = getValues("tags");
         setValue("tags", [...previousTags, inputValue]);
         setInputState("");
@@ -54,7 +48,7 @@ function TagInput({
     }
   };
 
-  const delteTag = (clickedTag: TagListType) => {
+  const deleteTag = (clickedTag: string) => {
     const newTagList = tagList.filter((tag) => tag !== clickedTag);
     setTagList(newTagList);
   };
@@ -68,11 +62,11 @@ function TagInput({
         <div className={styles.tagList}>
           {tagList.map((tag, i) => (
             <div
-              className={`${styles.tag} ${styles[tag.color]}`}
+              className={`${styles.tag} ${styles[colorList[randoColorIndex]]}`}
               key={i}
-              onClick={() => delteTag(tag)}
+              onClick={() => deleteTag(tag)}
             >
-              {tag.text}
+              {tag}
             </div>
           ))}
         </div>

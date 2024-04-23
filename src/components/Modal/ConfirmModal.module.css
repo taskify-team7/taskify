@@ -1,0 +1,11 @@
+.modal_text {
+  text-align: center;
+  line-height: 60px;
+  height: 60px;
+}
+
+.modal_buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}

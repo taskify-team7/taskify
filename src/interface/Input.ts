@@ -1,5 +1,5 @@
-import { ChangeEvent, InputHTMLAttributes } from 'react';
-import { FieldErrors, UseFormRegisterReturn } from 'react-hook-form';
+import { ChangeEvent, InputHTMLAttributes } from "react";
+import { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
 
 export interface CommonInputType extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -7,11 +7,13 @@ export interface CommonInputType extends InputHTMLAttributes<HTMLInputElement> {
   validation?: UseFormRegisterReturn;
   errors?: FieldErrors;
   disabled?: boolean;
+  setValue?: any;
 }
 
 export interface TagInputType extends CommonInputType {
   setValue: any;
   getValues: any;
+  value: string[];
 }
 
 export interface DateInputType extends CommonInputType {
@@ -24,6 +26,6 @@ export interface ImageInputType extends CommonInputType {
   columnId: number;
 }
 
-export interface ProfileImgInputType extends CommonInputType{
+export interface ProfileImgInputType extends CommonInputType {
   setValue: any;
 }
