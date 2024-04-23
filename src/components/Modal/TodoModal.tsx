@@ -39,7 +39,7 @@ function TodoCreateModal({
       assigneeUserId: cardData?.assignee.id || "",
       title: cardData?.title || "",
       description: cardData?.description || "",
-      tags: [],
+      tags: cardData?.tags || [],
       imageUrl: cardData?.imageUrl || "",
     },
   });
