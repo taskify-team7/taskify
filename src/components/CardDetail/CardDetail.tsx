@@ -16,6 +16,7 @@ interface CardDetailProps {
   ConfirmModalOpenHandler: () => void;
   todoEditModalOpenHandler: () => void;
   card: CardType;
+  columnTitle: string;
 }
 
 function CardDetail({
@@ -23,6 +24,7 @@ function CardDetail({
   card,
   ConfirmModalOpenHandler,
   todoEditModalOpenHandler,
+  columnTitle,
 }: CardDetailProps) {
   //옵션을 열고 닫는 상태를 관리하는 useState
   const [isOptionBoxState, setIsOptionBoxState] = useState(false);
@@ -103,7 +105,10 @@ function CardDetail({
           <div className={styles.cardDetail_content}>
             <div className={styles.cardDetail_labels}>
               {/**이부분 컬럼 이름도 변경되게 해야함*/}
-              <div className={styles.cardDetail_columnName}>To do</div>
+              <div className={styles.cardDetail_columnName}>
+                <span className={styles.cardDetail_columnName_circle}></span>
+                <p>{columnTitle}</p>
+              </div>
               <div className={styles.cardDetail_tags}>
                 {card?.tags.map((tag, i) => (
                   <Tag key={i} TagName={tag} />
