@@ -105,7 +105,10 @@ function CardDetail({
           <div className={styles.cardDetail_content}>
             <div className={styles.cardDetail_labels}>
               {/**이부분 컬럼 이름도 변경되게 해야함*/}
-              <div className={styles.cardDetail_columnName}>{columnTitle}</div>
+              <div className={styles.cardDetail_columnName}>
+                <span className={styles.cardDetail_columnName_circle}></span>
+                <p>{columnTitle}</p>
+              </div>
               <div className={styles.cardDetail_tags}>
                 {card?.tags.map((tag, i) => (
                   <Tag key={i} TagName={tag} />
