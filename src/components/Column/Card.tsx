@@ -42,6 +42,7 @@ export default function Card({
         isConfirmModalOpen && (
           <ConfirmModal
             handleModalClose={ConfirmModalCloseHandler}
+            columnId={columnId}
             cardId={card.id}
           />
         ),
