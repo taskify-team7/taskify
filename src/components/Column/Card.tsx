@@ -65,6 +65,13 @@ export default function Card({ card, columnId, columnTitle }: CardProps) {
       <div className={styles.container} onClick={() => handleModalOpen()}>
         <div className={styles.cardWrapper}>
           <div className={styles.cardHead}>
+            {card.imageUrl && (
+              <img
+                className={styles.imageCover}
+                src={card.imageUrl}
+                alt="card_image"
+              />
+            )}
             <div className={styles.cardTitle}>{card.title}</div>
             <div className={styles.Tags}>
               {card?.tags.map((tag, i) => (
