@@ -13,11 +13,7 @@ function CommentInput({ validation, errors }: CommonInputType) {
         {errors && (
           <p className={styles.errorMesage}>{error?.message?.toString()}</p>
         )}
-        <BaseButton
-          text="입력"
-          onClick={() => console.log()}
-          styleType="refuse"
-        />
+        <BaseButton text="입력" styleType="refuse" />
       </div>
     </>
   );

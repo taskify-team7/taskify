@@ -35,7 +35,6 @@ function UserInput({
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setOpenDropBox(true);
-    console.log(e.target.value);
 
     const res = userData.filter((data) =>
       data.nickname.includes(e.target.value)

@@ -19,7 +19,6 @@ function InviteItem({
 }: InviteItemProps) {
   const invitationsHandle = async (inviteAccepted: boolean) => {
     const res = await updateInvitations(invitationId, inviteAccepted);
-    console.log(res);
   };
 
   return (

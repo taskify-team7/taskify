@@ -26,7 +26,6 @@ function InviteModal({ handleModalClose, dashboardId }: InviteModalProps) {
   });
 
   const onSubmit = async (data: any) => {
-    console.log(data);
     const result = await dashboardInvite(data.email, dashboardId);
     handleModalClose();
   };

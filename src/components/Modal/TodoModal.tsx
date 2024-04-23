@@ -74,7 +74,6 @@ function TodoCreateModal({
     //카드 수정
     if (type && cardData?.id) {
       const res = await updateCard(e, cardData?.id);
-      console.log(columnId + "");
       await queryClient.invalidateQueries({
         queryKey: ["column", columnId + ""],
       });
@@ -85,7 +84,6 @@ function TodoCreateModal({
     if (dashboardId && columnId) {
       //리스폰스 값
       const res = await createCard(e, dashboardId, columnId);
-      console.log(columnId + "");
       await queryClient.invalidateQueries({
         queryKey: ["column", columnId + ""],
       });

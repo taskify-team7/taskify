@@ -13,8 +13,6 @@ function InviteBox() {
     queryFn: () => getInviteList(),
   });
 
-  console.log(data);
-
   if (isLoading) {
     return <div>loding</div>;
   }

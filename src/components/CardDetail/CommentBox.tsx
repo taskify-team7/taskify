@@ -42,7 +42,6 @@ function CommentBox({ comment }: CommentBoxType) {
 
   const handleEditComment = async (e: any) => {
     const res = await updateComment(comment.id, e.editComment);
-    console.log(res);
   };
 
   return (

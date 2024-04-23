@@ -53,7 +53,6 @@ function CardDetail({
   const onSubmit = async (e: any) => {
     const { id: cardId, dashboardId, columnId } = card;
     const res = await createComment(e.comment, cardId, columnId, dashboardId);
-    console.log(res);
     setValue("comment", "");
   };
 

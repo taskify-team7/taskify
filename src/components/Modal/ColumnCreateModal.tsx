@@ -31,7 +31,6 @@ function ColumnCreateModal({
   });
 
   const onSubmit = async (e: any) => {
-    // console.log(e);
     await createColumn(e.title, dashboardId);
     await queryClient.invalidateQueries({
       queryKey: ["columns", dashboardId + ""],
