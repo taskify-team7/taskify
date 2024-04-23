@@ -89,7 +89,7 @@ function Column({ col }: { col: ColumnType }) {
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                     >
-                      <Card card={card} />
+                      <Card card={card} columnTitle={col.title} />
                     </div>
                   )}
                 </Draggable>

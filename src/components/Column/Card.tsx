@@ -6,7 +6,12 @@ import CardDetail from "../CardDetail/CardDetail";
 import ConfirmModal from "../Modal/ConfirmModal";
 import TodoModal from "../Modal/TodoModal";
 
-export default function Card({ card }: { card: CardType }) {
+interface CardProps {
+  card: CardType;
+  columnTitle: string;
+}
+
+export default function Card({ card, columnTitle }: CardProps) {
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
   const {
     isModalOpen: isConfirmModalOpen,
@@ -26,6 +31,7 @@ export default function Card({ card }: { card: CardType }) {
           <CardDetail
             handleModalClose={handleModalClose}
             card={card}
+            columnTitle={columnTitle}
             ConfirmModalOpenHandler={ConfirmModalOpenHandler}
             todoEditModalOpenHandler={todoEditModalOpenHandler}
           />
