@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import CardDetail from "../CardDetail/CardDetail";
 import ConfirmModal from "../Modal/ConfirmModal";
 import TodoModal from "../Modal/TodoModal";
+import Tag from "../CardDetail/Tag";
 
 export default function Card({ card }: { card: CardType }) {
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
@@ -71,8 +72,12 @@ export default function Card({ card }: { card: CardType }) {
               />
               <div className={styles.cardDueDate}>{card.dueDate}</div>
             </div>
-            <div className={styles.cardProfileImageUrl}>
-              {card.assignee.profileImageUrl}
+            <div className={styles.cardDetailProfile}>
+              {card.assignee.profileImageUrl ? (
+                <img src={card.assignee.profileImageUrl} alt="profile" />
+              ) : (
+                card.assignee.nickname[0]
+              )}
             </div>
           </div>
         </div>
