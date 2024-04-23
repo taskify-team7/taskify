@@ -65,3 +65,7 @@ export interface CardType {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface TagProps {
+  TagName: string;
+}
