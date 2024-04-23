@@ -25,7 +25,7 @@ function InviteBox() {
             <img src="/Icons/search.svg" alt="search" />
             <input type="text" placeholder="검색" />
           </div>
-          {windowWidth <= 375 ? (
+          {windowWidth <= 480 ? (
             <MobileInviteList inviteData={data?.invitations} />
           ) : (
             <PcInviteList inviteData={data?.invitations} />
