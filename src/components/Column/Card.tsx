@@ -52,6 +52,7 @@ export default function Card({ card, columnTitle }: CardProps) {
           <TodoModal
             handleModalClose={toEditModalCloseHandler}
             cardData={card}
+            columnId={card.columnId}
             type="할 일 수정"
           />
         ),

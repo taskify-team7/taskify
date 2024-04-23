@@ -70,7 +70,7 @@ function TodoCreateModal({
   const imageValidation = register("imageUrl");
 
   const onSubmit = async (e: any) => {
-    console.log("Test");
+    console.log(e);
     //카드 수정
     if (type && cardData?.id) {
       const res = await updateCard(e, cardData?.id);
