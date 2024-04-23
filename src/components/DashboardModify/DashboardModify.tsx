@@ -1,16 +1,15 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import CommonInput from '../Input/CommonInput';
 import BaseButton from '../BaseButton/BaseButton';
 import ColorSelector from '../Modal/ColorSelector';
 import { DashBoardType } from '../../interface/DashboardType';
 import { useParams } from 'react-router-dom';
 import { dashboardModify } from '../../api/dashboard';
-import { useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import style from './DashboardModify.module.css';
 
 function DashboardModify() {
   const { id } = useParams();
-
   const queryClient = useQueryClient();
   const dashboardData = queryClient.getQueryData<DashBoardType | undefined>([
     'dashboard',
@@ -19,6 +18,19 @@ function DashboardModify() {
 
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [title, setTitle] = useState('');
+
+  const { mutate } = useMutation({
+    mutationFn: () => dashboardModify(title, selectedColor!, Number(id)),
+    onSettled: () => {
+      const updatedDashboardData = {
+        id: Number(id),
+        title,
+        color: selectedColor,
+      };
+
+      queryClient.setQueryData(['dashboard', id], updatedDashboardData);
+    },
+  });
 
   const handleSelectColor = (color: string) => {
     setSelectedColor(color);
@@ -30,25 +42,20 @@ function DashboardModify() {
     setTitle(value);
   };
 
+  useEffect(() => {
+    if (dashboardData) {
+      setTitle(dashboardData.title);
+    }
+  }, [dashboardData]);
+
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); 
+    e.preventDefault();
     try {
       if (selectedColor && dashboardData) {
-        await dashboardModify(title, selectedColor, Number(id));
+        mutate();
         alert('변경 완료');
-        queryClient.setQueryData<DashBoardType | undefined>(
-          ['dashboard', id],
-          (oldData) => {
-            if (oldData) {
-              return {
-                ...oldData,
-                title,
-                color: selectedColor,
-              };
-            }
-            return oldData;
-          }
-        );
+        setTitle(title);
+        setSelectedColor(selectedColor);
       } else if (title === '') {
         alert('변경될 이름을 입력해주세요.');
       } else {
@@ -58,7 +65,6 @@ function DashboardModify() {
       console.log(error);
     }
   };
-
   return (
     <div className={style.container}>
       {dashboardData && (
@@ -73,7 +79,6 @@ function DashboardModify() {
           <CommonInput
             label="대시보드 이름"
             placeholder="변경할 이름을 입력해주세요"
-            value={title}
             inputOnChange={handleTitle}
           />
           <div className={style.buttonContainer}>
