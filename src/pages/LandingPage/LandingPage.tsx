@@ -15,7 +15,7 @@ export default function Home() {
             <div className={styles.titleText1}>새로운 일정 관리</div>
             <div className={styles.titleText2}>Taskify</div>
           </div>
-          <div className={styles.subText}>서비스의 메인 설명 들어갑니다.</div>
+          <div className={styles.subText}>작업 일정을 손쉽게 관리하세요 ! </div>
           <Link to="/login">
             <button className={styles.loginButton}>로그인하기</button>
           </Link>

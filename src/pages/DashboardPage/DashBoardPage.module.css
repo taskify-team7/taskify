@@ -1,0 +1,11 @@
+.container {
+  flex: 1;
+  height: 100%;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-x: scroll;
+  width: 100%;
+}
