@@ -10,11 +10,12 @@ import { useForm } from "react-hook-form";
 import { createCard, updateCard } from "../../api/dashboard";
 import { CardType } from "../../interface/DashboardType";
 import BaseButton from "../BaseButton/BaseButton";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface TodoCreateModalProps {
   handleModalClose: () => void;
   dashboardId?: number;
-  columnId?: number;
+  columnId: number;
   cardData?: CardType;
   type?: string;
 }
@@ -68,13 +69,15 @@ function TodoCreateModal({
   const tagValidation = register("tags");
 
   const imageValidation = register("imageUrl");
-
+  const queryClient = useQueryClient();
   const onSubmit = async (e: any) => {
-    console.log("Test");
     //카드 수정
     if (type && cardData?.id) {
       const res = await updateCard(e, cardData?.id);
-      console.log(res);
+      console.log(columnId + "");
+      await queryClient.invalidateQueries({
+        queryKey: ["column", columnId + ""],
+      });
       handleModalClose();
     }
 
@@ -82,7 +85,10 @@ function TodoCreateModal({
     if (dashboardId && columnId) {
       //리스폰스 값
       const res = await createCard(e, dashboardId, columnId);
-      console.log(res);
+      console.log(columnId + "");
+      await queryClient.invalidateQueries({
+        queryKey: ["column", columnId + ""],
+      });
       handleModalClose();
     }
   };
