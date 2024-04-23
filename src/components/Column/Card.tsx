@@ -90,17 +90,6 @@ export default function Card({ card, columnId, columnTitle }: CardProps) {
             </div>
           </div>
         </div>
-
-        {/* <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div> */}
       </div>
     </>
   );

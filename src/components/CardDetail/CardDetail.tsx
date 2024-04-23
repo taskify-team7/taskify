@@ -6,7 +6,7 @@ import CommentBox from "./CommentBox";
 import Tag from "./Tag";
 import { CardType } from "../../interface/DashboardType";
 import { useForm } from "react-hook-form";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { CommentRequestType } from "../../interface/CardType";
 import { createComment, getComments } from "../../api/card";
 import OptionBox from "./OptionBox";
@@ -28,6 +28,7 @@ function CardDetail({
 }: CardDetailProps) {
   //옵션을 열고 닫는 상태를 관리하는 useState
   const [isOptionBoxState, setIsOptionBoxState] = useState(false);
+  const commentQueryClient = useQueryClient();
 
   const { data: commentsData } = useQuery<CommentRequestType>({
     queryKey: ["comments", card.id],
@@ -53,6 +54,9 @@ function CardDetail({
   const onSubmit = async (e: any) => {
     const { id: cardId, dashboardId, columnId } = card;
     const res = await createComment(e.comment, cardId, columnId, dashboardId);
+    await commentQueryClient.invalidateQueries({
+      queryKey: ["comments", cardId],
+    });
     setValue("comment", "");
   };
 
@@ -103,7 +107,6 @@ function CardDetail({
         <div className={styles.cardDetail_main}>
           <div className={styles.cardDetail_content}>
             <div className={styles.cardDetail_labels}>
-              {/**이부분 컬럼 이름도 변경되게 해야함*/}
               <div className={styles.cardDetail_columnName}>
                 <span className={styles.cardDetail_columnName_circle}></span>
                 <p>{columnTitle}</p>
@@ -126,7 +129,11 @@ function CardDetail({
             </form>
             <div className={styles.cardDetail_coments}>
               {commentsData?.comments.map((comment) => (
-                <CommentBox key={comment.id} comment={comment} />
+                <CommentBox
+                  key={comment.id}
+                  comment={comment}
+                  cardId={card.id}
+                />
               ))}
             </div>
           </div>
