@@ -3,12 +3,32 @@ import styles from "./LandingPage.module.css";
 import LandingNavbar from "../../components/LandingNavbar/LandingNavbar";
 import Footer from "../../components/LandingFooter/Footer";
 import { Link } from "react-router-dom";
-
+import Card from "../../components/Column/Card";
 
 export default function Home() {
   return (
     <div className={styles.bodyWrapper}>
       <LandingNavbar />
+      <Card
+        card={{
+          id: 1,
+          title: "제목",
+          description: "설명",
+          tags: ["태그1", "태그2"],
+          dueDate: "마감일",
+          assignee: {
+            id: 1,
+            nickname: "닉네임",
+            profileImageUrl: "프로필 이미지 URL",
+          },
+          imageUrl: "이미지 URL",
+          teamId: "팀 ID",
+          dashboardId: 1,
+          columnId: 1,
+          createdAt: "생성일",
+          updatedAt: "수정일",
+        }}
+      />
       <div className={styles.mainBlock}>
         <div className={styles.mainImage} />
         <div className={styles.titleWrapper}>
