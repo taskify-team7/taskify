@@ -42,6 +42,17 @@ export const getDashboard = async (id: string) => {
   return data;
 };
 
+export const deleteColumn = async (columnId: number) => {
+  const { data } = await client.delete(`columns/${columnId}`);
+  return data;
+};
+
+export const updateColumn = async (columnId: number, newTitle: string) => {
+  console.log(newTitle);
+  const { data } = await client.put(`columns/${columnId}`, { title: newTitle });
+  return data;
+};
+
 export const getMembers = async (id: string) => {
   const { data } = await client.get("members", { params: { dashboardId: id } });
   return data.members;

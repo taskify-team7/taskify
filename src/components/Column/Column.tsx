@@ -38,9 +38,10 @@ function Column({ col }: { col: ColumnType }) {
       {createPortal(
         isSettingsModalOpen && (
           <ColumnManagementModal
+            title={col.title}
             handleModalClose={handleSettingsModalClose}
-            // dashboardId={Number(id)}
-            // columnId={col.id}
+            dashboardId={Number(id)}
+            columnId={col.id}
           />
         ),
         document.body
