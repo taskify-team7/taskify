@@ -2,11 +2,18 @@ import styles from "./InviteBox.module.css";
 import useBrowserSize from "../../hooks/useBrowserSize";
 import MobileInviteList from "./MobileInviteList";
 import PcInviteList from "./PcInviteList";
-import useInfiniteHook from "../../hooks/useInfiniteHook";
+import { getInviteList } from "../../api/dashboard";
+import { useQuery } from "@tanstack/react-query";
+import { InviteListDataType } from "../../interface/DashboardType";
 
 function InviteBox() {
   const { windowWidth } = useBrowserSize();
-  const { isLoading, error, data } = useInfiniteHook();
+  const { isLoading, error, data } = useQuery<InviteListDataType>({
+    queryKey: ["invite"],
+    queryFn: () => getInviteList(),
+  });
+
+  console.log(data);
 
   if (isLoading) {
     return <div>loding</div>;

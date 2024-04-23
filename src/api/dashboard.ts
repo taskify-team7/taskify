@@ -26,7 +26,16 @@ export const getInviteList = async () => {
       size: 6,
     },
   });
+  return data;
+};
 
+export const updateInvitations = async (
+  invitationId: number,
+  inviteAccepted: boolean
+) => {
+  const { data } = await client.put(`invitations/${invitationId}`, {
+    inviteAccepted: inviteAccepted,
+  });
   return data;
 };
 
@@ -35,6 +44,7 @@ export const createDashboard = async (title: string, color: string) => {
     title: title,
     color: color,
   });
+  return data;
 };
 
 export const getDashboard = async (id: string) => {
