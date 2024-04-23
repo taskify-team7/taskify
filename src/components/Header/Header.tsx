@@ -8,7 +8,6 @@ import Crown from "../../assets/crown.svg";
 import Profile from "./Profile";
 import { useAuth } from "../../contexts/AuthProvider";
 
-import defaultProfile from "../../assets/deafultProfile.svg";
 import useBrowserSize from "../../hooks/useBrowserSize";
 
 export default function Header({
@@ -41,6 +40,9 @@ export default function Header({
   });
 
   let howManyMoreMembers = members?.length;
+
+  const colorList = ["#F9EEE3", "#E7F7DB", "#F7DBF0", "#DBE6F7"];
+  const randomColorIndex = Math.floor(Math.random() * colorList.length);
 
   if (members) {
     if (windowWidth > 1200) {
@@ -84,27 +86,32 @@ export default function Header({
               </div>
               <div className={styles.invitees}>
                 {members.map((member: any) => (
-                  <div key={member.id}>
-                    <div
-                      style={{
-                        backgroundImage: `url(${
-                          member?.profileImageUrl || defaultProfile
-                        })`,
-                        backgroundSize: "cover",
-                      }}
-                      className={styles.profile}
-                    />
-                    {howManyMoreMembers > 0 ? (
-                      <div
-                        className={`${styles.profile} ${styles.howManyMore}`}
-                      >
-                        +{howManyMoreMembers}
-                      </div>
-                    ) : (
-                      <></>
-                    )}
+                  <div
+                    key={member.id}
+                    style={
+                      member.profileImageUrl
+                        ? {
+                            backgroundImage: `url(${member.profileImageUrl})`,
+                            backgroundSize: "cover",
+                          }
+                        : {
+                            backgroundColor: `${colorList[randomColorIndex]}`,
+                          }
+                    }
+                    className={styles.profile}
+                  >
+                    {member.profileImageUrl
+                      ? ""
+                      : member.nickname.substring(0, 1)}
                   </div>
                 ))}
+                {howManyMoreMembers > 0 ? (
+                  <div className={`${styles.profile} ${styles.howManyMore}`}>
+                    +{howManyMoreMembers}
+                  </div>
+                ) : (
+                  <></>
+                )}
               </div>
               <div className={styles.verticalBar} />
             </>

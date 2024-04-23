@@ -38,9 +38,10 @@ function Column({ col }: { col: ColumnType }) {
       {createPortal(
         isSettingsModalOpen && (
           <ColumnManagementModal
+            title={col.title}
             handleModalClose={handleSettingsModalClose}
-            // dashboardId={Number(id)}
-            // columnId={col.id}
+            dashboardId={Number(id)}
+            columnId={col.id}
           />
         ),
         document.body
@@ -89,7 +90,7 @@ function Column({ col }: { col: ColumnType }) {
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                     >
-                      <Card card={card} columnTitle={col.title} />
+                      <Card columnId={col.id} card={card} columnTitle={col.title}/>
                     </div>
                   )}
                 </Draggable>

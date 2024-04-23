@@ -4,16 +4,25 @@ import ModalContainer from "./ModalContainer";
 import CommonModalLayout from "./CommonModalLayout";
 import BaseButton from "../BaseButton/BaseButton";
 import { deleteCard } from "../../api/dashboard";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface ConfirmModalProps {
   handleModalClose: () => void;
+  columnId: number;
   cardId: number;
 }
 
-function ConfirmModal({ handleModalClose, cardId }: ConfirmModalProps) {
+function ConfirmModal({
+  handleModalClose,
+  columnId,
+  cardId,
+}: ConfirmModalProps) {
+  const queryClient = useQueryClient();
   const handleDeleteCard = async () => {
     const res = await deleteCard(cardId);
-
+    await queryClient.invalidateQueries({
+      queryKey: ["column", columnId + ""],
+    });
     handleModalClose();
   };
   return (

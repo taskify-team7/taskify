@@ -56,7 +56,6 @@
   align-items: center;
   justify-content: center;
   background-color: white;
-  color: #d25b68;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -65,6 +64,7 @@
 
 .howManyMore {
   background-color: #f4d7da;
+  color: #d25b68;
 }
 
 .button {
