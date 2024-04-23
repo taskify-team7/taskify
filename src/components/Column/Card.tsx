@@ -18,7 +18,7 @@ export default function Card({
   card,
   columnId,
   columnTitle,
-}:CardProps {
+}:CardProps ){
 
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
   const {
