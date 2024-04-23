@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./DashBoardList.module.css";
 import CreateBoardButton from "../CreateBoardButton/CreateBoardButton";
 import DashBoardItem from "../DashBoardItem/DashBoardItem";
 import { getDashboardList } from "../../api/dashboard";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { DashBoardsType } from "../../interface/DashboardType";
 
 function DashBoardList() {
@@ -14,10 +14,22 @@ function DashBoardList() {
     size: 5,
   });
 
+  const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery<DashBoardsType>({
     queryKey: ["dashboards", params.page],
     queryFn: () => getDashboardList(params),
   });
+  const totalPage = Math.ceil((data?.totalCount || 0) / 5);
+
+  useEffect(() => {
+    if (params.page < totalPage) {
+      const nextPage = params.page + 1;
+      queryClient.prefetchQuery({
+        queryKey: ["dashboards", nextPage],
+        queryFn: () => getDashboardList(params),
+      });
+    }
+  }, [params, queryClient, totalPage]);
 
   if (isLoading) {
     return <div>loading</div>;
@@ -26,8 +38,6 @@ function DashBoardList() {
   if (error) {
     return <div>errors</div>;
   }
-
-  const totalPage = Math.ceil((data?.totalCount || 0) / 5);
 
   const nextPageHandler = () => {
     setParams((prev) => {
