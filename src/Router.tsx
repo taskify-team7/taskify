@@ -6,7 +6,7 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import MyPage from "./pages/MyPage/MyPage";
 import Layout from "./Layout";
 import DashBoardsPage from "./pages/DashBoardsPage/DashBoardsPage";
-import DashBoardPage from "./pages/DashBoardPage/DashBoardPage";
+import DashBoardPage from "./pages/DashboardPage/DashBoardPage";
 import DashBoardRedirector from "./DashBoardRedirector";
 
 const router = createBrowserRouter([
