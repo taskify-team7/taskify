@@ -35,6 +35,7 @@ function DashBoardCreateModal({ handleModalClose }: DashBoardCreateModalProps) {
         title: "",
         color: "",
       });
+
       handleModalClose();
     } catch (error) {
       console.log(error);

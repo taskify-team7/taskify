@@ -36,7 +36,6 @@ function InviteModal({ handleModalClose, dashboardId }: InviteModalProps) {
         <form className={styles.contents} onSubmit={handleSubmit(onSubmit)}>
           <CommonInput
             label="이메일"
-            name="email"
             placeholder="이메일을 입력해 주세요"
             type="email"
             validation={emailValidation}

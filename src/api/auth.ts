@@ -1,33 +1,70 @@
 import client from "./axios";
+import { toast } from "react-toastify";
 
 export async function signUp(data: object) {
-  const response = await client.post("/users/", data);
-  const result = response.data;
-  return result;
+  try {
+    const response = await client.post("/users/", data);
+    if (response.status === 201) {
+      toast.success("회원가입 되었습니다.");
+      const result = response.data;
+      return result;
+    }
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
+  }
 }
 
 export async function logIn(data: object) {
-  const response = await client.post("/auth/login", data);
-  const result = response.data;
-  return result;
+  try {
+    const response = await client.post("/auth/login", data);
+    if (response.status === 201) {
+      toast.success("로그인 되었습니다.");
+      const result = response.data;
+      return result;
+    }
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
+  }
 }
 
 export async function changePassword(data: object) {
-  const response = await client.put("/auth/password", data);
-  const result = response.data;
-  return result;
+  try {
+    const response = await client.put("/auth/password", data);
+    if (response.status === 204) {
+      toast.success("비밀번호가 변경되었습니다.");
+      const result = response.data;
+      return result;
+    }
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
+  }
 }
 
 export async function getMyInfo() {
-  const response = await client.get("/users/me");
-  const result = response.data;
-  return result;
+  try {
+    const response = await client.get("/users/me");
+    const result = response.data;
+    return result;
+  } catch (e: any) {
+    console.log(e);
+  }
 }
 
 export async function changeMyInfo(data: object) {
-  const response = await client.put("/users/me", data);
-  const result = response.data;
-  return result;
+  try {
+    const response = await client.put("/users/me", data);
+    if (response.status === 200) {
+      toast.success("회원정보가 변경되었습니다.");
+      const result = response.data;
+      return result;
+    }
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
+  }
 }
 
 export async function uploadMyImage(data: object) {
