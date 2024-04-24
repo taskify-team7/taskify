@@ -109,7 +109,7 @@ function DashboardInvite() {
           {inviteList?.map((member: InviteDataType) => (
             <div key={member.id} className={style.memberList}>
               <div className={style.profileContainer}>
-                <div className={style.profileName}>{member.invitee.email}</div>
+                <div className={style.profileEmail}>{member.invitee.email}</div>
               </div>
               <BaseButton
                 styleType="delete"
