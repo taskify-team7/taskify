@@ -85,6 +85,12 @@ export const dashboardModify = async (
   return data;
 };
 
+export const deleteDashboard = async (dashboardId: number) => {
+  const response = await client.delete(`dashboards/${dashboardId}`);
+  const result = response.data;
+  return result;
+};
+
 export const getDashboardInvite = async (
   dashboardId: number,
   page: number = 1, 
