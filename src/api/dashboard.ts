@@ -1,4 +1,4 @@
-import client from "./axios";
+import client from './axios';
 
 interface ApiPrameterType {
   navigationMethod: string;
@@ -8,7 +8,7 @@ interface ApiPrameterType {
 }
 
 export const getDashboardList = async (params: ApiPrameterType) => {
-  const { data } = await client.get("dashboards", {
+  const { data } = await client.get('dashboards', {
     params: {
       navigationMethod: params.navigationMethod,
       cursorId: params.cursorId,
@@ -21,7 +21,7 @@ export const getDashboardList = async (params: ApiPrameterType) => {
 };
 
 export const getInviteList = async () => {
-  const { data } = await client.get("invitations", {
+  const { data } = await client.get('invitations', {
     params: {
       size: 6,
     },
@@ -31,7 +31,7 @@ export const getInviteList = async () => {
 };
 
 export const createDashboard = async (title: string, color: string) => {
-  const { data } = await client.post("dashboards", {
+  const { data } = await client.post('dashboards', {
     title: title,
     color: color,
   });
@@ -43,8 +43,25 @@ export const getDashboard = async (id: string) => {
 };
 
 export const getMembers = async (id: string) => {
-  const { data } = await client.get("members", { params: { dashboardId: id } });
+  const { data } = await client.get('members', { params: { dashboardId: id } });
   return data.members;
+};
+
+export const getMemberList = async (
+  id: string,
+  page?: number | null,
+  size?: number | null
+) => {
+  const { data } = await client.get('members', {
+    params: { dashboardId: id, page, size },
+  });
+  return data;
+};
+
+export const deleteMember = async (id: number) => {
+  const response = await client.delete(`/members/${id}`);
+  const result = response.data;
+  return result;
 };
 
 export const createColumn = async (title: string, dashboardId: number) => {
@@ -56,11 +73,15 @@ export const createColumn = async (title: string, dashboardId: number) => {
   return data;
 };
 
-export const dashboardModify = async (title: string, color: string, dashboardId: number) => {
-  const {data} = await client.put(`dashboards/${dashboardId}`, {
+export const dashboardModify = async (
+  title: string,
+  color: string,
+  dashboardId: number
+) => {
+  const { data } = await client.put(`dashboards/${dashboardId}`, {
     title: title,
     color: color,
-  })
+  });
   return data;
 };
 
@@ -73,12 +94,12 @@ export const dashboardInvite = async (email: string, dashboardId: number) => {
 };
 
 export const getColumns = async (id: string) => {
-  const { data } = await client.get("columns", { params: { dashboardId: id } });
+  const { data } = await client.get('columns', { params: { dashboardId: id } });
   return data.data;
 };
 
 export const getCards = async (id: string) => {
-  const { data } = await client.get("cards", {
+  const { data } = await client.get('cards', {
     params: { columnId: id, size: 100 },
   });
   return data.cards;
@@ -121,12 +142,12 @@ export const changeColumnImageURL = async (
   columnId: number
 ) => {
   const formData = new FormData();
-  formData.append("image", imageFile);
+  formData.append('image', imageFile);
 
   try {
     const res = await client.post(`columns/${columnId}/card-image`, formData, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        'Content-Type': 'multipart/form-data',
       },
     });
     return res.data.imageUrl;

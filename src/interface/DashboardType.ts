@@ -65,3 +65,14 @@ export interface CardType {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface DashBoardMember {
+  id: number;
+  userId: number;
+  email: string;
+  nickname: string;
+  profileImageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  isOwner: boolean;
+}
