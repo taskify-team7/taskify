@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import styles from "./CommentBox.module.css";
 import { CommentsType } from "../../interface/CardType";
 import { formatDate } from "../../utils/FormatDateUtil";
-import { deleteComment, updateComment } from "../../api/card";
+import { deleteComment, updateComment } from "../../api/comment";
 import CommonInput from "../Input/CommonInput";
 import { useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface CommentBoxType {
   comment: CommentsType;
+  cardId: number;
 }
 
-function CommentBox({ comment }: CommentBoxType) {
+function CommentBox({ comment, cardId }: CommentBoxType) {
+  const commentQueryClient = useQueryClient();
   const [isEditInputState, setIsEditInputState] = useState(false);
 
   const {
@@ -38,11 +41,17 @@ function CommentBox({ comment }: CommentBoxType) {
 
   const handleDeleteComment = async () => {
     const res = await deleteComment(comment.id);
+    await commentQueryClient.invalidateQueries({
+      queryKey: ["comments", cardId],
+    });
   };
 
   const handleEditComment = async (e: any) => {
     const res = await updateComment(comment.id, e.editComment);
-    console.log(res);
+    await commentQueryClient.invalidateQueries({
+      queryKey: ["comments", cardId],
+    });
+    setIsEditInputState(false);
   };
 
   return (

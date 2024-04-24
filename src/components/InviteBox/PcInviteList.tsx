@@ -18,6 +18,7 @@ function PcInviteList({ inviteData }: { inviteData: InviteDataType[] }) {
             key={invite.id}
             dashboarData={invite?.dashboard}
             inviterData={invite?.inviter}
+            invitationId={invite.id}
           />
         ))}
         {inviteData.length > 6 && (

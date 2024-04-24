@@ -1,6 +1,6 @@
 import styles from "./Card.module.css";
 import { CardType } from "../../interface/DashboardType";
-import { useModal, ModalType } from "../../hooks/useModal";
+import { useModal } from "../../hooks/useModal";
 import { createPortal } from "react-dom";
 import CardDetail from "../CardDetail/CardDetail";
 import ConfirmModal from "../Modal/ConfirmModal";
@@ -65,6 +65,13 @@ export default function Card({ card, columnId, columnTitle }: CardProps) {
       <div className={styles.container} onClick={() => handleModalOpen()}>
         <div className={styles.cardWrapper}>
           <div className={styles.cardHead}>
+            {card.imageUrl && (
+              <img
+                className={styles.imageCover}
+                src={card.imageUrl}
+                alt="card_image"
+              />
+            )}
             <div className={styles.cardTitle}>{card.title}</div>
             <div className={styles.Tags}>
               {card?.tags.map((tag, i) => (
@@ -90,17 +97,6 @@ export default function Card({ card, columnId, columnTitle }: CardProps) {
             </div>
           </div>
         </div>
-
-        {/* <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div>
-      <div>와</div> */}
       </div>
     </>
   );

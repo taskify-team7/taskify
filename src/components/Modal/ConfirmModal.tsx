@@ -3,7 +3,7 @@ import styles from "./ConfirmModal.module.css";
 import ModalContainer from "./ModalContainer";
 import CommonModalLayout from "./CommonModalLayout";
 import BaseButton from "../BaseButton/BaseButton";
-import { deleteCard } from "../../api/dashboard";
+import { deleteCard } from "../../api/card";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface ConfirmModalProps {
