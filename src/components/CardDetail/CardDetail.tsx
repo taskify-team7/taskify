@@ -8,7 +8,7 @@ import { CardType } from "../../interface/DashboardType";
 import { useForm } from "react-hook-form";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { CommentRequestType } from "../../interface/CardType";
-import { createComment, getComments } from "../../api/card";
+import { createComment, getComments } from "../../api/comment";
 import OptionBox from "./OptionBox";
 
 interface CardDetailProps {

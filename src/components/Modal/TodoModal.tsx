@@ -7,7 +7,7 @@ import TagInput from "../Input/TagInput";
 import ImageInput from "../Input/ImageInput";
 import UserInput from "../Input/UserInput";
 import { useForm } from "react-hook-form";
-import { createCard, updateCard } from "../../api/dashboard";
+import { createCard, updateCard } from "../../api/card";
 import { CardType } from "../../interface/DashboardType";
 import BaseButton from "../BaseButton/BaseButton";
 import { useQueryClient } from "@tanstack/react-query";

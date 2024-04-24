@@ -8,7 +8,6 @@ import { InviteListDataType } from "../../interface/DashboardType";
 
 function InviteBox() {
   const { windowWidth } = useBrowserSize();
-  console.log(windowWidth);
   const { isLoading, error, data } = useQuery<InviteListDataType>({
     queryKey: ["invite"],
     queryFn: () => getInviteList(),

@@ -1,6 +1,6 @@
 import styles from "./Card.module.css";
 import { CardType } from "../../interface/DashboardType";
-import { useModal, ModalType } from "../../hooks/useModal";
+import { useModal } from "../../hooks/useModal";
 import { createPortal } from "react-dom";
 import CardDetail from "../CardDetail/CardDetail";
 import ConfirmModal from "../Modal/ConfirmModal";

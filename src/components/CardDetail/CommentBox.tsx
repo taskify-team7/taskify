@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./CommentBox.module.css";
 import { CommentsType } from "../../interface/CardType";
 import { formatDate } from "../../utils/FormatDateUtil";
-import { deleteComment, updateComment } from "../../api/card";
+import { deleteComment, updateComment } from "../../api/comment";
 import CommonInput from "../Input/CommonInput";
 import { useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
