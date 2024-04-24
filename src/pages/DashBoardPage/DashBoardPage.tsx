@@ -117,12 +117,9 @@ export default function DashBoardPage() {
       >
         <div className={styles.container}>
           <Columns columns={columns} allCards={allCards} />
-          <BaseButton
-            onClick={handleModalOpen}
-            styleType="addColumnButton"
-            text="새로운 칼럼 추가하기"
-            rightImage={"addButton"}
-          />
+          <button className={styles.newColumn} onClick={handleModalOpen}>
+            새로운 칼럼 추가하기 +
+          </button>
         </div>
       </DragDropContext>
     </>
