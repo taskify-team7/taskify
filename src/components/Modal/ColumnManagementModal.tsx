@@ -4,7 +4,7 @@ import ModalContainer from "./ModalContainer";
 import CommonModalLayout from "./CommonModalLayout";
 import CommonInput from "../Input/CommonInput";
 import { useQueryClient } from "@tanstack/react-query";
-import { deleteColumn, updateColumn } from "../../api/dashboard";
+import { deleteColumn, updateColumn } from "../../api/column";
 import { useForm } from "react-hook-form";
 
 interface ColumnManagementModalProps {

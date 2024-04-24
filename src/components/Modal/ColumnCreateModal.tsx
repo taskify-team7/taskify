@@ -3,7 +3,7 @@ import CommonModalLayout from "./CommonModalLayout";
 import CommonInput from "../Input/CommonInput";
 import styles from "./ColumnCreatemodal.module.css";
 import { useForm } from "react-hook-form";
-import { createColumn } from "../../api/dashboard";
+import { createColumn } from "../../api/column";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface columnCreateModalProps {

@@ -8,7 +8,7 @@ import { createPortal } from "react-dom";
 import ColumnCreateModal from "../../components/Modal/ColumnCreateModal";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { getColumns } from "../../api/dashboard";
+import { getColumns } from "../../api/column";
 import { getCards, changeCard } from "../../api/card";
 import { ColumnType } from "../../interface/DashboardType";
 import BaseButton from "../../components/BaseButton/BaseButton";
