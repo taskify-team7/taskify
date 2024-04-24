@@ -367,6 +367,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    width: 900px;
     height: 972px;
     position: relative;
   }
@@ -376,6 +377,7 @@
     flex-direction: column-reverse;
     justify-content: space-between;
     align-items: center;
+    width: 900px;
     height: 972px;
     position: relative;
   }
