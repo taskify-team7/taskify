@@ -3,11 +3,6 @@
   "name": "Takify",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "256x256 192x192 64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
       "src": "windows11/SmallTile.scale-100.png",
       "sizes": "71x71"
     },
@@ -329,11 +324,13 @@
     },
     {
       "src": "android/android-launchericon-512-512.png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "maskable"
     },
     {
       "src": "android/android-launchericon-192-192.png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "maskable"
     },
     {
       "src": "android/android-launchericon-144-144.png",
@@ -441,7 +438,8 @@
     },
     {
       "src": "ios/192.png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "maskable"
     },
     {
       "src": "ios/256.png",
@@ -449,7 +447,8 @@
     },
     {
       "src": "ios/512.png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "maskable"
     },
     {
       "src": "ios/1024.png",
