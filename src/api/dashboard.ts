@@ -85,6 +85,17 @@ export const dashboardModify = async (
   return data;
 };
 
+export const getDashboardInvite = async (
+  dashboardId: number,
+  page: number = 1, 
+  size: number = 10,
+) => {
+  const { data } = await client.get(`dashboards/${dashboardId}/invitations`, {
+    params: { page, size }, 
+  });
+  return data;
+};
+
 export const dashboardInvite = async (email: string, dashboardId: number) => {
   const { data } = await client.post(`dashboards/${dashboardId}/invitations`, {
     email: email,
@@ -92,6 +103,13 @@ export const dashboardInvite = async (email: string, dashboardId: number) => {
 
   return data;
 };
+
+export const deleteInvite = async (dashboardId: number, id: number) => {
+  const response = await client.delete(`dashboards/${dashboardId}/invitations/${id}`);
+  const result = response.data;
+  return result;
+};
+
 
 export const getColumns = async (id: string) => {
   const { data } = await client.get('columns', { params: { dashboardId: id } });
