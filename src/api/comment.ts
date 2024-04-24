@@ -1,4 +1,5 @@
 import client from "./axios";
+import { toast } from "react-toastify";
 
 export const createComment = async (
   content: string,
@@ -6,14 +7,21 @@ export const createComment = async (
   columnId: number,
   dashboardId: number
 ) => {
-  const { data } = await client.post("comments", {
-    content: content,
-    cardId: cardId,
-    columnId: columnId,
-    dashboardId: dashboardId,
-  });
-
-  return data;
+  try {
+    const result = await client.post("comments", {
+      content: content,
+      cardId: cardId,
+      columnId: columnId,
+      dashboardId: dashboardId,
+    });
+    if (result.status === 201) {
+      toast.success("댓글이 생성되었습니다.");
+      return result.data;
+    }
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
+  }
 };
 
 export const getComments = async (
@@ -35,15 +43,30 @@ export const getComments = async (
 };
 
 export const deleteComment = async (commentId: number) => {
-  const { data } = await client.delete(`/comments/${commentId}`);
+  try {
+    const result = await client.delete(`/comments/${commentId}`);
 
-  return data;
+    if (result.status === 204) {
+      toast.success("댓글이 삭제되었습니다.");
+      return result.data;
+    }
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
+  }
 };
 
 export const updateComment = async (commentId: number, content: string) => {
-  const { data } = await client.put(`/comments/${commentId}`, {
-    content: content,
-  });
-
-  return data;
+  try {
+    const result = await client.put(`/comments/${commentId}`, {
+      content: content,
+    });
+    if (result.status === 200) {
+      toast.success("댓글이 삭제되었습니다.");
+      return result.data;
+    }
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
+  }
 };
