@@ -1,19 +1,23 @@
 import client from "./axios";
+import { toast } from "react-toastify";
 
 export const getCards = async (id: string) => {
-  const { data } = await client.get("cards", {
-    params: { columnId: id, size: 100 },
-  });
-  return data.cards;
+  try {
+    const { data } = await client.get("cards", {
+      params: { columnId: id, size: 100 },
+    });
+    return data.cards;
+  } catch (e: any) {
+    console.log(e);
+  }
 };
 
 export const changeCard = async (id: string, body: object) => {
   try {
     const res = await client.put(`cards/${id}`, body);
     return res;
-    // console.log(res);
-  } catch (err) {
-    console.log(err);
+  } catch (e: any) {
+    console.log(e);
   }
 };
 
@@ -38,18 +42,25 @@ export const createCard = async (
       requestData.imageUrl = cardData.imageUrl;
     }
     const res = await client.post(`cards/`, requestData);
-    return res;
-  } catch (err) {
-    console.log(err);
+    if (res.status === 201) {
+      return res;
+    }
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
   }
 };
 
 export const deleteCard = async (cardId: number) => {
   try {
     const res = await client.delete(`cards/${cardId}`);
-    return res;
+    if (res.status === 204) {
+      toast.success("할 일이 삭제되었습니다.");
+      return res;
+    }
   } catch (e: any) {
     console.log(e);
+    toast.error(e.response.data.message);
   }
 };
 
@@ -74,8 +85,14 @@ export const updateCard = async (
     const res = await client.put(`cards/${cardId}`, {
       ...requestData,
     });
+
+    if (res.status === 200) {
+      toast.success("할 일이 수정되었습니다.");
+      return res;
+    }
     return res;
   } catch (e: any) {
     console.log(e);
+    toast.error(e.response.data.message);
   }
 };
