@@ -33,6 +33,10 @@
   font-weight: 400;
 }
 
+.error {
+  border: 1px solid red;
+}
+
 @media (max-width: 767px) {
   .content_input {
     height: 42px;
