@@ -10,6 +10,7 @@ import { CommonInputType } from "../../interface/Input";
 import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { MembersType } from "../../interface/ModalType";
+import ProfileCircle from "../ProfileCircle/ProfileCircle";
 
 function UserInput({
   label,
@@ -108,17 +109,11 @@ function UserInput({
                 )}
               </div>
               <div>
-                <div className={styles.user_profile}>
-                  {data.profileImageUrl ? (
-                    <img
-                      className={styles.profile_image}
-                      src={data.profileImageUrl}
-                      alt="profile"
-                    />
-                  ) : (
-                    data.nickname[0]
-                  )}
-                </div>
+                <ProfileCircle
+                  profileImageUrl={data.profileImageUrl}
+                  nickname={data.nickname}
+                  type="card"
+                />
                 <p>{data.nickname}</p>
               </div>
             </li>

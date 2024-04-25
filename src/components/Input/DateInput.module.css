@@ -44,3 +44,9 @@
   font-size: 16px;
   font-weight: 400;
 }
+
+@media screen and (max-height: 850px) {
+  .content_date_input {
+    height: 40px;
+  }
+}
