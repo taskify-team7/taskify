@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { DragDropContext } from "react-beautiful-dnd";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { changeCard } from "../../api/dashboard";
 import styles from "./DashBoardPage.module.css";
 import Columns from "../../components/Column/Columns";
 import { useModal } from "../../hooks/useModal";
@@ -9,10 +8,10 @@ import { createPortal } from "react-dom";
 import ColumnCreateModal from "../../components/Modal/ColumnCreateModal";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { getCards, getColumns } from "../../api/dashboard";
+import { getColumns } from "../../api/column";
+import { getCards, changeCard } from "../../api/card";
 import { ColumnType } from "../../interface/DashboardType";
 import BaseButton from "../../components/BaseButton/BaseButton";
-import AddIcon from "../../assets/addButton.svg";
 
 export default function DashBoardPage() {
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
@@ -83,6 +82,7 @@ export default function DashBoardPage() {
 
     onSettled: (data, error, variables) => {
       const { source, destination } = variables;
+      // console.log(source.droppableId);
       queryClient.invalidateQueries({
         queryKey: ["column", source.droppableId],
       });
@@ -117,12 +117,9 @@ export default function DashBoardPage() {
       >
         <div className={styles.container}>
           <Columns columns={columns} allCards={allCards} />
-          <BaseButton
-            onClick={handleModalOpen}
-            styleType="addColumnButton"
-            text="새로운 칼럼 추가하기"
-            rightImage={"addButton"}
-          />
+          <button className={styles.newColumn} onClick={handleModalOpen}>
+            새로운 칼럼 추가하기 +
+          </button>
         </div>
       </DragDropContext>
     </>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import throttle from "lodash/throttle";
 
 const useBrowserSize = () => {
   const [windowSize, setWindowSize] = useState({
@@ -9,12 +10,12 @@ const useBrowserSize = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       // 사이즈 변화 => setWindowSize
-      const setSize = () => {
+      const setSize = throttle(() => {
         setWindowSize({
           windowWidth: window.innerWidth,
           windowHeight: window.innerHeight,
         });
-      };
+      }, 1000);
 
       // 브라우저 창 크기 변화 시 발생 이벤트
       window.addEventListener("resize", setSize);

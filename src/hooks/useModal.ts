@@ -19,3 +19,9 @@ export const useModal = () => {
     handleModalClose,
   };
 };
+
+export interface ModalType {
+  isModalOpen: boolean;
+  handleModalOpen: () => void;
+  handleModalClose: () => void;
+}

@@ -1,49 +1,98 @@
 import client from "./axios";
+import { toast } from "react-toastify";
 
-export const createComment = async (
-  content: string,
-  cardId: number,
-  columnId: number,
-  dashboardId: number
-) => {
-  const { data } = await client.post("comments", {
-    content: content,
-    cardId: cardId,
-    columnId: columnId,
-    dashboardId: dashboardId,
-  });
-
-  return data;
+export const getCards = async (id: string) => {
+  try {
+    const { data } = await client.get("cards", {
+      params: { columnId: id, size: 100 },
+    });
+    return data.cards;
+  } catch (e: any) {
+    console.log(e);
+  }
 };
 
-export const getComments = async (
-  size = 10,
-  cursorId: number | null,
+export const changeCard = async (id: string, body: object) => {
+  try {
+    const res = await client.put(`cards/${id}`, body);
+    return res;
+  } catch (e: any) {
+    console.log(e);
+  }
+};
+
+export const createCard = async (
+  cardData: any,
+  dashboardId: number,
+  columnId: number
+) => {
+  try {
+    const requestData: any = {
+      assigneeUserId: parseInt(cardData.assigneeUserId),
+      dashboardId: dashboardId,
+      columnId: columnId,
+      title: cardData.title,
+      description: cardData.description,
+      dueDate: cardData.dueDate,
+      tags: [...cardData.tags],
+    };
+
+    // imageUrl 값이 존재하고 string 타입인 경우에만 imageUrl 속성을 추가합니다.
+    if (cardData.imageUrl && typeof cardData.imageUrl === "string") {
+      requestData.imageUrl = cardData.imageUrl;
+    }
+    const res = await client.post(`cards/`, requestData);
+    if (res.status === 201) {
+      return res;
+    }
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
+  }
+};
+
+export const deleteCard = async (cardId: number) => {
+  try {
+    const res = await client.delete(`cards/${cardId}`);
+    if (res.status === 204) {
+      toast.success("할 일이 삭제되었습니다.");
+      return res;
+    }
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
+  }
+};
+
+export const updateCard = async (
+  cardData: any,
   columnId: number,
   cardId: number
 ) => {
-  const { data } = await client.get("comments", {
-    params: {
-      size: size,
-      cursorId: cursorId,
+  try {
+    const requestData: any = {
+      assigneeUserId: parseInt(cardData.assigneeUserId),
       columnId: columnId,
-      cardId: cardId,
-    },
-  });
+      title: cardData.title,
+      description: cardData.description,
+      dueDate: cardData.dueDate,
+      tags: [...cardData.tags],
+    };
+    // imageUrl 값이 존재하고 string 타입인 경우에만 imageUrl 속성을 추가합니다.
+    if (cardData.imageUrl && typeof cardData.imageUrl === "string") {
+      requestData.imageUrl = cardData.imageUrl;
+    }
+    const res = await client.put(`cards/${cardId}`, {
+      ...requestData,
+    });
 
-  return data;
-};
-
-export const deleteComment = async (commentId: number) => {
-  const { data } = await client.delete(`/comments/${commentId}`);
-
-  return data;
-};
-
-export const updateComment = async (commentId: number, content: string) => {
-  const { data } = await client.put(`/comments/${commentId}`, {
-    content: content,
-  });
-
-  return data;
+    if (res.status === 200) {
+      toast.success("할 일이 수정되었습니다.");
+      return res;
+    }
+    return res;
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
+  }
 };

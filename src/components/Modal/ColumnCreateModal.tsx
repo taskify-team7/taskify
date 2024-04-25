@@ -3,7 +3,7 @@ import CommonModalLayout from "./CommonModalLayout";
 import CommonInput from "../Input/CommonInput";
 import styles from "./ColumnCreatemodal.module.css";
 import { useForm } from "react-hook-form";
-import { createColumn } from "../../api/dashboard";
+import { createColumn } from "../../api/column";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface columnCreateModalProps {
@@ -31,7 +31,6 @@ function ColumnCreateModal({
   });
 
   const onSubmit = async (e: any) => {
-    // console.log(e);
     await createColumn(e.title, dashboardId);
     await queryClient.invalidateQueries({
       queryKey: ["columns", dashboardId + ""],

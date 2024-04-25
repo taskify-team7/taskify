@@ -6,19 +6,29 @@ import CommentBox from "./CommentBox";
 import Tag from "./Tag";
 import { CardType } from "../../interface/DashboardType";
 import { useForm } from "react-hook-form";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { CommentRequestType } from "../../interface/CardType";
-import { createComment, getComments } from "../../api/card";
+import { createComment, getComments } from "../../api/comment";
 import OptionBox from "./OptionBox";
 
 interface CardDetailProps {
   handleModalClose: () => void;
+  ConfirmModalOpenHandler: () => void;
+  todoEditModalOpenHandler: () => void;
   card: CardType;
+  columnTitle: string;
 }
 
-function CardDetail({ handleModalClose, card }: CardDetailProps) {
+function CardDetail({
+  handleModalClose,
+  card,
+  ConfirmModalOpenHandler,
+  todoEditModalOpenHandler,
+  columnTitle,
+}: CardDetailProps) {
   //옵션을 열고 닫는 상태를 관리하는 useState
   const [isOptionBoxState, setIsOptionBoxState] = useState(false);
+  const commentQueryClient = useQueryClient();
 
   const { data: commentsData } = useQuery<CommentRequestType>({
     queryKey: ["comments", card.id],
@@ -43,9 +53,10 @@ function CardDetail({ handleModalClose, card }: CardDetailProps) {
 
   const onSubmit = async (e: any) => {
     const { id: cardId, dashboardId, columnId } = card;
-    console.log(e);
     const res = await createComment(e.comment, cardId, columnId, dashboardId);
-    console.log(res);
+    await commentQueryClient.invalidateQueries({
+      queryKey: ["comments", cardId],
+    });
     setValue("comment", "");
   };
 
@@ -55,7 +66,13 @@ function CardDetail({ handleModalClose, card }: CardDetailProps) {
         <div className={styles.cardDetail_header}>
           <h2>{card.title}</h2>
           <div className={styles.cardDetail_header_option}>
-            {isOptionBoxState && <OptionBox />}
+            {isOptionBoxState && (
+              <OptionBox
+                handleModalClose={handleModalClose}
+                ConfirmModalOpenHandler={ConfirmModalOpenHandler}
+                todoEditModalOpenHandler={todoEditModalOpenHandler}
+              />
+            )}
             <img
               src="/Icons/kebab.svg"
               alt="menu"
@@ -90,8 +107,10 @@ function CardDetail({ handleModalClose, card }: CardDetailProps) {
         <div className={styles.cardDetail_main}>
           <div className={styles.cardDetail_content}>
             <div className={styles.cardDetail_labels}>
-              {/**이부분 컬럼 이름도 변경되게 해야함*/}
-              <div className={styles.cardDetail_columnName}>To do</div>
+              <div className={styles.cardDetail_columnName}>
+                <span className={styles.cardDetail_columnName_circle}></span>
+                <p>{columnTitle}</p>
+              </div>
               <div className={styles.cardDetail_tags}>
                 {card?.tags.map((tag, i) => (
                   <Tag key={i} TagName={tag} />
@@ -101,15 +120,20 @@ function CardDetail({ handleModalClose, card }: CardDetailProps) {
             <div className={styles.cardDetail_text}>
               <p>{card.description}</p>
             </div>
+
             <div className={styles.cardDetail_img}>
-              <img src={card.imageUrl} alt="content_image" />
+              {card.imageUrl && <img src={card.imageUrl} alt="content_image" />}
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <CommentInput validation={comentValidation} errors={errors} />
             </form>
             <div className={styles.cardDetail_coments}>
               {commentsData?.comments.map((comment) => (
-                <CommentBox key={comment.id} comment={comment} />
+                <CommentBox
+                  key={comment.id}
+                  comment={comment}
+                  cardId={card.id}
+                />
               ))}
             </div>
           </div>

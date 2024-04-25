@@ -1,7 +1,8 @@
 import axios from "axios";
+export const API_BASE_URL = process.env.REACT_APP_API_ROOT;
 
 const client = axios.create({
-  baseURL: "https://sp-taskify-api.vercel.app/4-7/",
+  baseURL: API_BASE_URL,
 });
 
 client.interceptors.request.use(async (config) => {

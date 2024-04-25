@@ -2,11 +2,16 @@ import styles from "./InviteBox.module.css";
 import useBrowserSize from "../../hooks/useBrowserSize";
 import MobileInviteList from "./MobileInviteList";
 import PcInviteList from "./PcInviteList";
-import useInfiniteHook from "../../hooks/useInfiniteHook";
+import { getInviteList } from "../../api/dashboard";
+import { useQuery } from "@tanstack/react-query";
+import { InviteListDataType } from "../../interface/DashboardType";
 
 function InviteBox() {
   const { windowWidth } = useBrowserSize();
-  const { isLoading, error, data } = useInfiniteHook();
+  const { isLoading, error, data } = useQuery<InviteListDataType>({
+    queryKey: ["invite"],
+    queryFn: () => getInviteList(),
+  });
 
   if (isLoading) {
     return <div>loding</div>;
@@ -25,7 +30,7 @@ function InviteBox() {
             <img src="/Icons/search.svg" alt="search" />
             <input type="text" placeholder="검색" />
           </div>
-          {windowWidth <= 375 ? (
+          {windowWidth <= 480 ? (
             <MobileInviteList inviteData={data?.invitations} />
           ) : (
             <PcInviteList inviteData={data?.invitations} />

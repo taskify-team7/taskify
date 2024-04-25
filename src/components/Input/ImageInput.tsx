@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
-import styles from './ImageInput.module.css';
-import { ImageInputType } from '../../interface/Input';
-import { changeColumnImageURL } from '../../api/dashboard';
+import React, { ChangeEvent, useRef, useState } from "react";
+import styles from "./ImageInput.module.css";
+import { ImageInputType } from "../../interface/Input";
+import { changeColumnImageURL } from "../../api/dashboard";
 
 function ImageInput({
   label,
@@ -11,7 +11,7 @@ function ImageInput({
   columnId,
 }: ImageInputType) {
   const imageInput = useRef<HTMLInputElement | null>(null);
-  const [pickedImage, setPickedImage] = useState<any>();
+  const [pickedImage, setPickedImage] = useState<any>(value);
   const handleImageInput = () => {
     imageInput.current?.click();
   };
@@ -28,7 +28,7 @@ function ImageInput({
       setPickedImage(fileReader.result);
     };
     const image = await changeColumnImageURL(file, columnId);
-    setValue('imageUrl', image);
+    setValue("imageUrl", image);
   };
 
   return (
@@ -42,7 +42,6 @@ function ImageInput({
           type="file"
           accept="image/png, image/jpeg"
           className={styles.content_image_input}
-          value={value}
           onChange={handleImageChange}
           ref={(e) => {
             validation?.ref(e);

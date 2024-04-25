@@ -66,6 +66,7 @@ export interface CardType {
   updatedAt: string;
 }
 
+
 export interface DashBoardMember {
   id: number;
   userId: number;
@@ -75,4 +76,8 @@ export interface DashBoardMember {
   createdAt: string;
   updatedAt: string;
   isOwner: boolean;
+}
+
+export interface TagProps {
+  TagName: string;
 }

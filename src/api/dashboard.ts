@@ -1,4 +1,6 @@
-import client from './axios';
+import client from "./axios";
+import { toast } from "react-toastify";
+
 
 interface ApiPrameterType {
   navigationMethod: string;
@@ -8,44 +10,79 @@ interface ApiPrameterType {
 }
 
 export const getDashboardList = async (params: ApiPrameterType) => {
-  const { data } = await client.get('dashboards', {
-    params: {
-      navigationMethod: params.navigationMethod,
-      cursorId: params.cursorId,
-      page: params.page,
-      size: params.size,
-    },
-  });
 
-  return data;
+  try {
+    const { data } = await client.get("dashboards", {
+      params: {
+        navigationMethod: params.navigationMethod,
+        cursorId: params.cursorId,
+        page: params.page,
+        size: params.size,
+      },
+    });
+
+    return data;
+  } catch (e: any) {
+    console.log(e);
+  }
 };
 
 export const getInviteList = async () => {
-  const { data } = await client.get('invitations', {
-    params: {
-      size: 6,
-    },
-  });
+  try {
+    const { data } = await client.get("invitations", {
+      params: {
+        size: 6,
+      },
+    });
+    return data;
+  } catch (e: any) {
+    console.log(e);
+  }
+};
 
-  return data;
+
+export const updateInvitations = async (
+  invitationId: number,
+  inviteAccepted: boolean
+) => {
+  try {
+    const { data } = await client.put(`invitations/${invitationId}`, {
+      inviteAccepted: inviteAccepted,
+    });
+    return data;
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
+  }
 };
 
 export const createDashboard = async (title: string, color: string) => {
-  const { data } = await client.post('dashboards', {
-    title: title,
-    color: color,
-  });
+  try {
+    const result = await client.post("dashboards", {
+      title: title,
+      color: color,
+    });
+    if (result.status === 201) {
+      toast.success("새로운 대시보드가 생성되었습니다.");
+      return result.data;
+    }
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
+  }
 };
 
 export const getDashboard = async (id: string) => {
-  const { data } = await client.get(`dashboards/${id}`);
-  return data;
+  try {
+    const { data } = await client.get(`dashboards/${id}`);
+    return data;
+  } catch (e: any) {
+    console.log(e);
+  }
 };
 
-export const getMembers = async (id: string) => {
-  const { data } = await client.get('members', { params: { dashboardId: id } });
-  return data.members;
-};
+
+
 
 export const getMemberList = async (
   id: string,
@@ -64,14 +101,6 @@ export const deleteMember = async (id: number) => {
   return result;
 };
 
-export const createColumn = async (title: string, dashboardId: number) => {
-  const { data } = await client.post(`columns`, {
-    title: title,
-    dashboardId: dashboardId,
-  });
-
-  return data;
-};
 
 export const dashboardModify = async (
   title: string,
@@ -102,13 +131,7 @@ export const getDashboardInvite = async (
   return data;
 };
 
-export const dashboardInvite = async (email: string, dashboardId: number) => {
-  const { data } = await client.post(`dashboards/${dashboardId}/invitations`, {
-    email: email,
-  });
 
-  return data;
-};
 
 export const deleteInvite = async (dashboardId: number, id: number) => {
   const response = await client.delete(`dashboards/${dashboardId}/invitations/${id}`);
@@ -117,47 +140,32 @@ export const deleteInvite = async (dashboardId: number, id: number) => {
 };
 
 
-export const getColumns = async (id: string) => {
-  const { data } = await client.get('columns', { params: { dashboardId: id } });
-  return data.data;
-};
 
-export const getCards = async (id: string) => {
-  const { data } = await client.get('cards', {
-    params: { columnId: id, size: 100 },
-  });
-  return data.cards;
-};
-
-export const changeCard = async (id: string, body: object) => {
+export const getMembers = async (id: string) => {
   try {
-    const res = await client.put(`cards/${id}`, body);
-    return res;
-    // console.log(res);
-  } catch (err) {
-    console.log(err);
+    const { data } = await client.get("members", {
+      params: { dashboardId: id },
+    });
+    return data.members;
+  } catch (e: any) {
+    console.log(e);
   }
 };
 
-export const createCard = async (
-  cardData: any,
-  dashboardId: number,
-  columnId: number
-) => {
+export const dashboardInvite = async (email: string, dashboardId: number) => {
   try {
-    const res = await client.post(`cards/`, {
-      assigneeUserId: 1567,
-      dashboardId: dashboardId,
-      columnId: columnId,
-      title: cardData.title,
-      description: cardData.description,
-      dueDate: cardData.dueDate,
-      tags: [...cardData.tags],
-      imageUrl: cardData.imageUrl,
+    const result = await client.post(`dashboards/${dashboardId}/invitations`, {
+      email: email,
     });
-    return res;
-  } catch (err) {
-    console.log(err);
+
+    if (result.status === 201) {
+      toast.success("초대가 완료되었습니다.");
+    }
+
+    return result.data;
+  } catch (e: any) {
+    console.log(e);
+    toast.error(e.response.data.message);
   }
 };
 

@@ -2,13 +2,16 @@
   display: flex;
   align-items: center;
   position: relative;
-  min-width: 100px;
+  /* min-width: 100px; */
   height: 70px;
   color: var(--black-black_333236, #333236);
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  @media screen and (max-width: 1200px) {
+    min-width: none;
+  }
 }
 
 .profile {
@@ -17,6 +20,15 @@
   margin-right: 10px;
   border-radius: 50%;
   border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nickname {
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .dropdown {
