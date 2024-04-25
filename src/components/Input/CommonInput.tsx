@@ -1,19 +1,20 @@
-import styles from './CommonInput.module.css';
-import { CommonInputType } from '../../interface/Input';
+import styles from "./CommonInput.module.css";
+import { CommonInputType } from "../../interface/Input";
 
 function CommonInput({
   label,
   placeholder,
   value,
-  type = 'text',
+  type = "text",
   validation,
   errors,
-  name = '',
+  name = "",
   required,
   disabled = false,
   inputOnChange,
 }: CommonInputType) {
   const error = errors?.[validation?.name || ""];
+
   return (
     <div className={styles.content}>
       <label htmlFor={label} className={styles.content_label}>
@@ -24,7 +25,7 @@ function CommonInput({
         id={label}
         type={type}
         placeholder={placeholder}
-        className={styles.content_input}
+        className={`${styles.content_input} ${error ? styles.error : ""}`}
         value={value}
         onChange={inputOnChange}
         disabled={disabled}

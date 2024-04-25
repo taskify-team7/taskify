@@ -1,26 +1,26 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import CommonInput from '../Input/CommonInput';
-import BaseButton from '../BaseButton/BaseButton';
-import ColorSelector from '../Modal/ColorSelector';
-import { DashBoardType } from '../../interface/DashboardType';
-import { useParams } from 'react-router-dom';
-import { dashboardModify } from '../../api/dashboard';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import style from './DashboardModify.module.css';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import CommonInput from "../Input/CommonInput";
+import BaseButton from "../BaseButton/BaseButton";
+import ColorSelector from "../Modal/ColorSelector";
+import { DashBoardType } from "../../interface/DashboardType";
+import { useParams } from "react-router-dom";
+import { updateDashboard } from "../../api/dashboard";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import style from "./DashboardModify.module.css";
 
 function DashboardModify() {
   const { id } = useParams();
   const queryClient = useQueryClient();
   const dashboardData = queryClient.getQueryData<DashBoardType | undefined>([
-    'dashboard',
+    "dashboard",
     id,
   ]);
 
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
 
   const { mutate } = useMutation({
-    mutationFn: () => dashboardModify(title, selectedColor!, Number(id)),
+    mutationFn: () => updateDashboard(title, selectedColor!, Number(id)),
     onSettled: () => {
       const updatedDashboardData = {
         id: Number(id),
@@ -28,7 +28,7 @@ function DashboardModify() {
         color: selectedColor,
       };
 
-      queryClient.setQueryData(['dashboard', id], updatedDashboardData);
+      queryClient.setQueryData(["dashboard", id], updatedDashboardData);
     },
   });
 
@@ -53,13 +53,12 @@ function DashboardModify() {
     try {
       if (selectedColor && dashboardData) {
         mutate();
-        alert('변경 완료');
         setTitle(title);
         setSelectedColor(selectedColor);
-      } else if (title === '') {
-        alert('변경될 이름을 입력해주세요.');
+      } else if (title === "") {
+        alert("변경될 이름을 입력해주세요.");
       } else {
-        alert('색상을 선택해주세요.');
+        alert("색상을 선택해주세요.");
       }
     } catch (error) {
       console.log(error);

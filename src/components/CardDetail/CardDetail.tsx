@@ -10,6 +10,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { CommentRequestType } from "../../interface/CardType";
 import { createComment, getComments } from "../../api/comment";
 import OptionBox from "./OptionBox";
+import ProfileCircle from "../ProfileCircle/ProfileCircle";
 
 interface CardDetailProps {
   handleModalClose: () => void;
@@ -89,14 +90,10 @@ function CardDetail({
           <div>
             <label className={styles.cardDetail_mobile_label}>담당자</label>
             <div className={styles.cardDetail_mobile_user}>
-              <div className={styles.cardDetail_mobile_profile}>
-                {card.assignee.profileImageUrl ? (
-                  <img src={card.assignee.profileImageUrl} alt="profile" />
-                ) : (
-                  card.assignee.nickname[0]
-                )}
-              </div>
-              <p>{card.assignee.nickname}</p>
+              <ProfileCircle
+                profileImageUrl={card.assignee.profileImageUrl}
+                nickname={card.assignee.nickname}
+              />
             </div>
           </div>
           <div>
@@ -141,13 +138,10 @@ function CardDetail({
             <div>
               <label className={styles.cardDetail_sidebar_label}>담당자</label>
               <div className={styles.cardDetail_sidebar_user}>
-                <div className={styles.cardDetail_coment_profile}>
-                  {card.assignee.profileImageUrl ? (
-                    <img src={card.assignee.profileImageUrl} alt="profile" />
-                  ) : (
-                    card.assignee.nickname[0]
-                  )}
-                </div>
+                <ProfileCircle
+                  profileImageUrl={card.assignee.profileImageUrl}
+                  nickname={card.assignee.nickname}
+                />
                 <p>{card.assignee.nickname}</p>
               </div>
             </div>

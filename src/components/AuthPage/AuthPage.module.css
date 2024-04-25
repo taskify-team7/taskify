@@ -10,10 +10,6 @@
   width: 164.557px;
   height: 189.796px;
   flex-shrink: 0;
-  @media screen and (max-width: 580px) {
-    width: 98.734px;
-    height: 113.878px;
-  }
 }
 
 .logoText {

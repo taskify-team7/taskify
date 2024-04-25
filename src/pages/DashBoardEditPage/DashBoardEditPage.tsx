@@ -1,11 +1,11 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import style from './DashBoardEditPage.module.css';
-import backArrow from '../../assets/backButton.svg';
-import DashboardModify from '../../components/DashboardModify/DashboardModify';
-import DashboardMember from '../../components/DashboardMember/DashboardMember';
-import DashboardInvite from '../../components/DashboardInvite/DashboardInvite';
-import BaseButton from '../../components/BaseButton/BaseButton';
-import { deleteDashboard } from '../../api/dashboard';
+import { useNavigate, useParams } from "react-router-dom";
+import style from "./DashBoardEditPage.module.css";
+import backArrow from "../../assets/backButton.svg";
+import DashboardModify from "../../components/DashboardModify/DashboardModify";
+import DashboardMember from "../../components/DashboardMember/DashboardMember";
+import DashboardInvite from "../../components/DashboardInvite/DashboardInvite";
+import BaseButton from "../../components/BaseButton/BaseButton";
+import { deleteDashboard } from "../../api/dashboard";
 
 function DashBoardEditPage() {
   const navigate = useNavigate();
@@ -13,14 +13,10 @@ function DashBoardEditPage() {
   const { id } = useParams();
 
   const handleDashboardDelete = async () => {
-    console.log('대쉬보드 삭제', id);
     try {
       await deleteDashboard(Number(id));
-      alert('대쉬보드가 삭제되었습니다.');
-      navigate('/dashboard');
-    } catch (error) {
-      alert(error.response.data.message);
-    }
+      navigate("/dashboard");
+    } catch (error) {}
   };
 
   return (

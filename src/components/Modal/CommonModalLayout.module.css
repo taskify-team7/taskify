@@ -15,7 +15,7 @@
   font-weight: 700;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .modal_container {
     width: 330px;
   }

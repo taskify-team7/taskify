@@ -52,17 +52,3 @@
   gap: 10px;
   align-items: center;
 }
-
-.cardDetailProfile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  width: 26px;
-  height: 26px;
-  background: #fdd446;
-  color: #fff;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 600;
-}

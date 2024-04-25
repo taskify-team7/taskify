@@ -76,21 +76,15 @@
   gap: 10px;
 }
 
-.user_profile {
-  width: 26px;
-  height: 26px;
-  background: #a3c4a2;
-  border-radius: 50%;
-  font-size: 13px;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .content_dropbox_item > div > p {
   color: #333236;
   font-family: Pretendard;
   font-size: 16px;
   font-weight: 400;
+}
+
+@media screen and (max-height: 850px) {
+  .content_user_input {
+    height: 40px;
+  }
 }

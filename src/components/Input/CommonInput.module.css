@@ -33,6 +33,10 @@
   font-weight: 400;
 }
 
+.error {
+  border: 1px solid red;
+}
+
 @media (max-width: 767px) {
   .content_input {
     height: 42px;
@@ -51,4 +55,10 @@
   font-size: 13px;
   margin-left: 5px;
   font-weight: 400;
+}
+
+@media screen and (max-height: 850px) {
+  .content_input {
+    height: 40px;
+  }
 }

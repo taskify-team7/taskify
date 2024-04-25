@@ -11,8 +11,12 @@ function TagInput({
   value,
 }: TagInputType) {
   const colorList = ["F9EEE3", "E7F7DB", "F7DBF0", "DBE6F7"];
-  const randoColorIndex = Math.floor(Math.random() * colorList.length);
-  const [tagList, setTagList] = useState<string[]>(value);
+  const [tagList, setTagList] = useState<{ text: string; color: string }[]>(
+    value.map((tag: string) => ({
+      text: tag,
+      color: colorList[Math.floor(Math.random() * colorList.length)],
+    }))
+  );
 
   //이 컴포넌트에서만 사용하는 인풋 상태
   const [inputState, setInputState] = useState("");
@@ -29,8 +33,12 @@ function TagInput({
       // 한글 입력 오류 해결 조건문
       if (inputValue.trim() !== "" && !e.nativeEvent.isComposing) {
         //랜덤 색상 값
-
-        setTagList((prev) => [...prev, inputValue]);
+        const randomColor =
+          colorList[Math.floor(Math.random() * colorList.length)];
+        setTagList((prev) => [
+          ...prev,
+          { text: inputValue, color: randomColor },
+        ]);
         const previousTags = getValues("tags");
         setValue("tags", [...previousTags, inputValue]);
         setInputState("");
@@ -49,7 +57,7 @@ function TagInput({
   };
 
   const deleteTag = (clickedTag: string) => {
-    const newTagList = tagList.filter((tag) => tag !== clickedTag);
+    const newTagList = tagList.filter((tag) => tag.text !== clickedTag);
     setTagList(newTagList);
   };
 
@@ -62,11 +70,11 @@ function TagInput({
         <div className={styles.tagList}>
           {tagList.map((tag, i) => (
             <div
-              className={`${styles.tag} ${styles[colorList[randoColorIndex]]}`}
+              className={`${styles.tag} ${styles[tag.color]}`}
               key={i}
-              onClick={() => deleteTag(tag)}
+              onClick={() => deleteTag(tag.text)}
             >
-              {tag}
+              {tag.text}
             </div>
           ))}
         </div>

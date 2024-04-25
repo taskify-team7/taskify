@@ -148,20 +148,6 @@
   font-weight: 400;
 }
 
-.cardDetail_coment_profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  width: 34px;
-  height: 34px;
-  background: #fdd446;
-  color: #fff;
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-}
-
 .cardDetail_mobile_userBox {
   display: none;
 }
@@ -185,20 +171,6 @@
   font-weight: 400;
 }
 
-.cardDetail_mobile_profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  width: 26px;
-  height: 26px;
-  background: #fdd446;
-  color: #fff;
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-}
-
 .cardDetail_mibile_date {
   color: #333236;
   font-family: Pretendard;
@@ -206,7 +178,7 @@
   font-weight: 400;
 }
 
-@media (max-width: 744px) {
+@media (max-width: 1023px) {
   .cardDetail {
     width: 680px;
   }
@@ -216,7 +188,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .cardDetail {
     width: 327px;
   }
@@ -244,19 +216,5 @@
     border-radius: 8px;
     border: 1px solid #d9d9d9;
     background: #fff;
-  }
-
-  .cardDetail_mobile_profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    background: #fdd446;
-    color: #fff;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 600;
   }
 }
