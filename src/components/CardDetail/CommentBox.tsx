@@ -6,6 +6,7 @@ import { deleteComment, updateComment } from "../../api/comment";
 import CommonInput from "../Input/CommonInput";
 import { useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
+import ProfileCircle from "../ProfileCircle/ProfileCircle";
 
 interface CommentBoxType {
   comment: CommentsType;
@@ -56,13 +57,10 @@ function CommentBox({ comment, cardId }: CommentBoxType) {
 
   return (
     <div className={styles.cardDetail_coment}>
-      <div className={styles.cardDetail_coment_profile}>
-        {comment.author.profileImageUrl ? (
-          <img src={comment.author.profileImageUrl} alt="profile" />
-        ) : (
-          comment.author.nickname[0]
-        )}
-      </div>
+      <ProfileCircle
+        profileImageUrl={comment.author.profileImageUrl}
+        nickname={comment.author.nickname}
+      />
       <div className={styles.cardDetail_coment_main}>
         <div className={styles.cardDetail_coment_user}>
           <p>{comment.author.nickname}</p>

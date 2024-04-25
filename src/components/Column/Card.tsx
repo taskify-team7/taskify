@@ -6,6 +6,7 @@ import CardDetail from "../CardDetail/CardDetail";
 import ConfirmModal from "../Modal/ConfirmModal";
 import TodoModal from "../Modal/TodoModal";
 import Tag from "../CardDetail/Tag";
+import ProfileCircle from "../ProfileCircle/ProfileCircle";
 
 interface CardProps {
   card: CardType;
@@ -88,17 +89,11 @@ export default function Card({ card, columnId, columnTitle }: CardProps) {
               />
               <div className={styles.cardDueDate}>{card.dueDate}</div>
             </div>
-            <div className={styles.cardDetailProfile}>
-              {card.assignee.profileImageUrl ? (
-                <img
-                  className={styles.profile_image}
-                  src={card.assignee.profileImageUrl}
-                  alt="profile"
-                />
-              ) : (
-                card.assignee.nickname[0]
-              )}
-            </div>
+            <ProfileCircle
+              profileImageUrl={card.assignee.profileImageUrl}
+              nickname={card.assignee.nickname}
+              type="card"
+            />
           </div>
         </div>
       </div>
