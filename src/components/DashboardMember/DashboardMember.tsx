@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { DashBoardMember } from '../../interface/DashboardType';
-import { deleteMember, getMemberList } from '../../api/dashboard';
-import { useParams } from 'react-router-dom';
-import BaseButton from '../BaseButton/BaseButton';
-import style from './DashboardMember.module.css';
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { DashBoardMember } from "../../interface/DashboardType";
+import { deleteMember, getMemberList } from "../../api/dashboard";
+import { useParams } from "react-router-dom";
+import BaseButton from "../BaseButton/BaseButton";
+import style from "./DashboardMember.module.css";
+import ProfileCircle from "../ProfileCircle/ProfileCircle";
 
 function DashboardMember() {
   const { id } = useParams();
@@ -12,7 +13,7 @@ function DashboardMember() {
   const size = 4;
 
   const { data } = useQuery({
-    queryKey: ['memberList', { id, page, size }],
+    queryKey: ["memberList", { id, page, size }],
     queryFn: () => {
       if (!id) {
         return Promise.resolve([]);
@@ -53,7 +54,7 @@ function DashboardMember() {
     try {
       await deleteMember(id);
     } catch (error) {
-      alert(error.response.data.message);
+      console.log(error);
     }
   };
 
@@ -85,7 +86,10 @@ function DashboardMember() {
           <div key={member.id} className={style.memberList}>
             <div className={style.profileContainer}>
               <div className={style.profileImg}>
-                <img src={member.profileImageUrl} alt="유저프로필이미지" />
+                <ProfileCircle
+                  profileImageUrl={member.profileImageUrl}
+                  nickname={member.nickname}
+                />
               </div>
               <div className={style.profileName}>{member.nickname}</div>
             </div>
