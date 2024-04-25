@@ -1,0 +1,205 @@
+@import './../../Global.css';
+
+.container {
+  width: 620px;
+  height: 477px;
+  padding: 28px 28px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  .container {
+    width: 544px;
+    height: 477px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+    min-width: 284px;
+    height: 406px;
+    padding: 28px 20px;
+  }
+}
+
+.titleNPageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  margin-bottom: 28px;
+
+  > h2 {
+    color: var(--black-black_333236, #333236);
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+}
+
+@media (max-width: 767px) {
+  .titleNPageContainer {
+    height: 36px;
+    margin-bottom: 18px;
+
+    > h2 {
+      font-size: 20px;
+    }
+  }
+}
+
+.pagenationBtn {
+  display: flex;
+  align-items: center;
+
+  > p {
+    color: var(--black-black_333236, #333236);
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+@media (max-width: 767px) {
+  .pagenationBtn {
+    position: relative;
+  }
+}
+
+.leftBtn {
+  margin-left: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px 0px 0px 4px;
+  border: 1px solid #d9d9d9;
+}
+
+@media (max-width: 767px) {
+  .leftBtn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.rightBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 0px 4px 4px 0px;
+  border: 1px solid #d9d9d9;
+}
+
+@media (max-width: 767px) {
+  .rightBtn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.inviteBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 105px;
+  height: 32px;
+  gap: 8px;
+
+  margin-left: 16px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: var(--violet);
+
+  > img {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .inviteBtn {
+    position: absolute;
+    right: 0;
+    bottom: -44px;
+  }
+}
+
+.explanation {
+  margin-bottom: 8px;
+  color: var(--gray-gray_9FA6B2, #9fa6b2);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media (max-width: 767px) {
+  .explanation {
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+}
+
+.memberList {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 0;
+
+  border-bottom: 1px solid #eee;
+}
+
+.profileContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (max-width: 767px) {
+  .profileContainer {
+    gap: 10px;
+  }
+}
+
+.profileImg {
+  width: 38px;
+  height: 38px;
+  > img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 767px) {
+  .profileImg {
+    width: 36px;
+    height: 36px;
+    > img {
+      width: 36px;
+      height: 36px;
+    }
+  }
+}
+
+.profileEmail {
+  color: var(--black-black_333236, #333236);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media (max-width: 767px) {
+  .profileEmail {
+    font-size: 14px;
+  }
+}

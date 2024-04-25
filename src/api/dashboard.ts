@@ -1,6 +1,7 @@
 import client from "./axios";
 import { toast } from "react-toastify";
 
+
 interface ApiPrameterType {
   navigationMethod: string;
   cursorId: number | null;
@@ -9,6 +10,7 @@ interface ApiPrameterType {
 }
 
 export const getDashboardList = async (params: ApiPrameterType) => {
+
   try {
     const { data } = await client.get("dashboards", {
       params: {
@@ -37,6 +39,7 @@ export const getInviteList = async () => {
     console.log(e);
   }
 };
+
 
 export const updateInvitations = async (
   invitationId: number,
@@ -78,6 +81,66 @@ export const getDashboard = async (id: string) => {
   }
 };
 
+
+
+
+export const getMemberList = async (
+  id: string,
+  page?: number | null,
+  size?: number | null
+) => {
+  const { data } = await client.get('members', {
+    params: { dashboardId: id, page, size },
+  });
+  return data;
+};
+
+export const deleteMember = async (id: number) => {
+  const response = await client.delete(`/members/${id}`);
+  const result = response.data;
+  return result;
+};
+
+
+export const dashboardModify = async (
+  title: string,
+  color: string,
+  dashboardId: number
+) => {
+  const { data } = await client.put(`dashboards/${dashboardId}`, {
+    title: title,
+    color: color,
+  });
+  return data;
+};
+
+export const deleteDashboard = async (dashboardId: number) => {
+  const response = await client.delete(`dashboards/${dashboardId}`);
+  const result = response.data;
+  return result;
+};
+
+export const getDashboardInvite = async (
+  dashboardId: number,
+  page: number = 1, 
+  size: number = 10,
+) => {
+  const { data } = await client.get(`dashboards/${dashboardId}/invitations`, {
+    params: { page, size }, 
+  });
+  return data;
+};
+
+
+
+export const deleteInvite = async (dashboardId: number, id: number) => {
+  const response = await client.delete(`dashboards/${dashboardId}/invitations/${id}`);
+  const result = response.data;
+  return result;
+};
+
+
+
 export const getMembers = async (id: string) => {
   try {
     const { data } = await client.get("members", {
@@ -111,12 +174,12 @@ export const changeColumnImageURL = async (
   columnId: number
 ) => {
   const formData = new FormData();
-  formData.append("image", imageFile);
+  formData.append('image', imageFile);
 
   try {
     const res = await client.post(`columns/${columnId}/card-image`, formData, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        'Content-Type': 'multipart/form-data',
       },
     });
     return res.data.imageUrl;

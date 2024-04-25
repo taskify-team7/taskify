@@ -66,6 +66,18 @@ export interface CardType {
   updatedAt: string;
 }
 
+
+export interface DashBoardMember {
+  id: number;
+  userId: number;
+  email: string;
+  nickname: string;
+  profileImageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  isOwner: boolean;
+}
+
 export interface TagProps {
   TagName: string;
 }

@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: 1.25rem;
+  padding: 20px;
 
   height: 100%;
   background-color: #fafafa;
@@ -38,5 +38,25 @@
     > span {
       font-size: 14px;
     }
+  }
+}
+
+.dashboardDeleteBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  height: 62px;
+  padding: 20px 95px;
+  margin-top: 36px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 767px) {
+  .dashboardDeleteBtn {
+    width: 100%;
+    min-width: 282px;
+    height: 52px;
+    padding: 0;
   }
 }
