@@ -143,7 +143,11 @@ function CardDetail({
               <div className={styles.cardDetail_sidebar_user}>
                 <div className={styles.cardDetail_coment_profile}>
                   {card.assignee.profileImageUrl ? (
-                    <img src={card.assignee.profileImageUrl} alt="profile" />
+                    <img
+                      className={styles.profile_image}
+                      src={card.assignee.profileImageUrl}
+                      alt="profile"
+                    />
                   ) : (
                     card.assignee.nickname[0]
                   )}

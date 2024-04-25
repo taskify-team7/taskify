@@ -110,7 +110,11 @@ function UserInput({
               <div>
                 <div className={styles.user_profile}>
                   {data.profileImageUrl ? (
-                    <img src={data.profileImageUrl} alt="profile" />
+                    <img
+                      className={styles.profile_image}
+                      src={data.profileImageUrl}
+                      alt="profile"
+                    />
                   ) : (
                     data.nickname[0]
                   )}

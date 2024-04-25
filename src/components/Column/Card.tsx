@@ -90,7 +90,11 @@ export default function Card({ card, columnId, columnTitle }: CardProps) {
             </div>
             <div className={styles.cardDetailProfile}>
               {card.assignee.profileImageUrl ? (
-                <img src={card.assignee.profileImageUrl} alt="profile" />
+                <img
+                  className={styles.profile_image}
+                  src={card.assignee.profileImageUrl}
+                  alt="profile"
+                />
               ) : (
                 card.assignee.nickname[0]
               )}

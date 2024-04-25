@@ -206,6 +206,12 @@
   font-weight: 400;
 }
 
+.profile_image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
 @media (max-width: 744px) {
   .cardDetail {
     width: 680px;
