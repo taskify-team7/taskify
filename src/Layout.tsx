@@ -1,20 +1,21 @@
-import { Outlet } from 'react-router-dom';
-import LoginRedirector from './LoginRedirector';
-import Sidebar from './components/Sidebar/Sidebar';
-import { useQuery } from '@tanstack/react-query';
-import { getDashboardList } from './api/dashboard';
-import Header from './components/Header/Header';
-import { DashBoardsType } from './interface/DashboardType';
-import { useState } from 'react';
+import { Outlet } from "react-router-dom";
+import LoginRedirector from "./LoginRedirector";
+import Sidebar from "./components/Sidebar/Sidebar";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getDashboardList } from "./api/dashboard";
+import Header from "./components/Header/Header";
+import { DashBoardsType } from "./interface/DashboardType";
+import { useEffect, useState } from "react";
 
 export default function Layout() {
+  const queryClient = useQueryClient();
   const [page, setPage] = useState<number>(1);
 
   const { isLoading, error, data } = useQuery<DashBoardsType>({
-    queryKey: ['dashboards', page],
+    queryKey: ["dashboards", page, ""],
     queryFn: () =>
       getDashboardList({
-        navigationMethod: 'pagination',
+        navigationMethod: "pagination",
         cursorId: null,
         page,
         size: 10,
@@ -23,6 +24,22 @@ export default function Layout() {
   const totalPage = Math.ceil((data?.totalCount || 0) / 10);
   const nextPage = () => setPage((current) => current + 1);
   const prevPage = () => setPage((current) => current - 1);
+
+  useEffect(() => {
+    if (page < totalPage) {
+      const nextPage = page + 1;
+      queryClient.prefetchQuery({
+        queryKey: ["dashboards", nextPage, ""],
+        queryFn: () =>
+          getDashboardList({
+            navigationMethod: "pagination",
+            cursorId: null,
+            page,
+            size: 10,
+          }),
+      });
+    }
+  }, [page, queryClient, totalPage]);
 
   if (isLoading) {
     return <div>loading</div>;
@@ -39,7 +56,7 @@ export default function Layout() {
         page={page}
         nextPage={nextPage}
         prevPage={prevPage}
-        totalPage = {totalPage}
+        totalPage={totalPage}
       >
         <Header dashboards={data?.dashboards || null}>
           <Outlet />
