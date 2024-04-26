@@ -29,6 +29,7 @@ function DashboardModify() {
       };
 
       queryClient.setQueryData(["dashboard", id], updatedDashboardData);
+      queryClient.invalidateQueries({ queryKey: ["dashboardList"] });
     },
   });
 
