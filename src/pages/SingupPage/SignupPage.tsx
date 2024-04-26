@@ -10,11 +10,8 @@ export default function SignupPage() {
   async function handleSignup(data: object) {
     try {
       await signUp(data);
-      alert("회원가입 완료");
       navigate("/login");
-    } catch (error: any) {
-      alert(error.response.data.message);
-    }
+    } catch (error: any) {}
   }
   return (
     <div className={styles.container}>
