@@ -12,7 +12,7 @@ export default function Layout() {
   const [page, setPage] = useState<number>(1);
 
   const { isLoading, error, data } = useQuery<DashBoardsType>({
-    queryKey: ["dashboards", page, ""],
+    queryKey: ["dashboardList", page],
     queryFn: () =>
       getDashboardList({
         navigationMethod: "pagination",
@@ -29,7 +29,7 @@ export default function Layout() {
     if (page < totalPage) {
       const nextPage = page + 1;
       queryClient.prefetchQuery({
-        queryKey: ["dashboards", nextPage, ""],
+        queryKey: ["dashboardList", nextPage],
         queryFn: () =>
           getDashboardList({
             navigationMethod: "pagination",
