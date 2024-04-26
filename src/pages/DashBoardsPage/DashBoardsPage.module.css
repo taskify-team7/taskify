@@ -6,4 +6,5 @@
   flex-direction: column;
   gap: 100px;
   background: #fafafa;
+  overflow-y: scroll;
 }
