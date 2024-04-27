@@ -1,20 +1,21 @@
-import { Outlet } from 'react-router-dom';
-import LoginRedirector from './LoginRedirector';
-import Sidebar from './components/Sidebar/Sidebar';
-import { useQuery } from '@tanstack/react-query';
-import { getDashboardList } from './api/dashboard';
-import Header from './components/Header/Header';
-import { DashBoardsType } from './interface/DashboardType';
-import { useState } from 'react';
+import { Outlet } from "react-router-dom";
+import LoginRedirector from "./LoginRedirector";
+import Sidebar from "./components/Sidebar/Sidebar";
+import { useQuery } from "@tanstack/react-query";
+import { getDashboardList } from "./api/dashboard";
+import Header from "./components/Header/Header";
+import { DashBoardsType } from "./interface/DashboardType";
+import { useState } from "react";
+import Loading from "./components/Loading/Loading";
 
 export default function Layout() {
   const [page, setPage] = useState<number>(1);
 
   const { isLoading, error, data } = useQuery<DashBoardsType>({
-    queryKey: ['dashboards', page],
+    queryKey: ["dashboards", page],
     queryFn: () =>
       getDashboardList({
-        navigationMethod: 'pagination',
+        navigationMethod: "pagination",
         cursorId: null,
         page,
         size: 10,
@@ -25,7 +26,7 @@ export default function Layout() {
   const prevPage = () => setPage((current) => current - 1);
 
   if (isLoading) {
-    return <div>loading</div>;
+    return <Loading />;
   }
 
   if (error) {
@@ -39,7 +40,7 @@ export default function Layout() {
         page={page}
         nextPage={nextPage}
         prevPage={prevPage}
-        totalPage = {totalPage}
+        totalPage={totalPage}
       >
         <Header dashboards={data?.dashboards || null}>
           <Outlet />
