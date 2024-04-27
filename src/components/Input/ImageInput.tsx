@@ -31,6 +31,11 @@ function ImageInput({
     setValue("imageUrl", image);
   };
 
+  const delteImage = () => {
+    setPickedImage(undefined);
+    setValue("imageUrl", undefined);
+  };
+
   return (
     <div className={styles.content}>
       <label htmlFor="imageUrl" className={styles.content_label}>
@@ -49,7 +54,7 @@ function ImageInput({
           }}
         />
         {pickedImage ? (
-          <>
+          <div className={styles.content_image_preview}>
             <div className={styles.imageCover} onClick={handleImageInput}>
               <img src="/Icons/edit_pen.svg" alt="edit" />
             </div>
@@ -58,7 +63,13 @@ function ImageInput({
               src={pickedImage}
               alt="add_Image"
             />
-          </>
+            <button
+              className={styles.content_delete_button}
+              onClick={delteImage}
+            >
+              <img src="/Icons/modal_close.svg" alt="delete_Image" />
+            </button>
+          </div>
         ) : (
           <>
             <button

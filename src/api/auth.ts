@@ -10,8 +10,8 @@ export async function signUp(data: object) {
       return result;
     }
   } catch (e: any) {
-    console.log(e);
     toast.error(e.response.data.message);
+    throw new Error(e);
   }
 }
 
@@ -26,6 +26,7 @@ export async function logIn(data: object) {
   } catch (e: any) {
     console.log(e);
     toast.error(e.response.data.message);
+    throw new Error(e);
   }
 }
 

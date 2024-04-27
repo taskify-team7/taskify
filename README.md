@@ -1,46 +1,38 @@
-# Getting Started with Create React App
+# 코드잇 FE 4기 중급 프로젝트 7팀
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Taskify
 
-## Available Scripts
+[Taskify 사용하하러 가기](https://taskify-two-gray.vercel.app/)
 
-In the project directory, you can run:
+## Authors
 
-### `yarn start`
+- [Byeong Hyeon Yun](https://www.github.com/78-artilleryman)
+  - 팀장
+  - 모달 구현
+  - PWA 작성
+  -
+- [Jueon An](https://www.github.com/vinoankr)
+  - 유저 기능 전반
+  - 레이아웃 및 라우팅
+  - 카드 드래그 앤 드롭 구현
+- [Lee jin woo](https://www.github.com/yeeZinu)
+  - 공용 컴포넌트 작성
+  - My Page 구현
+  -
+- [Ryu Gwang Hyeon](https://www.github.com/RyuGwangHyeon)
+  - 랜딩페이지 작성
+  - 404 에러페이지 작성
+  -
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tech Stack
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**Client:** React, Typescript, Module CSS![](https://img.shields.io/badge/React-000000?logo=React)
+![](https://img.shields.io/badge/React_Query-000000?logo=reactquery)
+![](https://img.shields.io/badge/Typescript-000000?logo=Typescript)
+![](https://img.shields.io/badge/PWA-000000?logo=PWA)
 
-### `yarn test`
+**Server:** Node, Express
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Screenshots
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)

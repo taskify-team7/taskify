@@ -21,6 +21,21 @@ self.addEventListener("install", async (event) => {
   );
 });
 
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    (async function () {
+      // 네비게이션 프리로드 시작
+      const preloadResponse = event.preloadResponse;
+
+      // 네비게이션 프리로드 프로미스가 해결될 때까지 기다립니다.
+      await event.waitUntil(preloadResponse);
+
+      // 요청에 응답합니다.
+      return fetch(event.request);
+    })()
+  );
+});
+
 if (workbox.navigationPreload.isSupported()) {
   workbox.navigationPreload.enable();
 }

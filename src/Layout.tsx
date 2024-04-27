@@ -8,11 +8,13 @@ import { DashBoardsType } from "./interface/DashboardType";
 import { useState } from "react";
 import Loading from "./components/Loading/Loading";
 
+
 export default function Layout() {
+  const queryClient = useQueryClient();
   const [page, setPage] = useState<number>(1);
 
   const { isLoading, error, data } = useQuery<DashBoardsType>({
-    queryKey: ["dashboards", page],
+    queryKey: ["dashboardList", page],
     queryFn: () =>
       getDashboardList({
         navigationMethod: "pagination",
@@ -24,6 +26,22 @@ export default function Layout() {
   const totalPage = Math.ceil((data?.totalCount || 0) / 10);
   const nextPage = () => setPage((current) => current + 1);
   const prevPage = () => setPage((current) => current - 1);
+
+  useEffect(() => {
+    if (page < totalPage) {
+      const nextPage = page + 1;
+      queryClient.prefetchQuery({
+        queryKey: ["dashboardList", nextPage],
+        queryFn: () =>
+          getDashboardList({
+            navigationMethod: "pagination",
+            cursorId: null,
+            page,
+            size: 10,
+          }),
+      });
+    }
+  }, [page, queryClient, totalPage]);
 
   if (isLoading) {
     return <Loading />;

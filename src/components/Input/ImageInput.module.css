@@ -43,6 +43,11 @@
   display: block;
 }
 
+.content_image_preview {
+  display: flex;
+  position: relative;
+}
+
 .content_image_button {
   width: 76px;
   height: 76px;
@@ -51,4 +56,18 @@
   align-items: center;
   border-radius: 6px;
   background: #f5f5f5;
+}
+
+.content_delete_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #f1effd;
+  position: absolute;
+  right: -20px;
+}
+
+.content_delete_button img {
+  width: 16px;
 }
