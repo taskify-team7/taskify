@@ -85,12 +85,16 @@ function Column({ col }: { col: ColumnType }) {
                 <Draggable key={card.id} draggableId={card.id + ""} index={i}>
                   {(provided) => (
                     <div
-                      className={styles["card-draggableItem"]}
+                      className={styles.card_draggableItem}
                       ref={provided.innerRef}
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                     >
-                      <Card columnId={col.id} card={card} columnTitle={col.title}/>
+                      <Card
+                        columnId={col.id}
+                        card={card}
+                        columnTitle={col.title}
+                      />
                     </div>
                   )}
                 </Draggable>
