@@ -29,6 +29,7 @@
 }
 
 .introBox > h2 {
+  white-space: nowrap;
   color: #fff;
   text-align: center;
   font-family: Pretendard;
@@ -234,6 +235,8 @@
 /*mobile*/
 @media screen and (max-width: 768px) {
   .introBox > h2 {
+    display: flex;
+    flex-direction: column;
     font-size: 40px;
   }
   .introBox > h2 > strong {
