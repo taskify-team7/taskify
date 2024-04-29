@@ -8,14 +8,14 @@
   background-color: #fff;
 }
 
-@media (max-width: 1023px) and (min-width: 768px) {
+@media (max-width: 1023px) and (min-width: 769px) {
   .container {
     width: 544px;
     height: 355px;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .container {
     width: 100%;
     min-width: 284px;
@@ -35,7 +35,7 @@
   margin-bottom: 32px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .mainText {
     font-size: 24px;
     margin-bottom: 24px;
@@ -50,7 +50,7 @@
   margin-bottom: 20px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .totalInputContainer {
     flex-direction: column;
     align-items: start;
@@ -64,7 +64,7 @@
   height: 182px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .imgInputContainer {
     width: 100px;
     height: 100px;
@@ -80,7 +80,7 @@
   gap: 30px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .commonInputContainer {
     gap: 16px;
   }
@@ -93,7 +93,7 @@
   align-items: flex-end;
   margin-top: 4px;
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .BtnContainer {
     margin-top: 0;
   }

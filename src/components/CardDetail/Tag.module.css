@@ -1,13 +1,14 @@
 .cardDetail_tag {
-  display: flex;
+  display: block;
   padding: 4px 6px;
-  justify-content: center;
-  align-items: center;
   border-radius: 4px;
   text-align: center;
   font-family: Pretendard;
   font-size: 12px;
   font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .F9EEE3 {

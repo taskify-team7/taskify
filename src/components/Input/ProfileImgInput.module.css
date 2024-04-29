@@ -15,7 +15,7 @@
   height: 182px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .profileDiv {
     width: 100px;
     height: 100px;
@@ -28,7 +28,7 @@
   border-radius: 6px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .profilePickImg {
     width: 100px;
     height: 100px;
@@ -46,7 +46,7 @@
   z-index: 1;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .profileImgCover {
     width: 100px;
     height: 100px;
@@ -59,7 +59,7 @@
   transform: translate(-23px, -23px);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .penImg {
     width: 100px;
     height: 100px;
@@ -80,7 +80,7 @@
   background: #f5f5f5;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .profileImgBtn {
     width: 100px;
     height: 100px;

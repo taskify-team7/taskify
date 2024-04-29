@@ -16,7 +16,7 @@
   width: 200px;
   height: 55.186px;
   flex-shrink: 0;
-  @media screen and (max-width: 580px) {
+  @media screen and (max-width: 768px) {
     width: 119.044px;
     height: 33.112px;
   }
