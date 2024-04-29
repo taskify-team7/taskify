@@ -6,6 +6,7 @@
 }
 
 .cardDetail_comentForm_input {
+  width: 100%;
   gap: 10px;
   height: 110px;
   padding: 16px;

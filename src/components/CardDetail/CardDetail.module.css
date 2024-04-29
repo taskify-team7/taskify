@@ -52,7 +52,9 @@
 
 .cardDetail_columnName {
   display: flex;
-  padding: 4px 8px;
+  min-width: 70px;
+  max-height: 22px;
+  padding: 12px 8px;
   justify-content: center;
   align-items: center;
   border-radius: 11px;
@@ -62,6 +64,12 @@
   font-family: Pretendard;
   font-size: 12px;
   font-weight: 400;
+}
+
+.cardDetail_columnName > p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cardDetail_columnName_circle {
@@ -74,7 +82,10 @@
 }
 
 .cardDetail_tags {
+  max-width: 80%;
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 6px;
   border-left: 1px solid #d9d9d9;
   padding-left: 20px;
@@ -99,6 +110,11 @@
   width: 90%;
   height: 90%;
   border-radius: 8px;
+}
+
+.cardDetail_form {
+  width: 100%;
+  display: block;
 }
 
 .cardDetail_coments {
@@ -192,6 +208,10 @@
   .cardDetail {
     width: 327px;
   }
+  .cardDetail_content {
+    width: 280px;
+    background-color: bl;
+  }
   .cardDetail_header {
     display: flex;
     justify-content: space-between;
@@ -216,5 +236,9 @@
     border-radius: 8px;
     border: 1px solid #d9d9d9;
     background: #fff;
+  }
+
+  .cardDetail_tags {
+    max-width: 60%;
   }
 }
