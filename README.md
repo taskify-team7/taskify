@@ -10,7 +10,7 @@
   - 팀장
   - 모달 구현
   - PWA 작성
-  -
+  - GA와 Sentry 연결
 - [Jueon An](https://www.github.com/vinoankr)
   - 유저 기능 전반
   - 레이아웃 및 라우팅
@@ -26,14 +26,13 @@
 
 ## Tech Stack
 
-**Client:** 
 ![](https://img.shields.io/badge/React-000000?logo=React)
-![](https://img.shields.io/badge/React_Query-000000?logo=reactquery)
 ![](https://img.shields.io/badge/Typescript-000000?logo=Typescript)
-![](https://img.shields.io/badge/PWA-000000?logo=PWA)
-![](https://img.shields.io/badge/cssmodules-000000?logo=cssmodules)
+![](https://img.shields.io/badge/Module_CSS-000000?logo=cssmodules)
+![](https://img.shields.io/badge/React_Query-000000?logo=reactquery)
+![](https://img.shields.io/badge/Setnry-362D59?logo=sentry)
+![](https://img.shields.io/badge/Google_Analytics-E37400?logo=googleanalytics)
 
-**Server:** Node, Express
 
 ## Screenshots
 
