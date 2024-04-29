@@ -26,10 +26,12 @@
 
 ## Tech Stack
 
-**Client:** React, Typescript, Module CSS![](https://img.shields.io/badge/React-000000?logo=React)
+**Client:** 
+![](https://img.shields.io/badge/React-000000?logo=React)
 ![](https://img.shields.io/badge/React_Query-000000?logo=reactquery)
 ![](https://img.shields.io/badge/Typescript-000000?logo=Typescript)
 ![](https://img.shields.io/badge/PWA-000000?logo=PWA)
+![](https://img.shields.io/badge/cssmodules-000000?logo=cssmodules)
 
 **Server:** Node, Express
 
