@@ -6,6 +6,7 @@ import { getDashboardList } from "./api/dashboard";
 import Header from "./components/Header/Header";
 import { DashBoardsType } from "./interface/DashboardType";
 import { useEffect, useState } from "react";
+import Loading from "./components/Loading/Loading";
 
 export default function Layout() {
   const queryClient = useQueryClient();
@@ -42,7 +43,7 @@ export default function Layout() {
   }, [page, queryClient, totalPage]);
 
   if (isLoading) {
-    return <div>loading</div>;
+    return <Loading />;
   }
 
   if (error) {
