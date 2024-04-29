@@ -1,21 +1,25 @@
 .navContainer {
   z-index: 2;
   height: 70px;
-  width: 100%;
   background-color: #000000;
-  color: #ffffff;
+  position: sticky;
+  padding: 15px;
+}
+
+.navbar {
+  max-width: 1920px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
-  padding: 15px;
+  color: #ffffff;
 }
 
 .logoTitle {
   visibility: visible;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .logoTitle {
     visibility: hidden;
   }
