@@ -1,4 +1,6 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import * as Sentry from "@sentry/react";
+
 export const API_BASE_URL = process.env.REACT_APP_API_ROOT;
 
 const client = axios.create({
@@ -12,5 +14,21 @@ client.interceptors.request.use(async (config) => {
   }
   return config;
 });
+
+// 500에러 발생시 센트리로 에러 전송
+client.interceptors.response.use(
+  (res) => res,
+  (err) => {
+    if (err.response && err.response.status === 500) {
+      const ApiErrorInstance = new AxiosError(err);
+      Sentry.withScope((scope) => {
+        scope.setTag("api", "Network500Error"); // 태그 설정
+        scope.setLevel("fatal"); // 레벨 설정
+      });
+      return Promise.reject(ApiErrorInstance);
+    }
+    return Promise.reject(err);
+  }
+);
 
 export default client;
