@@ -20,12 +20,11 @@ client.interceptors.response.use(
   (res) => res,
   (err) => {
     if (err.response && err.response.status === 500) {
-      const ApiErrorInstance = new AxiosError(err);
       Sentry.withScope((scope) => {
         scope.setTag("api", "Network500Error"); // 태그 설정
         scope.setLevel("fatal"); // 레벨 설정
       });
-      return Promise.reject(ApiErrorInstance);
+      return Promise.reject(err);
     }
     return Promise.reject(err);
   }
