@@ -18,7 +18,7 @@
 - [Lee jin woo](https://www.github.com/yeeZinu)
   - 공용 컴포넌트 작성
   - My Page 구현
-  -
+  - 대쉬보드 관리 및 수정,삭제 구현
 - [Ryu Gwang Hyeon](https://www.github.com/RyuGwangHyeon)
   - 랜딩페이지 작성
   - 404 에러페이지 작성
