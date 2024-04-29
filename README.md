@@ -22,7 +22,7 @@
 - [Ryu Gwang Hyeon](https://www.github.com/RyuGwangHyeon)
   - 랜딩페이지 작성
   - 404 에러페이지 작성
-  -
+  - Loading 구현
 
 ## Tech Stack
 
@@ -32,7 +32,6 @@
 ![](https://img.shields.io/badge/React_Query-000000?logo=reactquery)
 ![](https://img.shields.io/badge/Setnry-362D59?logo=sentry)
 ![](https://img.shields.io/badge/Google_Analytics-E37400?logo=googleanalytics)
-
 
 ## Screenshots
 
