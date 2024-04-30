@@ -41,7 +41,7 @@
   border-radius: 6px;
 }
 
-@media screen and (max-width: 744px) {
+@media screen and (max-width: 1023px) {
   .inviteBox {
     max-height: 600px;
   }
@@ -50,7 +50,7 @@
   }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 768px) {
   .inviteBox {
     max-height: 850px;
   }

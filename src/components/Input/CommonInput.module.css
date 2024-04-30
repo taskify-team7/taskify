@@ -37,7 +37,7 @@
   border: 1px solid red;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .content_input {
     height: 42px;
   }

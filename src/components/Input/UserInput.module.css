@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
+  position: relative;
 }
 
 .content_label {
@@ -18,7 +19,6 @@
   align-items: center;
   border-radius: 6px;
   border: 1px solid #d9d9d9;
-  position: relative;
 }
 
 .content_user > img {
@@ -48,7 +48,7 @@
 
 .content_dropbox {
   position: absolute;
-  top: calc(25% + 15px);
+  top: calc(100% + 10px);
   width: 238px;
   border-radius: 6px;
   border: 1px solid #d9d9d9;
@@ -81,6 +81,9 @@
   font-family: Pretendard;
   font-size: 16px;
   font-weight: 400;
+}
+
+@media screen and (max-width: 768px) {
 }
 
 @media screen and (max-height: 850px) {

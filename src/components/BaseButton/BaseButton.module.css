@@ -19,7 +19,7 @@
   height: 20px;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
   .baseButtonImg {
     display: none;
   }
@@ -39,7 +39,7 @@
   font-size: 18px;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
   .login {
     padding: 14px 152px;
   }
@@ -78,13 +78,13 @@
   font-size: 14px;
 }
 
-@media (min-width: 376px) and (max-width: 744px) {
+@media (max-width: 1023px) {
   .accept {
     padding: 7px 23px;
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
   .accept {
     padding: 7px 44px;
     font-size: 12px;
@@ -105,13 +105,13 @@
   font-size: 14px;
 }
 
-@media (min-width: 376px) and (max-width: 744px) {
+@media (max-width: 1023px) {
   .refuse {
     padding: 7px 23px;
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
   .refuse {
     padding: 7px 44px;
     font-size: 12px;
@@ -132,7 +132,7 @@
   font-size: 14px;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
   .delete {
     padding: 7px 15px;
     font-size: 12px;
@@ -175,14 +175,14 @@
   font-weight: 600;
 }
 
-@media (min-width: 376px) and (max-width: 744px) {
+@media (max-width: 1023px) {
   .newDashboard {
     height: 68px;
     padding: 23px 56px;
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
   .newDashboard {
     height: 58px;
     padding: 19px 70px;
@@ -204,13 +204,13 @@
   font-weight: 700;
 }
 
-@media (min-width: 376px) and (max-width: 744px) {
+@media (max-width: 1023px) {
   .addColumn {
     padding: 24px 180px;
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
   .addColumn {
     height: 60px;
     padding: 20px 60px;
@@ -235,13 +235,13 @@
   font-weight: 700;
 }
 
-@media (min-width: 376px) and (max-width: 744px) {
+@media (max-width: 1023px) {
   .addColumnButton {
     padding: 9px 261px;
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
   .addColumnButton {
     height: 32px;
     padding: 6px 132px;

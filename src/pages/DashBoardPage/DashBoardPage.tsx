@@ -11,7 +11,6 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import { getColumns } from "../../api/column";
 import { getCards, changeCard } from "../../api/card";
 import { ColumnType } from "../../interface/DashboardType";
-import BaseButton from "../../components/BaseButton/BaseButton";
 
 export default function DashBoardPage() {
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();

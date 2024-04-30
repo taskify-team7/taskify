@@ -6,15 +6,26 @@ import DashboardMember from "../../components/DashboardMember/DashboardMember";
 import DashboardInvite from "../../components/DashboardInvite/DashboardInvite";
 import BaseButton from "../../components/BaseButton/BaseButton";
 import { deleteDashboard } from "../../api/dashboard";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function DashBoardEditPage() {
   const navigate = useNavigate();
 
   const { id } = useParams();
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: () => deleteDashboard(Number(id)),
+    onSettled: () => {
+      return (
+        queryClient.invalidateQueries({ queryKey: ["dashboardList", 1] }),
+        queryClient.invalidateQueries({ queryKey: ["dashboards", 1] })
+      );
+    },
+  });
 
   const handleDashboardDelete = async () => {
     try {
-      await deleteDashboard(Number(id));
+      mutate();
       navigate("/dashboard");
     } catch (error) {}
   };

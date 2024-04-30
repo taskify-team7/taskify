@@ -24,7 +24,10 @@ function DashBoardCreateModal({ handleModalClose }: DashBoardCreateModalProps) {
   const { mutate } = useMutation({
     mutationFn: () => createDashboard(apiBodyValue.title, apiBodyValue.color),
     onSettled: () => {
-      return queryClient.invalidateQueries({ queryKey: ["dashboards"] });
+      return (
+        queryClient.invalidateQueries({ queryKey: ["dashboardList", 1] }),
+        queryClient.invalidateQueries({ queryKey: ["dashboards", 1] })
+      );
     },
   });
 

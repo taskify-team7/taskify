@@ -10,14 +10,14 @@
   margin-bottom: 12px;
 }
 
-@media (max-width: 1023px) and (min-width: 768px) {
+@media (max-width: 1023px) and (min-width: 769px) {
   .container {
     width: 544px;
     height: 256px;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .container {
     width: 100%;
     min-width: 284px;
@@ -42,7 +42,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .titleNBtn {
     margin-bottom: 24px;
   }
@@ -56,7 +56,7 @@
   margin-top: 24px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .buttonContainer {
     margin-top: 16px;
   }

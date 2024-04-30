@@ -89,7 +89,7 @@
   color: black;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .comment_edit form {
     width: 105%;
     flex-direction: column;
