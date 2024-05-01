@@ -10,7 +10,7 @@ function ProfileImgInput({
   initialImg,
 }: ProfileImgInputType) {
   const imageInput = useRef<HTMLInputElement | null>(null);
-  const [pickedImage, setPickedImage] = useState<any>();
+  const [pickedImage, setPickedImage] = useState<any>(null);
 
   const handleImageInput = () => {
     imageInput.current?.click();

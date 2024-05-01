@@ -1,22 +1,20 @@
-import style from './ProfileModify.module.css';
-import BaseButton from '../BaseButton/BaseButton';
-import CommonInput from '../Input/CommonInput';
-import { useForm } from 'react-hook-form';
-import ProfileImgInput from '../Input/ProfileImgInput';
-import { changeMyInfo } from '../../api/auth';
+import style from "./ProfileModify.module.css";
+import BaseButton from "../BaseButton/BaseButton";
+import CommonInput from "../Input/CommonInput";
+import { useForm } from "react-hook-form";
+import ProfileImgInput from "../Input/ProfileImgInput";
+import { changeMyInfo } from "../../api/auth";
 
 export default function ProfileModify() {
-  let userEmail = '';
-  let userImg = '';
-  const userString = localStorage.getItem('user');
+
+  let userEmail = "";
+  let userImg = "";
+  const userString = localStorage.getItem("user");
   if (userString) {
     const userObject = JSON.parse(userString);
     userEmail = userObject.email;
     userImg = userObject.profileImageUrl;
   }
-
-  console.log(userImg);
-  
 
   const {
     register,
@@ -24,20 +22,21 @@ export default function ProfileModify() {
     handleSubmit,
     setValue,
   } = useForm({
-    mode: 'onBlur',
+    mode: "onBlur",
     defaultValues: {
-      nickName: '',
-      imageUrl: '',
+      nickName: "",
+      imageUrl: null,
     },
   });
 
-  const imageValidation = register('imageUrl');
+  const imageValidation = register("imageUrl");
 
   const onSubmit = async (data: any) => {
     const profileData = {
       nickname: data.nickName,
-      profileImageUrl: data.imageUrl,
+      ...(data.imageUrl ? { profileImageUrl: data.imageUrl } : {}),
     };
+
     try {
       const res = await changeMyInfo(profileData);
     } catch (error) {
@@ -51,18 +50,22 @@ export default function ProfileModify() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={style.totalInputContainer}>
           <div className={style.imgInputContainer}>
-            <ProfileImgInput initialImg = {userImg} validation={imageValidation} setValue={setValue} />
+            <ProfileImgInput
+              initialImg={userImg}
+              validation={imageValidation}
+              setValue={setValue}
+            />
           </div>
           <div className={style.commonInputContainer}>
             <CommonInput
-              label={'이메일'}
+              label={"이메일"}
               placeholder={userEmail}
               disabled={true}
             />
             <CommonInput
-              label={'닉네임'}
+              label={"닉네임"}
               placeholder="닉네임 입력"
-              validation={register('nickName')}
+              validation={register("nickName")}
             />
           </div>
         </div>
