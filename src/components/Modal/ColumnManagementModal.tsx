@@ -6,6 +6,7 @@ import CommonInput from "../Input/CommonInput";
 import { useQueryClient } from "@tanstack/react-query";
 import { deleteColumn, updateColumn } from "../../api/column";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 interface ColumnManagementModalProps {
   columnId: number;
@@ -33,22 +34,31 @@ function ColumnManagementModal({
   });
 
   async function handleDelete() {
-    await deleteColumn(columnId);
-    await queryClient.removeQueries({
-      queryKey: ["column", columnId + ""],
-      exact: true,
-    });
-    await queryClient.invalidateQueries({
-      queryKey: ["columns", dashboardId + ""],
-    });
+    const response = await deleteColumn(columnId);
+    if (typeof response === "string") {
+      toast.error(response);
+    } else {
+      await queryClient.removeQueries({
+        queryKey: ["column", columnId + ""],
+        exact: true,
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ["columns", dashboardId + ""],
+      });
+    }
   }
 
   const onSubmit = async (e: any) => {
-    const res = await updateColumn(columnId, e.title);
-    await queryClient.invalidateQueries({
-      queryKey: ["columns", dashboardId + ""],
-    });
-    handleModalClose();
+    const response = await updateColumn(columnId, e.title);
+    if (typeof response === "string") {
+      toast.error(response);
+    } else {
+      toast.success("컬럼이 수정되었습니다.");
+      await queryClient.invalidateQueries({
+        queryKey: ["columns", dashboardId + ""],
+      });
+      handleModalClose();
+    }
   };
 
   return (

@@ -5,6 +5,7 @@ import styles from "./ColumnCreatemodal.module.css";
 import { useForm } from "react-hook-form";
 import { createColumn } from "../../api/column";
 import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 interface columnCreateModalProps {
   handleModalClose: () => void;
@@ -31,11 +32,16 @@ function ColumnCreateModal({
   });
 
   const onSubmit = async (e: any) => {
-    await createColumn(e.title, dashboardId);
-    await queryClient.invalidateQueries({
-      queryKey: ["columns", dashboardId + ""],
-    });
-    handleModalClose();
+    const response = await createColumn(e.title, dashboardId);
+    if (typeof response === "string") {
+      toast.error(response);
+    } else {
+      toast.success("새로운 컬럼이 생성되었습니다.");
+      await queryClient.invalidateQueries({
+        queryKey: ["columns", dashboardId + ""],
+      });
+      handleModalClose();
+    }
   };
 
   return (

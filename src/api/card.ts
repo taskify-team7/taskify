@@ -1,5 +1,4 @@
 import client from "./axios";
-import { toast } from "react-toastify";
 
 interface CardDataType {
   assigneeUserId: string;
