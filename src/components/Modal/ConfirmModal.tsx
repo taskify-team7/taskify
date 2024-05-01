@@ -5,6 +5,7 @@ import CommonModalLayout from "./CommonModalLayout";
 import BaseButton from "../BaseButton/BaseButton";
 import { deleteCard } from "../../api/card";
 import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 interface ConfirmModalProps {
   handleModalClose: () => void;
@@ -19,11 +20,16 @@ function ConfirmModal({
 }: ConfirmModalProps) {
   const queryClient = useQueryClient();
   const handleDeleteCard = async () => {
-    const res = await deleteCard(cardId);
-    await queryClient.invalidateQueries({
-      queryKey: ["column", columnId + ""],
-    });
-    handleModalClose();
+    const response = await deleteCard(cardId);
+    if (typeof response === "string") {
+      toast.error(response);
+    } else {
+      toast.success("할 일이 삭제되었습니다.");
+      await queryClient.invalidateQueries({
+        queryKey: ["column", columnId + ""],
+      });
+      handleModalClose();
+    }
   };
   return (
     <ModalContainer handleModalClose={handleModalClose}>
