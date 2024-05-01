@@ -5,6 +5,7 @@ import CommonModalLayout from "./CommonModalLayout";
 import CommonInput from "../Input/CommonInput";
 import { useForm } from "react-hook-form";
 import { dashboardInvite } from "../../api/dashboard";
+import { toast } from "react-toastify";
 
 interface InviteModalProps {
   handleModalClose: () => void;
@@ -26,8 +27,13 @@ function InviteModal({ handleModalClose, dashboardId }: InviteModalProps) {
   });
 
   const onSubmit = async (data: any) => {
-    const result = await dashboardInvite(data.email, dashboardId);
-    handleModalClose();
+    const response = await dashboardInvite(data.email, dashboardId);
+    if (typeof response === "string") {
+      toast.error(response);
+    } else {
+      toast.success("초대가 완료되었습니다.");
+      handleModalClose();
+    }
   };
 
   return (

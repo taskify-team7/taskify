@@ -7,6 +7,7 @@ import DashboardInvite from "../../components/DashboardInvite/DashboardInvite";
 import BaseButton from "../../components/BaseButton/BaseButton";
 import { deleteDashboard } from "../../api/dashboard";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 function DashBoardEditPage() {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ function DashBoardEditPage() {
   const handleDashboardDelete = async () => {
     try {
       mutate();
+      toast.success("대시보드가 삭제되었습니다.");
       navigate("/dashboard");
     } catch (error) {}
   };

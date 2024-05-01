@@ -1,5 +1,4 @@
 import client from "./axios";
-import { toast } from "react-toastify";
 
 interface ApiPrameterType {
   navigationMethod: string;
@@ -32,13 +31,11 @@ export const createDashboard = async (title: string, color: string) => {
       title: title,
       color: color,
     });
-    if (result.status === 201) {
-      toast.success("새로운 대시보드가 생성되었습니다.");
-      return result.data;
-    }
+
+    return result.data;
   } catch (e: any) {
     console.log(e);
-    toast.error(e.response.data.message);
+    return e.response.data.message;
   }
 };
 
@@ -48,25 +45,29 @@ export const updateDashboard = async (
   color: string,
   dashboardId: number
 ) => {
-  const { data } = await client.put(`dashboards/${dashboardId}`, {
-    title: title,
-    color: color,
-  });
-  return data;
+  try {
+    const { data } = await client.put(`dashboards/${dashboardId}`, {
+      title: title,
+      color: color,
+    });
+    return data;
+  } catch (e: any) {
+    console.log(e);
+    return e.response.data.message;
+  }
 };
 
 // 대시보드 삭제 API
 export const deleteDashboard = async (dashboardId: number) => {
   try {
     const response = await client.delete(`dashboards/${dashboardId}`);
-    if (response.status === 204) {
-      const result = response.data;
-      toast.success("대시보드가 삭제되었습니다.");
-      return result;
-    }
+
+    const result = response.data;
+
+    return result;
   } catch (e: any) {
     console.log(e);
-    toast.error(e.response.data.message);
+    return e.response.data.message;
   }
 };
 
@@ -106,14 +107,11 @@ export const getMemberList = async (
 export const deleteMember = async (id: number) => {
   try {
     const response = await client.delete(`/members/${id}`);
-    if (response.status === 204) {
-      const result = response.data;
-      toast.success("멤버가 삭제되었습니다.");
-      return result;
-    }
+
+    return response;
   } catch (e: any) {
     console.log(e);
-    toast.error(e.response.data.message);
+    return e.response.data.message;
   }
 };
 
@@ -142,7 +140,7 @@ export const updateInvitations = async (
     return data;
   } catch (e: any) {
     console.log(e);
-    toast.error(e.response.data.message);
+    return e.response.data.message;
   }
 };
 
@@ -164,14 +162,10 @@ export const deleteInvite = async (dashboardId: number, id: number) => {
     const response = await client.delete(
       `dashboards/${dashboardId}/invitations/${id}`
     );
-    if (response.status === 204) {
-      const result = response.data;
-      toast.success("멤버가 삭제되었습니다.");
-      return result;
-    }
+    return response;
   } catch (e: any) {
     console.log(e);
-    toast.error(e.response.data.message);
+    return e.response.data.message;
   }
 };
 
@@ -182,14 +176,10 @@ export const dashboardInvite = async (email: string, dashboardId: number) => {
       email: email,
     });
 
-    if (result.status === 201) {
-      toast.success("초대가 완료되었습니다.");
-    }
-
     return result.data;
   } catch (e: any) {
     console.log(e);
-    toast.error(e.response.data.message);
+    return e.response.data.message;
   }
 };
 

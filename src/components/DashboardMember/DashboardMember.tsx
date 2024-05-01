@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import BaseButton from "../BaseButton/BaseButton";
 import style from "./DashboardMember.module.css";
 import ProfileCircle from "../ProfileCircle/ProfileCircle";
+import { toast } from "react-toastify";
 
 function DashboardMember() {
   const { id } = useParams();
@@ -51,10 +52,11 @@ function DashboardMember() {
   };
 
   const handleDeleteMember = (id: number) => async () => {
-    try {
-      await deleteMember(id);
-    } catch (error) {
-      console.log(error);
+    const response = await deleteMember(id);
+    if (typeof response === "string") {
+      toast.error(response);
+    } else {
+      toast.success("멤버가 삭제되었습니다.");
     }
   };
 

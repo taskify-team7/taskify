@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { InviteDataType } from '../../interface/DashboardType';
-import { deleteInvite, getDashboardInvite } from '../../api/dashboard';
-import { useParams } from 'react-router-dom';
-import { createPortal } from 'react-dom';
-import { useModal } from '../../hooks/useModal';
-import InviteModal from '../Modal/InviteModal';
-import BaseButton from '../BaseButton/BaseButton';
-import style from './DashboardInvite.module.css';
-import plus_white from '../../assets/plus_white.svg';
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { InviteDataType } from "../../interface/DashboardType";
+import { deleteInvite, getDashboardInvite } from "../../api/dashboard";
+import { useParams } from "react-router-dom";
+import { createPortal } from "react-dom";
+import { useModal } from "../../hooks/useModal";
+import InviteModal from "../Modal/InviteModal";
+import BaseButton from "../BaseButton/BaseButton";
+import style from "./DashboardInvite.module.css";
+import plus_white from "../../assets/plus_white.svg";
+import { toast } from "react-toastify";
 
 function DashboardInvite() {
   const { id } = useParams();
@@ -18,7 +19,7 @@ function DashboardInvite() {
   const size = 5;
 
   const { data } = useQuery({
-    queryKey: ['inviteList', { id, page, size }],
+    queryKey: ["inviteList", { id, page, size }],
     queryFn: () => {
       if (!id) {
         return Promise.resolve([]);
@@ -56,11 +57,11 @@ function DashboardInvite() {
   };
 
   const handleDeleteInvite = (inviteId: number) => async () => {
-    try {
-      await deleteInvite(Number(id), inviteId);
-      alert('취소 완료');
-    } catch (error) {
-      alert(error.response.data.message);
+    const response = await deleteInvite(Number(id), inviteId);
+    if (typeof response === "string") {
+      toast.error(response);
+    } else {
+      toast.success("초대가 취소되었습니다.");
     }
   };
 
