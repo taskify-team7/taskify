@@ -28,4 +28,5 @@ export interface ImageInputType extends CommonInputType {
 
 export interface ProfileImgInputType extends CommonInputType {
   setValue: any;
+  initialImg: string;
 }

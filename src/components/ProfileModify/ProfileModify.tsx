@@ -7,11 +7,16 @@ import { changeMyInfo } from '../../api/auth';
 
 export default function ProfileModify() {
   let userEmail = '';
+  let userImg = '';
   const userString = localStorage.getItem('user');
   if (userString) {
     const userObject = JSON.parse(userString);
     userEmail = userObject.email;
+    userImg = userObject.profileImageUrl;
   }
+
+  console.log(userImg);
+  
 
   const {
     register,
@@ -35,7 +40,6 @@ export default function ProfileModify() {
     };
     try {
       const res = await changeMyInfo(profileData);
-      alert('프로필이 변경되었습니다.');
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +51,7 @@ export default function ProfileModify() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={style.totalInputContainer}>
           <div className={style.imgInputContainer}>
-            <ProfileImgInput validation={imageValidation} setValue={setValue} />
+            <ProfileImgInput initialImg = {userImg} validation={imageValidation} setValue={setValue} />
           </div>
           <div className={style.commonInputContainer}>
             <CommonInput
