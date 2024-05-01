@@ -4,29 +4,22 @@ import { toast } from "react-toastify";
 export async function signUp(data: object) {
   try {
     const response = await client.post("/users/", data);
-    if (response.status === 201) {
-      toast.success("회원가입 되었습니다.");
-      const result = response.data;
-      return result;
-    }
+    const result = response.data;
+    return result;
   } catch (e: any) {
-    toast.error(e.response.data.message);
-    throw new Error(e);
+    console.log(e);
+    return e.response.data.message;
   }
 }
 
 export async function logIn(data: object) {
   try {
     const response = await client.post("/auth/login", data);
-    if (response.status === 201) {
-      toast.success("로그인 되었습니다.");
-      const result = response.data;
-      return result;
-    }
+    const result = response.data;
+    return result;
   } catch (e: any) {
     console.log(e);
-    toast.error(e.response.data.message);
-    throw new Error(e);
+    return e.response.data.message;
   }
 }
 
