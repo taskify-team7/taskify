@@ -1,15 +1,16 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
-import style from './ProfileImgInput.module.css';
-import { ProfileImgInputType } from '../../interface/Input';
-import { changeImageURL } from '../../api/auth';
+import React, { ChangeEvent, useRef, useState } from "react";
+import style from "./ProfileImgInput.module.css";
+import { ProfileImgInputType } from "../../interface/Input";
+import { changeImageURL } from "../../api/auth";
 
 function ProfileImgInput({
   value,
   validation,
   setValue,
+  initialImg,
 }: ProfileImgInputType) {
   const imageInput = useRef<HTMLInputElement | null>(null);
-  const [pickedImage, setPickedImage] = useState<any>();
+  const [pickedImage, setPickedImage] = useState<any>(null);
 
   const handleImageInput = () => {
     imageInput.current?.click();
@@ -27,7 +28,7 @@ function ProfileImgInput({
       setPickedImage(fileReader.result);
     };
     const image = await changeImageURL(file);
-    setValue('imageUrl', image);
+    setValue("imageUrl", image);
   };
 
   return (
@@ -48,7 +49,11 @@ function ProfileImgInput({
         {pickedImage ? (
           <>
             <div className={style.profileImgCover} onClick={handleImageInput}>
-              <img className={style.penImg} src="/Icons/edit_pen.svg" alt="edit" />
+              <img
+                className={style.penImg}
+                src="/Icons/edit_pen.svg"
+                alt="edit"
+              />
             </div>
             <img
               className={style.profilePickImg}
@@ -63,7 +68,11 @@ function ProfileImgInput({
               className={style.profileImgBtn}
               onClick={handleImageInput}
             >
-              <img src="/Icons/add_icon.svg" alt="add_Image" />
+              <img
+                className={initialImg ? style.profilePickImg : ""}
+                src={initialImg ? initialImg : "/Icons/add_icon.svg"}
+                alt="add_Image"
+              />
             </button>
           </>
         )}
@@ -71,5 +80,6 @@ function ProfileImgInput({
     </div>
   );
 }
+// "/Icons/add_icon.svg"
 
 export default ProfileImgInput;

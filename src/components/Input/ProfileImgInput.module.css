@@ -85,4 +85,8 @@
     width: 100px;
     height: 100px;
   }
+  }
+
+.profileImg{
+  object-fit: cover;
 }
