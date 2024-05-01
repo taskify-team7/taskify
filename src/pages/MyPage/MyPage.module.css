@@ -8,6 +8,13 @@
 
   overflow: auto;
 }
+
+@media (max-width: 767px) {
+  .container {
+    padding: 12px;
+  }
+}
+
 .goBack {
   display: flex;
   width: 82px;
