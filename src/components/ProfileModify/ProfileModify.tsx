@@ -6,15 +6,10 @@ import ProfileImgInput from "../Input/ProfileImgInput";
 import { changeMyInfo } from "../../api/auth";
 
 export default function ProfileModify() {
-
-  let userEmail = "";
-  let userImg = "";
-  const userString = localStorage.getItem("user");
-  if (userString) {
-    const userObject = JSON.parse(userString);
-    userEmail = userObject.email;
-    userImg = userObject.profileImageUrl;
-  }
+  const userString = localStorage.getItem("user") || "";
+  const userObject = JSON.parse(userString);
+  const userEmail = userObject.email;
+  const userImg = userObject.profileImageUrl;
 
   const {
     register,
