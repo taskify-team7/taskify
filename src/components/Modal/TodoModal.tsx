@@ -11,6 +11,7 @@ import { createCard, updateCard } from "../../api/card";
 import { CardType } from "../../interface/DashboardType";
 import BaseButton from "../BaseButton/BaseButton";
 import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 interface TodoCreateModalProps {
   handleModalClose: () => void;
@@ -73,21 +74,30 @@ function TodoCreateModal({
   const onSubmit = async (e: any) => {
     //카드 수정
     if (type && cardData?.id) {
-      const res = await updateCard(e, columnId, cardData?.id);
-      await queryClient.invalidateQueries({
-        queryKey: ["column", columnId + ""],
-      });
-      handleModalClose();
+      const response = await updateCard(e, columnId, cardData?.id);
+      if (typeof response === "string") {
+        toast.error(response);
+      } else {
+        toast.success("할 일이 수정되었습니다.");
+        await queryClient.invalidateQueries({
+          queryKey: ["column", columnId + ""],
+        });
+        handleModalClose();
+      }
     }
 
     // 새로운 카드 생성
     if (dashboardId && columnId) {
       //리스폰스 값
-      const res = await createCard(e, dashboardId, columnId);
-      await queryClient.invalidateQueries({
-        queryKey: ["column", columnId + ""],
-      });
-      handleModalClose();
+      const response = await createCard(e, dashboardId, columnId);
+      if (typeof response === "string") {
+        toast.error(response);
+      } else {
+        await queryClient.invalidateQueries({
+          queryKey: ["column", columnId + ""],
+        });
+        handleModalClose();
+      }
     }
   };
 

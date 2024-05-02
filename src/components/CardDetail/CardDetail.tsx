@@ -11,6 +11,7 @@ import { CommentRequestType } from "../../interface/CardType";
 import { createComment, getComments } from "../../api/comment";
 import OptionBox from "./OptionBox";
 import ProfileCircle from "../ProfileCircle/ProfileCircle";
+import { toast } from "react-toastify";
 
 interface CardDetailProps {
   handleModalClose: () => void;
@@ -54,11 +55,21 @@ function CardDetail({
 
   const onSubmit = async (e: any) => {
     const { id: cardId, dashboardId, columnId } = card;
-    const res = await createComment(e.comment, cardId, columnId, dashboardId);
-    await commentQueryClient.invalidateQueries({
-      queryKey: ["comments", cardId],
-    });
-    setValue("comment", "");
+    const response = await createComment(
+      e.comment,
+      cardId,
+      columnId,
+      dashboardId
+    );
+    if (typeof response === "string") {
+      toast.error(response);
+    } else {
+      toast.success("댓글이 생성되었습니다.");
+      await commentQueryClient.invalidateQueries({
+        queryKey: ["comments", cardId],
+      });
+      setValue("comment", "");
+    }
   };
 
   return (

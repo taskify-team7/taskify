@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { logIn } from "../api/auth";
 import { createContext, useContext } from "react";
 
@@ -26,15 +27,13 @@ export default function AuthProvider({
   }
 
   async function contextLogin(data: { email: string; password: string }) {
-    try {
-      const result = await logIn(data);
-      localStorage.setItem("user", JSON.stringify(result.user));
-      localStorage.setItem("token", result.accessToken);
-      alert(result.user.nickname + "님 반갑습니다");
-    } catch (error: any) {
-      alert(error.response.data.message);
-      throw new Error(error);
+    const result = await logIn(data);
+    if (typeof result === "string") {
+      toast.error(result);
     }
+    localStorage.setItem("user", JSON.stringify(result.user));
+    localStorage.setItem("token", result.accessToken);
+    toast.success(result.user.nickname + "님 반갑습니다");
   }
 
   async function contextLogout() {

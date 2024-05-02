@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { updateDashboard } from "../../api/dashboard";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import style from "./DashboardModify.module.css";
+import { toast } from "react-toastify";
 
 function DashboardModify() {
   const { id } = useParams();
@@ -54,12 +55,13 @@ function DashboardModify() {
     try {
       if (selectedColor && dashboardData) {
         mutate();
+        toast.success("대시보드 이름이 수정되었습니다.");
         setTitle(title);
         setSelectedColor(selectedColor);
       } else if (title === "") {
-        alert("변경될 이름을 입력해주세요.");
+        toast.error("변경될 이름을 입력해주세요.");
       } else {
-        alert("색상을 선택해주세요.");
+        toast.error("색상을 선택해주세요.");
       }
     } catch (error) {
       console.log(error);

@@ -7,6 +7,7 @@ import CommonInput from "../Input/CommonInput";
 import { useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import ProfileCircle from "../ProfileCircle/ProfileCircle";
+import { toast } from "react-toastify";
 
 interface CommentBoxType {
   comment: CommentsType;
@@ -41,18 +42,29 @@ function CommentBox({ comment, cardId }: CommentBoxType) {
   };
 
   const handleDeleteComment = async () => {
-    const res = await deleteComment(comment.id);
-    await commentQueryClient.invalidateQueries({
-      queryKey: ["comments", cardId],
-    });
+    const response = await deleteComment(comment.id);
+    console.log(response);
+    if (typeof response === "string") {
+      toast.error(response);
+    } else {
+      toast.success("댓글이 삭제되었습니다.");
+      await commentQueryClient.invalidateQueries({
+        queryKey: ["comments", cardId],
+      });
+    }
   };
 
   const handleEditComment = async (e: any) => {
-    const res = await updateComment(comment.id, e.editComment);
-    await commentQueryClient.invalidateQueries({
-      queryKey: ["comments", cardId],
-    });
-    setIsEditInputState(false);
+    const response = await updateComment(comment.id, e.editComment);
+    if (typeof response === "string") {
+      toast.error(response);
+    } else {
+      toast.success("댓글이 수정되었습니다.");
+      await commentQueryClient.invalidateQueries({
+        queryKey: ["comments", cardId],
+      });
+      setIsEditInputState(false);
+    }
   };
 
   return (
@@ -90,7 +102,7 @@ function CommentBox({ comment, cardId }: CommentBoxType) {
               <button type="button" onClick={handleEditInputOpen}>
                 수정
               </button>
-              <button type="button" onClick={() => handleDeleteComment()}>
+              <button type="button" onClick={handleDeleteComment}>
                 삭제
               </button>
             </div>

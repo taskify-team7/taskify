@@ -1,5 +1,4 @@
 import client from "./axios";
-import { toast } from "react-toastify";
 
 export const createComment = async (
   content: string,
@@ -14,13 +13,10 @@ export const createComment = async (
       columnId: columnId,
       dashboardId: dashboardId,
     });
-    if (result.status === 201) {
-      toast.success("댓글이 생성되었습니다.");
-      return result.data;
-    }
+    return result.data;
   } catch (e: any) {
     console.log(e);
-    toast.error(e.response.data.message);
+    return e.response.data.message;
   }
 };
 
@@ -46,13 +42,10 @@ export const deleteComment = async (commentId: number) => {
   try {
     const result = await client.delete(`/comments/${commentId}`);
 
-    if (result.status === 204) {
-      toast.success("댓글이 삭제되었습니다.");
-      return result.data;
-    }
+    return result;
   } catch (e: any) {
     console.log(e);
-    toast.error(e.response.data.message);
+    return e.response.data.message;
   }
 };
 
@@ -61,12 +54,10 @@ export const updateComment = async (commentId: number, content: string) => {
     const result = await client.put(`/comments/${commentId}`, {
       content: content,
     });
-    if (result.status === 200) {
-      toast.success("댓글이 삭제되었습니다.");
-      return result.data;
-    }
+
+    return result.data;
   } catch (e: any) {
     console.log(e);
-    toast.error(e.response.data.message);
+    return e.response.data.message;
   }
 };

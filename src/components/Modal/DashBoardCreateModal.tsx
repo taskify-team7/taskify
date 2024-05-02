@@ -8,6 +8,7 @@ import CommonInput from "../Input/CommonInput";
 import ColorSelector from "./ColorSelector";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 interface DashBoardCreateModalProps {
   handleModalClose: () => void;
@@ -34,6 +35,7 @@ function DashBoardCreateModal({ handleModalClose }: DashBoardCreateModalProps) {
   const onCreate = () => {
     try {
       mutate();
+      toast.success("대시보드가 생성되었습니다.");
       setApiBodyValue({
         title: "",
         color: "",

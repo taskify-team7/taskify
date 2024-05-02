@@ -4,14 +4,18 @@ import AuthPageRedirector from "../../components/AuthPage/AuthPageRedirector";
 import SignupForm from "../../components/AuthPage/SignupForm";
 import { signUp } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function SignupPage() {
   const navigate = useNavigate();
   async function handleSignup(data: object) {
-    try {
-      await signUp(data);
+    const response = await signUp(data);
+    if (typeof response === "string") {
+      toast.error(response);
+    } else {
+      toast.success("회원가입 되었습니다.");
       navigate("/login");
-    } catch (error: any) {}
+    }
   }
   return (
     <div className={styles.container}>
