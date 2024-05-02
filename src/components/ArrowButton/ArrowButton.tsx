@@ -6,10 +6,16 @@ interface arrowButtonProps {
   disabled?: boolean;
 }
 
-const ArrowRightButton = ({ onClick, disabled, direction }: arrowButtonProps) => {
+const ArrowRightButton = ({
+  onClick,
+  disabled,
+  direction,
+}: arrowButtonProps) => {
   return (
     <button
-      className={`${styles.arrowButton} ${direction === "left" ? styles.left : styles.right} ${disabled ? styles.disabled : ""}`}
+      className={`${styles.arrowButton} ${styles[direction]} ${
+        disabled ? styles.disabled : ""
+      }`}
       onClick={onClick}
       disabled={disabled}
     >
