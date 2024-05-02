@@ -10,6 +10,7 @@ export default function ProfileModify() {
   const userObject = JSON.parse(userString);
   const userEmail = userObject.email;
   const userImg = userObject.profileImageUrl;
+  console.log(userObject.nickname="??");
 
   const {
     register,
@@ -34,6 +35,8 @@ export default function ProfileModify() {
 
     try {
       const res = await changeMyInfo(profileData);
+      userObject.nickname = data.nickName;
+      localStorage.setItem("user", JSON.stringify(userObject))
     } catch (error) {
       console.log(error);
     }
