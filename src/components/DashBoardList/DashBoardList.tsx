@@ -5,8 +5,7 @@ import DashBoardItem from "../DashBoardItem/DashBoardItem";
 import { getDashboardList } from "../../api/dashboard";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { DashBoardsType } from "../../interface/DashboardType";
-import ArrowLeftButton from "../ArrowButton/ArrowLeftButton";
-import ArrowRightButton from "../ArrowButton/ArrowRightButton";
+import ArrowButton from "../ArrowButton/ArrowButton";
 
 function DashBoardList() {
   const [params, setParams] = useState({
@@ -78,13 +77,15 @@ function DashBoardList() {
         ))}
         <div className={styles.pagenationBtn}>
           <p>{`${totalPage}페이지 중 ${params.page}`}</p>
-          <ArrowLeftButton
+          <ArrowButton
             onClick={prevPageHandler}
             disabled={params.page === 1}
+            direction="left"
           />
-          <ArrowRightButton
+          <ArrowButton
             onClick={nextPageHandler}
             disabled={params.page === totalPage}
+            direction="right"
           />
         </div>
       </div>
