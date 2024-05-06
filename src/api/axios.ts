@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import * as Sentry from "@sentry/react";
 
 export const API_BASE_URL = process.env.REACT_APP_API_ROOT;
@@ -23,6 +23,7 @@ client.interceptors.response.use(
       Sentry.withScope((scope) => {
         scope.setTag("api", "Network500Error"); // 태그 설정
         scope.setLevel("fatal"); // 레벨 설정
+        Sentry.captureException(new Error("서버 500 에러 발생")); // 센트리로 보낼 에러 메세지
       });
       return Promise.reject(err);
     }

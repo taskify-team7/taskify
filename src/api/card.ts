@@ -1,4 +1,5 @@
 import client from "./axios";
+import * as Sentry from "@sentry/react";
 
 interface CardDataType {
   assigneeUserId: string;
@@ -26,6 +27,15 @@ export const changeCard = async (id: string, body: object) => {
     return res;
   } catch (e: any) {
     console.log(e);
+    const { method, url } = e.config; // axios의 error객체
+    const { status } = e.response;
+    Sentry.withScope((scope) => {
+      scope.setTag("api", "signUp"); // 태그 설정
+      scope.setLevel("warning"); // 레벨 설정
+      scope.setFingerprint([method, status, url]);
+      Sentry.captureException(new Error(e.response.data.message));
+    });
+    return e.response.data.message;
   }
 };
 
@@ -54,6 +64,14 @@ export const createCard = async (
     return res;
   } catch (e: any) {
     console.log(e);
+    const { method, url } = e.config; // axios의 error객체
+    const { status } = e.response;
+    Sentry.withScope((scope) => {
+      scope.setTag("api", "signUp"); // 태그 설정
+      scope.setLevel("warning"); // 레벨 설정
+      scope.setFingerprint([method, status, url]);
+      Sentry.captureException(new Error(e.response.data.message));
+    });
     return e.response.data.message;
   }
 };
@@ -65,6 +83,14 @@ export const deleteCard = async (cardId: number) => {
     return res;
   } catch (e: any) {
     console.log(e);
+    const { method, url } = e.config; // axios의 error객체
+    const { status } = e.response;
+    Sentry.withScope((scope) => {
+      scope.setTag("api", "signUp"); // 태그 설정
+      scope.setLevel("warning"); // 레벨 설정
+      scope.setFingerprint([method, status, url]);
+      Sentry.captureException(new Error(e.response.data.message));
+    });
     return e.response.data.message;
   }
 };
@@ -94,6 +120,14 @@ export const updateCard = async (
     return res;
   } catch (e: any) {
     console.log(e);
+    const { method, url } = e.config; // axios의 error객체
+    const { status } = e.response;
+    Sentry.withScope((scope) => {
+      scope.setTag("api", "signUp"); // 태그 설정
+      scope.setLevel("warning"); // 레벨 설정
+      scope.setFingerprint([method, status, url]);
+      Sentry.captureException(new Error(e.response.data.message));
+    });
     return e.response.data.message;
   }
 };

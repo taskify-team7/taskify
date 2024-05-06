@@ -1,5 +1,6 @@
 import client from "./axios";
 import { toast } from "react-toastify";
+import * as Sentry from "@sentry/react";
 
 export async function signUp(data: object) {
   try {
@@ -8,6 +9,14 @@ export async function signUp(data: object) {
     return result;
   } catch (e: any) {
     console.log(e);
+    const { method, url } = e.config; // axios의 error객체
+    const { status } = e.response;
+    Sentry.withScope((scope) => {
+      scope.setTag("api", "signUp"); // 태그 설정
+      scope.setLevel("warning"); // 레벨 설정
+      scope.setFingerprint([method, status, url]);
+      Sentry.captureException(new Error(e.response.data.message));
+    });
     return e.response.data.message;
   }
 }
@@ -19,6 +28,14 @@ export async function logIn(data: object) {
     return result;
   } catch (e: any) {
     console.log(e);
+    const { method, url } = e.config; // axios의 error객체
+    const { status } = e.response;
+    Sentry.withScope((scope) => {
+      scope.setTag("api", "login"); // 태그 설정
+      scope.setLevel("warning"); // 레벨 설정
+      scope.setFingerprint([method, status, url]);
+      scope.captureException(new Error(e.response.data.message));
+    });
     return e.response.data.message;
   }
 }
@@ -33,6 +50,14 @@ export async function changePassword(data: object) {
     }
   } catch (e: any) {
     console.log(e);
+    const { method, url } = e.config; // axios의 error객체
+    const { status } = e.response;
+    Sentry.withScope((scope) => {
+      scope.setTag("api", "changePassword"); // 태그 설정
+      scope.setLevel("warning"); // 레벨 설정
+      scope.setFingerprint([method, status, url]);
+      scope.captureException(new Error(e.response.data.message));
+    });
     toast.error(e.response.data.message);
   }
 }
@@ -44,6 +69,14 @@ export async function getMyInfo() {
     return result;
   } catch (e: any) {
     console.log(e);
+    const { method, url } = e.config; // axios의 error객체
+    const { status } = e.response;
+    Sentry.withScope((scope) => {
+      scope.setTag("api", "getMyInfo"); // 태그 설정
+      scope.setLevel("warning"); // 레벨 설정
+      scope.setFingerprint([method, status, url]);
+      scope.captureException(new Error(e.response.data.message));
+    });
   }
 }
 
@@ -57,6 +90,14 @@ export async function changeMyInfo(data: object) {
     }
   } catch (e: any) {
     console.log(e);
+    const { method, url } = e.config; // axios의 error객체
+    const { status } = e.response;
+    Sentry.withScope((scope) => {
+      scope.setTag("api", "changeMyInfo"); // 태그 설정
+      scope.setLevel("warning"); // 레벨 설정
+      scope.setFingerprint([method, status, url]);
+      Sentry.captureException(new Error(e.response.data.message));
+    });
     toast.error(e.response.data.message);
   }
 }
@@ -80,6 +121,14 @@ export const changeImageURL = async (imageFile: File) => {
 
     return res.data.profileImageUrl;
   } catch (e: any) {
+    const { method, url } = e.config; // axios의 error객체
+    const { status } = e.response;
+    Sentry.withScope((scope) => {
+      scope.setTag("api", "changeImageURL"); // 태그 설정
+      scope.setLevel("warning"); // 레벨 설정
+      scope.setFingerprint([method, status, url]);
+      Sentry.captureException(new Error(e.response.data.message));
+    });
     console.log(e);
   }
 };
