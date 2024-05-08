@@ -7,6 +7,7 @@ import Header from "./components/Header/Header";
 import { DashBoardsType } from "./interface/DashboardType";
 import { useEffect, useState } from "react";
 import Loading from "./components/Loading/Loading";
+import RouteChangeTracker from "./RouteChangeTracker";
 
 export default function Layout() {
   const queryClient = useQueryClient();
@@ -52,6 +53,7 @@ export default function Layout() {
   }
   return (
     <LoginRedirector>
+      <RouteChangeTracker />
       <Sidebar
         dashboards={data?.dashboards || null}
         page={page}
