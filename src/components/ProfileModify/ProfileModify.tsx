@@ -1,16 +1,16 @@
 import style from "./ProfileModify.module.css";
-import BaseButton from "../BaseButton/BaseButton";
 import CommonInput from "../Input/CommonInput";
 import { useForm } from "react-hook-form";
 import ProfileImgInput from "../Input/ProfileImgInput";
 import { changeMyInfo } from "../../api/auth";
+import Button from "../Button/BaseButton/BaseButton";
 
 export default function ProfileModify() {
   const userString = localStorage.getItem("user") || "";
   const userObject = JSON.parse(userString);
   const userEmail = userObject.email;
   const userImg = userObject.profileImageUrl;
-  console.log(userObject.nickname="??");
+  console.log((userObject.nickname = "??"));
 
   const {
     register,
@@ -36,7 +36,7 @@ export default function ProfileModify() {
     try {
       const res = await changeMyInfo(profileData);
       userObject.nickname = data.nickName;
-      localStorage.setItem("user", JSON.stringify(userObject))
+      localStorage.setItem("user", JSON.stringify(userObject));
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +68,7 @@ export default function ProfileModify() {
           </div>
         </div>
         <div className={style.BtnContainer}>
-          <BaseButton text="저장" styleType="accept" type="submit" />
+          <Button.Accept type="submit">저장</Button.Accept>
         </div>
       </form>
     </div>

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import styles from "./DashBoardList.module.css";
-import CreateBoardButton from "../CreateBoardButton/CreateBoardButton";
+
 import DashBoardItem from "../DashBoardItem/DashBoardItem";
 import { getDashboardList } from "../../api/dashboard";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { DashBoardsType } from "../../interface/DashboardType";
-import ArrowButton from "../ArrowButton/ArrowButton";
+import ArrowButton from "../Button/ArrowButton/ArrowButton";
+import CreateBoardButton from "../Button/CreateBoardButton/CreateBoardButton";
 
 function DashBoardList() {
   const [params, setParams] = useState({

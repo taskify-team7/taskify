@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { createColumn } from "../../api/column";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import Button from "../Button/BaseButton/BaseButton";
 
 interface columnCreateModalProps {
   handleModalClose: () => void;
@@ -56,12 +57,12 @@ function ColumnCreateModal({
             errors={errors}
           />
           <div className={styles.modal_buttons}>
-            <button className={styles.a_button} disabled={isSubmitting}>
+            <Button.ModalColor type="submit" disabled={isSubmitting}>
               생성
-            </button>
-            <button className={styles.c_button} onClick={handleModalClose}>
+            </Button.ModalColor>
+            <Button.ModalCancel type="button" onClick={handleModalClose}>
               취소
-            </button>
+            </Button.ModalCancel>
           </div>
         </form>
       </CommonModalLayout>

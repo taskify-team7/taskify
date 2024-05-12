@@ -7,6 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { deleteColumn, updateColumn } from "../../api/column";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import Button from "../Button/BaseButton/BaseButton";
 
 interface ColumnManagementModalProps {
   columnId: number;
@@ -22,11 +23,7 @@ function ColumnManagementModal({
   handleModalClose,
 }: ColumnManagementModalProps) {
   const queryClient = useQueryClient();
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     mode: "onBlur",
     defaultValues: {
       title: title || "",
@@ -77,16 +74,12 @@ function ColumnManagementModal({
               삭제하기
             </button>
             <div>
-              <button className={styles.c_button} onClick={handleModalClose}>
+              <Button.ModalCancel type="button" onClick={handleModalClose}>
                 취소
-              </button>
-              <button
-                type="submit"
-                className={styles.a_button}
-                onClick={handleSubmit(onSubmit)}
-              >
+              </Button.ModalCancel>
+              <Button.ModalColor type="submit" onClick={handleSubmit(onSubmit)}>
                 변경
-              </button>
+              </Button.ModalColor>
             </div>
           </div>
         </form>

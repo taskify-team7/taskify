@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./CommentInput.module.css";
-import BaseButton from "../BaseButton/BaseButton";
 import { CommonInputType } from "../../interface/Input";
+import Button from "../Button/BaseButton/BaseButton";
 
 function CommentInput({ validation, errors }: CommonInputType) {
   const error = errors?.[validation?.name || ""];
@@ -13,7 +13,7 @@ function CommentInput({ validation, errors }: CommonInputType) {
         {errors && (
           <p className={styles.errorMesage}>{error?.message?.toString()}</p>
         )}
-        <BaseButton text="입력" styleType="refuse" />
+        <Button>입력</Button>
       </div>
     </>
   );

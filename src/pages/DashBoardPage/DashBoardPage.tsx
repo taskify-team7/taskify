@@ -11,6 +11,7 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import { getColumns } from "../../api/column";
 import { getCards, changeCard } from "../../api/card";
 import { ColumnType } from "../../interface/DashboardType";
+import CreateColumnButton from "../../components/Button/CreateColumnButton/CreateColumnButton";
 
 export default function DashBoardPage() {
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
@@ -116,9 +117,7 @@ export default function DashBoardPage() {
       >
         <div className={styles.container}>
           <Columns columns={columns} allCards={allCards} />
-          <button className={styles.newColumn} onClick={handleModalOpen}>
-            새로운 칼럼 추가하기 +
-          </button>
+          <CreateColumnButton onClick={handleModalOpen} />
         </div>
       </DragDropContext>
     </>

@@ -9,9 +9,9 @@ import UserInput from "../Input/UserInput";
 import { useForm } from "react-hook-form";
 import { createCard, updateCard } from "../../api/card";
 import { CardType } from "../../interface/DashboardType";
-import BaseButton from "../BaseButton/BaseButton";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import Button from "../Button/BaseButton/BaseButton";
 
 interface TodoCreateModalProps {
   handleModalClose: () => void;
@@ -152,17 +152,12 @@ function TodoCreateModal({
             value={cardData?.imageUrl}
           />
           <div className={styles.modal_buttons}>
-            <BaseButton
-              type="submit"
-              text={type ? "수정" : "생성"}
-              styleType={"accept"}
-            />
-            <BaseButton
-              type="button"
-              text="취소"
-              styleType={"refuse"}
-              onClick={handleModalClose}
-            />
+            <Button.ModalColor type="submit">
+              {type ? "수정" : "생성"}
+            </Button.ModalColor>
+            <Button.ModalCancel type="button" onClick={handleModalClose}>
+              취소
+            </Button.ModalCancel>
           </div>
         </form>
       </CommonModalLayout>

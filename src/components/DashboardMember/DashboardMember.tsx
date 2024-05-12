@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 import { DashBoardMember } from "../../interface/DashboardType";
 import { deleteMember, getMemberList } from "../../api/dashboard";
 import { useParams } from "react-router-dom";
-import BaseButton from "../BaseButton/BaseButton";
 import style from "./DashboardMember.module.css";
 import ProfileCircle from "../ProfileCircle/ProfileCircle";
 import { toast } from "react-toastify";
+import Button from "../Button/BaseButton/BaseButton";
 
 function DashboardMember() {
   const { id } = useParams();
@@ -95,11 +95,12 @@ function DashboardMember() {
               </div>
               <div className={style.profileName}>{member.nickname}</div>
             </div>
-            <BaseButton
-              styleType="delete"
-              text="삭제"
+            <Button.Delete
+              type="button"
               onClick={handleDeleteMember(member.id)}
-            />
+            >
+              삭제
+            </Button.Delete>
           </div>
         ))}
       </div>

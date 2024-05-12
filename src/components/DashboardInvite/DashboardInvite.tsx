@@ -6,10 +6,10 @@ import { useParams } from "react-router-dom";
 import { createPortal } from "react-dom";
 import { useModal } from "../../hooks/useModal";
 import InviteModal from "../Modal/InviteModal";
-import BaseButton from "../BaseButton/BaseButton";
 import style from "./DashboardInvite.module.css";
 import plus_white from "../../assets/plus_white.svg";
 import { toast } from "react-toastify";
+import Button from "../Button/BaseButton/BaseButton";
 
 function DashboardInvite() {
   const { id } = useParams();
@@ -112,11 +112,12 @@ function DashboardInvite() {
               <div className={style.profileContainer}>
                 <div className={style.profileEmail}>{member.invitee.email}</div>
               </div>
-              <BaseButton
-                styleType="delete"
-                text="취소"
+              <Button.Delete
+                type="button"
                 onClick={handleDeleteInvite(member.id)}
-              />
+              >
+                삭제
+              </Button.Delete>
             </div>
           ))}
         </div>

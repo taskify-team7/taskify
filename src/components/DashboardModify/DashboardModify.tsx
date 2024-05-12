@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import CommonInput from "../Input/CommonInput";
-import BaseButton from "../BaseButton/BaseButton";
 import ColorSelector from "../Modal/ColorSelector";
 import { DashBoardType } from "../../interface/DashboardType";
 import { useParams } from "react-router-dom";
@@ -8,6 +7,7 @@ import { updateDashboard } from "../../api/dashboard";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import style from "./DashboardModify.module.css";
 import { toast } from "react-toastify";
+import Button from "../Button/BaseButton/BaseButton";
 
 function DashboardModify() {
   const { id } = useParams();
@@ -84,7 +84,7 @@ function DashboardModify() {
             inputOnChange={handleTitle}
           />
           <div className={style.buttonContainer}>
-            <BaseButton text="변경" type="submit" styleType="accept" />
+            <Button.Accept type="submit">변경</Button.Accept>
           </div>
         </form>
       )}

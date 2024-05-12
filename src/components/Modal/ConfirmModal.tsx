@@ -2,10 +2,10 @@ import React from "react";
 import styles from "./ConfirmModal.module.css";
 import ModalContainer from "./ModalContainer";
 import CommonModalLayout from "./CommonModalLayout";
-import BaseButton from "../BaseButton/BaseButton";
 import { deleteCard } from "../../api/card";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import Button from "../Button/BaseButton/BaseButton";
 
 interface ConfirmModalProps {
   handleModalClose: () => void;
@@ -38,16 +38,12 @@ function ConfirmModal({
           할 일에 대한 모든 정보가 삭제 됩니다.
         </p>
         <div className={styles.modal_buttons}>
-          <BaseButton
-            onClick={handleDeleteCard}
-            text="삭제"
-            styleType="accept"
-          />
-          <BaseButton
-            onClick={handleModalClose}
-            text="취소"
-            styleType="refuse"
-          />
+          <Button.ModalColor type="button" onClick={handleDeleteCard}>
+            삭제
+          </Button.ModalColor>
+          <Button.ModalCancel type="button" onClick={handleModalClose}>
+            취소
+          </Button.ModalCancel>
         </div>
       </CommonModalLayout>
     </ModalContainer>

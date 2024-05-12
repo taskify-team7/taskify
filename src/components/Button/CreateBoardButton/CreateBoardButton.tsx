@@ -1,7 +1,7 @@
 import styles from "./CreateBoardButton.module.css";
-import { useModal } from "../../hooks/useModal";
 import { createPortal } from "react-dom";
-import DashBoardCreateModal from "../Modal/DashBoardCreateModal";
+import DashBoardCreateModal from "../../Modal/DashBoardCreateModal";
+import { useModal } from "../../../hooks/useModal";
 
 function CreateBoardButton() {
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();

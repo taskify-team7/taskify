@@ -4,6 +4,7 @@ import RevealSvg from "../../assets/reveal.svg";
 import HideSvg from "../../assets/hide.svg";
 import { useState } from "react";
 import { LoginFormValue } from "../../interface/auth";
+import Button from "../Button/BaseButton/BaseButton";
 
 export default function LoginForm({
   handleLogin,
@@ -73,9 +74,12 @@ export default function LoginForm({
           </span>
         )}
       </div>
-      <button type="submit" className={styles.submit} disabled={isSubmitting}>
+      <Button.Login
+        type="submit"
+        disabled={isSubmitting || !!errors.email || !!errors.password}
+      >
         로그인
-      </button>
+      </Button.Login>
     </form>
   );
 }

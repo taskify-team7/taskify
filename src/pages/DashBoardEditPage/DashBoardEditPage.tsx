@@ -4,10 +4,10 @@ import backArrow from "../../assets/backButton.svg";
 import DashboardModify from "../../components/DashboardModify/DashboardModify";
 import DashboardMember from "../../components/DashboardMember/DashboardMember";
 import DashboardInvite from "../../components/DashboardInvite/DashboardInvite";
-import BaseButton from "../../components/BaseButton/BaseButton";
 import { deleteDashboard } from "../../api/dashboard";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import DeleteBoardButton from "../../components/Button/DeleteBoardButton/DeleteBoardButton";
 
 function DashBoardEditPage() {
   const navigate = useNavigate();
@@ -48,9 +48,7 @@ function DashBoardEditPage() {
       <DashboardModify />
       <DashboardMember />
       <DashboardInvite />
-      <div className={style.dashboardDeleteBtn} onClick={handleDashboardDelete}>
-        <BaseButton styleType="dashboardDelete" text="대쉬보드 삭제하기" />
-      </div>
+      <DeleteBoardButton onClick={handleDashboardDelete} />
     </div>
   );
 }
