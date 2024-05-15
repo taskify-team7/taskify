@@ -130,3 +130,16 @@ export interface UserLoginResponse {
   };
   accessToken: string;
 }
+
+export interface CommentnResponse {
+  id: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  cardId: number;
+  author: {
+    profileImageUrl: string;
+    nickname: string;
+    id: number;
+  };
+}

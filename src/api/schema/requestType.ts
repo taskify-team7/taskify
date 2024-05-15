@@ -45,3 +45,10 @@ export interface CreateColumnsRequestbody {
   title: string;
   dashboardId: number;
 }
+
+export interface CreateCommentRequestbody {
+  content: string;
+  cardId: number;
+  columnId: number;
+  dashboardId: number;
+}

@@ -1,5 +1,9 @@
 import client from "./axios";
-import * as Sentry from "@sentry/react";
+import baseHttpClient from "./baseHttpClient";
+import { CreateCommentRequestbody } from "./schema/requestType";
+import { CommentnResponse } from "./schema/responseType";
+
+const httpClient = baseHttpClient();
 
 export const createComment = async (
   content: string,
@@ -7,26 +11,16 @@ export const createComment = async (
   columnId: number,
   dashboardId: number
 ) => {
-  try {
-    const result = await client.post("comments", {
-      content: content,
-      cardId: cardId,
-      columnId: columnId,
-      dashboardId: dashboardId,
-    });
-    return result.data;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
+  const response = await httpClient.post<
+    CommentnResponse,
+    CreateCommentRequestbody
+  >("comments", {
+    content: content,
+    cardId: cardId,
+    columnId: columnId,
+    dashboardId: dashboardId,
+  });
+  return response;
 };
 
 export const getComments = async (
@@ -48,41 +42,18 @@ export const getComments = async (
 };
 
 export const deleteComment = async (commentId: number) => {
-  try {
-    const result = await client.delete(`/comments/${commentId}`);
+  const response = await httpClient.delete(`/comments/${commentId}`);
 
-    return result;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
+  return response;
 };
 
 export const updateComment = async (commentId: number, content: string) => {
-  try {
-    const result = await client.put(`/comments/${commentId}`, {
+  const response = await httpClient.put<CommentnResponse, { content: string }>(
+    `/comments/${commentId}`,
+    {
       content: content,
-    });
+    }
+  );
 
-    return result.data;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
+  return response;
 };

@@ -43,15 +43,16 @@ function CommentBox({ comment, cardId }: CommentBoxType) {
 
   const handleDeleteComment = async () => {
     const response = await deleteComment(comment.id);
-    console.log(response);
-    if (typeof response === "string") {
+
+    if (typeof response === "string" && !(response === "")) {
       toast.error(response);
-    } else {
-      toast.success("댓글이 삭제되었습니다.");
-      await commentQueryClient.invalidateQueries({
-        queryKey: ["comments", cardId],
-      });
+      return 0;
     }
+
+    toast.success("댓글이 삭제되었습니다.");
+    await commentQueryClient.invalidateQueries({
+      queryKey: ["comments", cardId],
+    });
   };
 
   const handleEditComment = async (e: any) => {

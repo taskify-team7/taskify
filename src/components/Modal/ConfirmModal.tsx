@@ -23,6 +23,7 @@ function ConfirmModal({
     const response = await deleteCard(cardId);
     if (typeof response === "string" && !(response === "")) {
       toast.error(response);
+      return 0;
     }
     toast.success("할 일이 삭제되었습니다.");
     await queryClient.invalidateQueries({
