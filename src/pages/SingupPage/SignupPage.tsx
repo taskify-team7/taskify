@@ -5,10 +5,12 @@ import SignupForm from "../../components/AuthPage/SignupForm";
 import { signUp } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { SignUpRequestbody } from "../../api/schema/requestType";
 
 export default function SignupPage() {
   const navigate = useNavigate();
-  async function handleSignup(data: object) {
+
+  async function handleSignup(data: SignUpRequestbody) {
     const response = await signUp(data);
     if (typeof response === "string") {
       toast.error(response);

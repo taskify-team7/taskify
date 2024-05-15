@@ -1,20 +1,21 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import styles from "./Forms.module.css";
 import RevealSvg from "../../assets/reveal.svg";
 import HideSvg from "../../assets/hide.svg";
 import { useState } from "react";
+import { SignUpRequestbody } from "../../api/schema/requestType";
 
 export default function LoginForm({
   handleSignup,
 }: {
-  handleSignup: (arg0: object) => void;
+  handleSignup: SubmitHandler<SignUpRequestbody>;
 }) {
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
     getValues,
-  } = useForm({ mode: "onBlur" });
+  } = useForm<SignUpRequestbody>({ mode: "onBlur" });
   const [revealPw, setRevealPw] = useState(false);
   const [revealConfirmPw, setRevealConfirmPw] = useState(false);
 

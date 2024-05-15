@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { logIn } from "../api/auth";
 import { createContext, useContext } from "react";
+import { LoginRequestbody } from "../api/schema/requestType";
 
 const AuthContext = createContext<{
   getUser: () => any;
@@ -26,7 +27,7 @@ export default function AuthProvider({
     return parsed;
   }
 
-  async function contextLogin(data: { email: string; password: string }) {
+  async function contextLogin(data: LoginRequestbody) {
     const result = await logIn(data);
     if (typeof result === "string") {
       toast.error(result);

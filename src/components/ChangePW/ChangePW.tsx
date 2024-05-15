@@ -3,6 +3,7 @@ import style from "./ChangePW.module.css";
 import { useForm } from "react-hook-form";
 import { changePassword, logIn } from "../../api/auth";
 import Button from "../Button/BaseButton/BaseButton";
+import { toast } from "react-toastify";
 
 interface FormValues {
   password: string;
@@ -18,6 +19,7 @@ export default function ChangePW() {
     formState: { errors },
     setError,
     clearErrors,
+    setValue,
   } = useForm<FormValues>({
     mode: "onBlur",
     defaultValues: {
@@ -55,12 +57,18 @@ export default function ChangePW() {
       newPassword: data.newPassword,
     };
 
-    try {
-      await logIn(LoginData);
-      await changePassword(submissionData);
-    } catch (error) {
-      console.log(error.response.data.message);
+    const loginRes = await logIn(LoginData);
+
+    if (typeof loginRes === "string") {
+      toast.error("현재 비밀번호가 일치하지 않습니다.");
+      return 0;
     }
+
+    await changePassword(submissionData);
+    toast.success("비밀번호가 변경되었습니다.");
+    setValue("password", "");
+    setValue("newPassword", "");
+    setValue("newPasswordConfirmation", "");
   };
 
   return (

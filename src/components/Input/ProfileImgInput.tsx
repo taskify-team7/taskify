@@ -10,7 +10,7 @@ function ProfileImgInput({
   initialImg,
 }: ProfileImgInputType) {
   const imageInput = useRef<HTMLInputElement | null>(null);
-  const [pickedImage, setPickedImage] = useState<any>(null);
+  const [pickedImage, setPickedImage] = useState<any>(initialImg || null);
 
   const handleImageInput = () => {
     imageInput.current?.click();
@@ -28,7 +28,12 @@ function ProfileImgInput({
       setPickedImage(fileReader.result);
     };
     const image = await changeImageURL(file);
-    setValue("imageUrl", image);
+    setValue("profileImageUrl", image);
+  };
+
+  const delteImage = () => {
+    setPickedImage(undefined);
+    setValue("profileImageUrl", undefined);
   };
 
   return (
@@ -48,18 +53,18 @@ function ProfileImgInput({
         />
         {pickedImage ? (
           <>
-            <div className={style.profileImgCover} onClick={handleImageInput}>
-              <img
-                className={style.penImg}
-                src="/Icons/edit_pen.svg"
-                alt="edit"
-              />
-            </div>
             <img
               className={style.profilePickImg}
               src={pickedImage}
               alt="add_Image"
+              onClick={handleImageInput}
             />
+            <button
+              onClick={delteImage}
+              className={style.content_delete_button}
+            >
+              <img src="/Icons/modal_close.svg" alt="delete_Image" />
+            </button>
           </>
         ) : (
           <>
@@ -68,11 +73,7 @@ function ProfileImgInput({
               className={style.profileImgBtn}
               onClick={handleImageInput}
             >
-              <img
-                className={initialImg ? style.profilePickImg : ""}
-                src={initialImg ? initialImg : "/Icons/add_icon.svg"}
-                alt="add_Image"
-              />
+              <img src="/Icons/add_icon.svg" alt="add_Image" />
             </button>
           </>
         )}
@@ -80,6 +81,5 @@ function ProfileImgInput({
     </div>
   );
 }
-// "/Icons/add_icon.svg"
 
 export default ProfileImgInput;
