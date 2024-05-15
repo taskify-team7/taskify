@@ -21,15 +21,14 @@ function ConfirmModal({
   const queryClient = useQueryClient();
   const handleDeleteCard = async () => {
     const response = await deleteCard(cardId);
-    if (typeof response === "string") {
+    if (typeof response === "string" && !(response === "")) {
       toast.error(response);
-    } else {
-      toast.success("할 일이 삭제되었습니다.");
-      await queryClient.invalidateQueries({
-        queryKey: ["column", columnId + ""],
-      });
-      handleModalClose();
     }
+    toast.success("할 일이 삭제되었습니다.");
+    await queryClient.invalidateQueries({
+      queryKey: ["column", columnId + ""],
+    });
+    handleModalClose();
   };
   return (
     <ModalContainer handleModalClose={handleModalClose}>

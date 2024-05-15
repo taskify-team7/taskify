@@ -19,3 +19,24 @@ export interface ChangeMyInfoRequestbody {
   nickname: string;
   profileImageUrl?: string;
 }
+
+export interface ChangeCardRequestbody {
+  columnId: number;
+  assigneeUserId: number;
+  title: string;
+  description: string;
+  dueDate: string;
+  tags?: string[];
+  imageUrl?: string;
+}
+
+export interface CreateCardRequestbody {
+  assigneeUserId: number;
+  dashboardId: number;
+  columnId: number;
+  title: string;
+  description: string;
+  dueDate: string;
+  tags: string[];
+  imageUrl?: string;
+}

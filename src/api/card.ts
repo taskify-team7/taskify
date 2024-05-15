@@ -1,5 +1,10 @@
 import client from "./axios";
-import * as Sentry from "@sentry/react";
+import baseHttpClient from "./baseHttpClient";
+import { CardResponse } from "./schema/responseType";
+import {
+  ChangeCardRequestbody,
+  CreateCardRequestbody,
+} from "./schema/requestType";
 
 interface CardDataType {
   assigneeUserId: string;
@@ -9,6 +14,8 @@ interface CardDataType {
   tags: string[];
   imageUrl?: string;
 }
+
+const httpClient = baseHttpClient();
 
 export const getCards = async (id: string) => {
   try {
@@ -21,22 +28,12 @@ export const getCards = async (id: string) => {
   }
 };
 
-export const changeCard = async (id: string, body: object) => {
-  try {
-    const res = await client.put(`cards/${id}`, body);
-    return res;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
+export const changeCard = async (id: string, body: ChangeCardRequestbody) => {
+  const response = await httpClient.put<CardResponse, ChangeCardRequestbody>(
+    `cards/${id}`,
+    body
+  );
+  return response;
 };
 
 export const createCard = async (
@@ -44,55 +41,32 @@ export const createCard = async (
   dashboardId: number,
   columnId: number
 ) => {
-  try {
-    const requestData: any = {
-      assigneeUserId: parseInt(cardData.assigneeUserId),
-      dashboardId: dashboardId,
-      columnId: columnId,
-      title: cardData.title,
-      description: cardData.description,
-      dueDate: cardData.dueDate,
-      tags: [...cardData.tags],
-    };
+  const requestData: CreateCardRequestbody = {
+    assigneeUserId: parseInt(cardData.assigneeUserId),
+    dashboardId: dashboardId,
+    columnId: columnId,
+    title: cardData.title,
+    description: cardData.description,
+    dueDate: cardData.dueDate,
+    tags: [...cardData.tags],
+  };
 
-    // imageUrl 값이 존재하고 string 타입인 경우에만 imageUrl 속성을 추가합니다.
-    if (cardData.imageUrl && typeof cardData.imageUrl === "string") {
-      requestData.imageUrl = cardData.imageUrl;
-    }
-    const res = await client.post(`cards/`, requestData);
-
-    return res;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
+  // imageUrl 값이 존재하고 string 타입인 경우에만 imageUrl 속성을 추가합니다.
+  if (cardData.imageUrl && typeof cardData.imageUrl === "string") {
+    requestData.imageUrl = cardData.imageUrl;
   }
+  const response = await httpClient.post<CardResponse, CreateCardRequestbody>(
+    `cards/`,
+    requestData
+  );
+
+  return response;
 };
 
 export const deleteCard = async (cardId: number) => {
-  try {
-    const res = await client.delete(`cards/${cardId}`);
+  const response = await httpClient.delete(`cards/${cardId}`);
 
-    return res;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
+  return response;
 };
 
 export const updateCard = async (
@@ -100,34 +74,24 @@ export const updateCard = async (
   columnId: number,
   cardId: number
 ) => {
-  try {
-    const requestData: any = {
-      assigneeUserId: parseInt(cardData.assigneeUserId),
-      columnId: columnId,
-      title: cardData.title,
-      description: cardData.description,
-      dueDate: cardData.dueDate,
-      tags: [...cardData.tags],
-    };
-    // imageUrl 값이 존재하고 string 타입인 경우에만 imageUrl 속성을 추가합니다.
-    if (cardData.imageUrl && typeof cardData.imageUrl === "string") {
-      requestData.imageUrl = cardData.imageUrl;
-    }
-    const res = await client.put(`cards/${cardId}`, {
-      ...requestData,
-    });
-
-    return res;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
+  const requestData: ChangeCardRequestbody = {
+    assigneeUserId: parseInt(cardData.assigneeUserId),
+    columnId: columnId,
+    title: cardData.title,
+    description: cardData.description,
+    dueDate: cardData.dueDate,
+    tags: [...cardData.tags],
+  };
+  // imageUrl 값이 존재하고 string 타입인 경우에만 imageUrl 속성을 추가합니다.
+  if (cardData.imageUrl && typeof cardData.imageUrl === "string") {
+    requestData.imageUrl = cardData.imageUrl;
   }
+  const response = await client.put<CardResponse, ChangeCardRequestbody>(
+    `cards/${cardId}`,
+    {
+      ...requestData,
+    }
+  );
+
+  return response;
 };
