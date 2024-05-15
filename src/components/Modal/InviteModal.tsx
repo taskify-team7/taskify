@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { dashboardInvite } from "../../api/dashboard";
 import { toast } from "react-toastify";
 import Button from "../Button/BaseButton/BaseButton";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface InviteModalProps {
   handleModalClose: () => void;
@@ -19,6 +20,8 @@ function InviteModal({ handleModalClose, dashboardId }: InviteModalProps) {
     formState: { errors },
     handleSubmit,
   } = useForm({ mode: "onBlur" });
+
+  const queryClient = useQueryClient();
 
   const emailValidation = register("email", {
     required: {
@@ -34,6 +37,7 @@ function InviteModal({ handleModalClose, dashboardId }: InviteModalProps) {
     } else {
       toast.success("초대가 완료되었습니다.");
       handleModalClose();
+      queryClient.invalidateQueries({ queryKey: ["inviteList"] });
     }
   };
 

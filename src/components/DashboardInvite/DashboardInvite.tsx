@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { InviteDataType } from "../../interface/DashboardType";
 import { deleteInvite, getDashboardInvite } from "../../api/dashboard";
 import { useParams } from "react-router-dom";
@@ -15,11 +15,12 @@ function DashboardInvite() {
   const { id } = useParams();
   const [page, setPage] = useState<number>(1);
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
+  const queryClient = useQueryClient();
 
   const size = 5;
 
   const { data } = useQuery({
-    queryKey: ["inviteList", { id, page, size }],
+    queryKey: ["inviteList"],
     queryFn: () => {
       if (!id) {
         return Promise.resolve([]);
@@ -58,11 +59,12 @@ function DashboardInvite() {
 
   const handleDeleteInvite = (inviteId: number) => async () => {
     const response = await deleteInvite(Number(id), inviteId);
-    if (typeof response === "string") {
+    if (typeof response === "string" && !(response === "")) {
       toast.error(response);
-    } else {
-      toast.success("초대가 취소되었습니다.");
+      return 0;
     }
+    toast.success("초대가 취소되었습니다.");
+    queryClient.invalidateQueries({ queryKey: ["inviteList"] });
   };
 
   return (
