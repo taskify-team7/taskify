@@ -52,3 +52,8 @@ export interface CreateCommentRequestbody {
   columnId: number;
   dashboardId: number;
 }
+
+export interface CreateDashBoardRequestbody {
+  title: string;
+  color: string;
+}

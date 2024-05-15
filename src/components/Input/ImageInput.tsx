@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 import styles from "./ImageInput.module.css";
 import { ImageInputType } from "../../interface/Input";
-import { changeColumnImageURL } from "../../api/dashboard";
+import { changeColumnImageURL } from "../../api/card";
 
 function ImageInput({
   label,

@@ -95,3 +95,19 @@ export const updateCard = async (
 
   return response;
 };
+
+// 카드 URL 생성 API
+export const changeColumnImageURL = async (
+  imageFile: File,
+  columnId: number
+) => {
+  const formData = new FormData();
+  formData.append("image", imageFile);
+
+  const response = await httpClient.post<{ imageUrl: string }, {}>(
+    `columns/${columnId}/card-image`,
+    formData,
+    "multipart/form-data"
+  );
+  return response.imageUrl;
+};

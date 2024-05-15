@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./InviteItem.module.css";
 import { UserType } from "../../interface/DashboardType";
 import { updateInvitations } from "../../api/dashboard";
+import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface InviteItemProps {
   dashboarData: {
@@ -17,8 +19,16 @@ function InviteItem({
   inviterData,
   invitationId,
 }: InviteItemProps) {
+  const queryClient = useQueryClient();
   const invitationsHandle = async (inviteAccepted: boolean) => {
-    const res = await updateInvitations(invitationId, inviteAccepted);
+    await updateInvitations(invitationId, inviteAccepted);
+
+    if (inviteAccepted) {
+      toast.success("수락 했습니다");
+    } else {
+      toast.success("거절 했습니다");
+    }
+    queryClient.invalidateQueries({ queryKey: ["invite"] });
   };
 
   return (

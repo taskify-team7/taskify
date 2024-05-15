@@ -53,11 +53,11 @@ function DashboardMember() {
 
   const handleDeleteMember = (id: number) => async () => {
     const response = await deleteMember(id);
-    if (typeof response === "string") {
+    if (typeof response === "string" && !(response === "")) {
       toast.error(response);
-    } else {
-      toast.success("멤버가 삭제되었습니다.");
+      return 0;
     }
+    toast.success("멤버가 삭제되었습니다.");
   };
 
   return (

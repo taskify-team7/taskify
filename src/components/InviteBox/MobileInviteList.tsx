@@ -2,14 +2,25 @@ import React from "react";
 import styles from "./MobileInviteList.module.css";
 import { InviteDataType } from "../../interface/DashboardType";
 import { updateInvitations } from "../../api/dashboard";
+import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
 
 function MobileInviteList({ inviteData }: { inviteData: InviteDataType[] }) {
+  const queryClient = useQueryClient();
+
   const invitationsHandle = async (
     invitationId: number,
     inviteAccepted: boolean
   ) => {
-    const res = await updateInvitations(invitationId, inviteAccepted);
+    await updateInvitations(invitationId, inviteAccepted);
+    if (inviteAccepted) {
+      toast.success("수락 했습니다");
+    } else {
+      toast.success("거절 했습니다");
+    }
+    queryClient.invalidateQueries({ queryKey: ["invite"] });
   };
+
   return (
     <div className={styles.inviteList}>
       {inviteData.map((invite) => (

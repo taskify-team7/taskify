@@ -110,6 +110,16 @@ export interface DashboardListResponse {
   cursorId: any;
 }
 
+export interface DashboardResponse {
+  id: number;
+  title: string;
+  color: string;
+  userId: number;
+  createdAt: string;
+  updatedAt: string;
+  createdByMe: boolean;
+}
+
 export interface UserInfoResponse {
   id: number;
   email: string;
@@ -142,4 +152,26 @@ export interface CommentnResponse {
     nickname: string;
     id: number;
   };
+}
+
+export interface Invutations {
+  id: number;
+  inviter: {
+    nickname: string;
+    email: string;
+    id: number;
+  };
+  teamId: string;
+  dashboard: {
+    title: string;
+    id: number;
+  };
+  invitee: {
+    nickname: string;
+    email: string;
+    id: number;
+  };
+  inviteAccepted: true;
+  createdAt: string;
+  updatedAt: string;
 }

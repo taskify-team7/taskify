@@ -3,7 +3,7 @@ import styles from "./ColorSelector.module.css";
 const colors = ["#7AC555", "#760DDE", "#FFA500", "#76A5EA", "#E876EA"];
 
 interface ColorSelectorProps {
-  selectedColor: string | null;
+  selectedColor: string | undefined;
   selectColor: (color: string) => void;
 }
 

@@ -19,9 +19,11 @@ function DashBoardCreateModal({ handleModalClose }: DashBoardCreateModalProps) {
   const queryClient = useQueryClient();
   const [apiBodyValue, setApiBodyValue] = useState({
     title: "",
-    color: "",
+    color: "#7AC555",
   });
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | undefined>(
+    "#7AC555"
+  );
 
   const { mutate } = useMutation({
     mutationFn: () => createDashboard(apiBodyValue.title, apiBodyValue.color),
@@ -39,7 +41,7 @@ function DashBoardCreateModal({ handleModalClose }: DashBoardCreateModalProps) {
       toast.success("대시보드가 생성되었습니다.");
       setApiBodyValue({
         title: "",
-        color: "",
+        color: "#7AC555",
       });
 
       handleModalClose();

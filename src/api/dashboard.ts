@@ -1,5 +1,7 @@
 import client from "./axios";
-import * as Sentry from "@sentry/react";
+import baseHttpClient from "./baseHttpClient";
+import { DashboardResponse, Invutations } from "./schema/responseType";
+import { CreateDashBoardRequestbody } from "./schema/requestType";
 
 interface ApiPrameterType {
   navigationMethod: string;
@@ -7,6 +9,8 @@ interface ApiPrameterType {
   page: number | null;
   size: number | null;
 }
+
+const httpClient = baseHttpClient();
 
 export const getDashboardList = async (params: ApiPrameterType) => {
   try {
@@ -27,25 +31,15 @@ export const getDashboardList = async (params: ApiPrameterType) => {
 
 // 대시보드 생성 API
 export const createDashboard = async (title: string, color: string) => {
-  try {
-    const result = await client.post("dashboards", {
-      title: title,
-      color: color,
-    });
+  const response = await httpClient.post<
+    DashboardResponse,
+    CreateDashBoardRequestbody
+  >("dashboards", {
+    title: title,
+    color: color,
+  });
 
-    return result.data;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
+  return response;
 };
 
 // 대시보드 수정 API
@@ -54,56 +48,27 @@ export const updateDashboard = async (
   color: string,
   dashboardId: number
 ) => {
-  try {
-    const { data } = await client.put(`dashboards/${dashboardId}`, {
-      title: title,
-      color: color,
-    });
-    return data;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
+  const response = await httpClient.put<
+    DashboardResponse,
+    CreateDashBoardRequestbody
+  >(`dashboards/${dashboardId}`, {
+    title: title,
+    color: color,
+  });
+  return response;
 };
 
 // 대시보드 삭제 API
 export const deleteDashboard = async (dashboardId: number) => {
-  try {
-    const response = await client.delete(`dashboards/${dashboardId}`);
+  const response = await httpClient.delete(`dashboards/${dashboardId}`);
 
-    const result = response.data;
-
-    return result;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
+  return response;
 };
 
 // 대시보드 정보를 가져오는 API
 export const getDashboard = async (id: string) => {
-  try {
-    const { data } = await client.get(`dashboards/${id}`);
-    return data;
-  } catch (e: any) {
-    console.log(e);
-  }
+  const response = await httpClient.get<DashboardResponse>(`dashboards/${id}`);
+  return response;
 };
 
 export const getMembers = async (id: string) => {
@@ -130,22 +95,9 @@ export const getMemberList = async (
 };
 
 export const deleteMember = async (id: number) => {
-  try {
-    const response = await client.delete(`/members/${id}`);
+  const response = await httpClient.delete(`/members/${id}`);
 
-    return response;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
+  return response;
 };
 
 // 초대를 받은 리스트 가져오는 API와 수락 및 거절하는 API
@@ -166,23 +118,13 @@ export const updateInvitations = async (
   invitationId: number,
   inviteAccepted: boolean
 ) => {
-  try {
-    const { data } = await client.put(`invitations/${invitationId}`, {
-      inviteAccepted: inviteAccepted,
-    });
-    return data;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
+  const response = await httpClient.put<
+    Invutations,
+    { inviteAccepted: boolean }
+  >(`invitations/${invitationId}`, {
+    inviteAccepted: inviteAccepted,
+  });
+  return response;
 };
 
 // 자신의 대시보드에 초대한 멤버 리스트 불러오는 API
@@ -199,63 +141,20 @@ export const getDashboardInvite = async (
 
 // 자신의 대시보드에 초대한 요청을 취소하는 취소하는 API
 export const deleteInvite = async (dashboardId: number, id: number) => {
-  try {
-    const response = await client.delete(
-      `dashboards/${dashboardId}/invitations/${id}`
-    );
-    return response;
-  } catch (e: any) {
-    console.log(e);
-    return e.response.data.message;
-  }
+  const response = await httpClient.delete(
+    `dashboards/${dashboardId}/invitations/${id}`
+  );
+  return response;
 };
 
 // 자신의 대시보드에 멤버 초대 요청 API
 export const dashboardInvite = async (email: string, dashboardId: number) => {
-  try {
-    const result = await client.post(`dashboards/${dashboardId}/invitations`, {
+  const response = await httpClient.post<Invutations, { email: string }>(
+    `dashboards/${dashboardId}/invitations`,
+    {
       email: email,
-    });
+    }
+  );
 
-    return result.data;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
-};
-
-// 프로필 이미지 URL 생성 API
-export const changeColumnImageURL = async (
-  imageFile: File,
-  columnId: number
-) => {
-  const formData = new FormData();
-  formData.append("image", imageFile);
-
-  try {
-    const res = await client.post(`columns/${columnId}/card-image`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return res.data.imageUrl;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-  }
+  return response;
 };

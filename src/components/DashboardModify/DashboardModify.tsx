@@ -16,8 +16,9 @@ function DashboardModify() {
     "dashboard",
     id,
   ]);
-
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | undefined>(
+    dashboardData?.color
+  );
   const [title, setTitle] = useState("");
 
   const { mutate } = useMutation({
@@ -63,6 +64,7 @@ function DashboardModify() {
       } else {
         toast.error("색상을 선택해주세요.");
       }
+      setTitle("");
     } catch (error) {
       console.log(error);
     }
