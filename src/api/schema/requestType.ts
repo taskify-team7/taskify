@@ -40,3 +40,8 @@ export interface CreateCardRequestbody {
   tags: string[];
   imageUrl?: string;
 }
+
+export interface CreateColumnsRequestbody {
+  title: string;
+  dashboardId: number;
+}

@@ -12,6 +12,19 @@ export interface ColumnListResponse {
   ];
 }
 
+export interface ColumnResponse {
+  result: string;
+  data: [
+    {
+      id: number;
+      title: string;
+      teamId: string;
+      createdAt: string;
+      updatedAt: string;
+    }
+  ];
+}
+
 export interface CardListResponse {
   cards: [
     {

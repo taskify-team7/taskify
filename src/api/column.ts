@@ -1,26 +1,20 @@
 import client from "./axios";
-import * as Sentry from "@sentry/react";
+import baseHttpClient from "./baseHttpClient";
+import { CreateColumnsRequestbody } from "./schema/requestType";
+import { ColumnListResponse, ColumnResponse } from "./schema/responseType";
+
+const httpClient = baseHttpClient();
 
 export const createColumn = async (title: string, dashboardId: number) => {
-  try {
-    const result = await client.post(`columns`, {
-      title: title,
-      dashboardId: dashboardId,
-    });
+  const response = await httpClient.post<
+    ColumnListResponse,
+    CreateColumnsRequestbody
+  >(`columns`, {
+    title: title,
+    dashboardId: dashboardId,
+  });
 
-    return result.data;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
+  return response;
 };
 
 export const getColumns = async (id: string) => {
@@ -35,41 +29,18 @@ export const getColumns = async (id: string) => {
 };
 
 export const deleteColumn = async (columnId: number) => {
-  try {
-    const { data } = await client.delete(`columns/${columnId}`);
+  const response = await httpClient.delete(`columns/${columnId}`);
 
-    return data;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
+  return response;
 };
 
 export const updateColumn = async (columnId: number, newTitle: string) => {
-  try {
-    const result = await client.put(`columns/${columnId}`, {
+  const response = await httpClient.put<ColumnResponse, { title: string }>(
+    `columns/${columnId}`,
+    {
       title: newTitle,
-    });
+    }
+  );
 
-    return result.data;
-  } catch (e: any) {
-    console.log(e);
-    const { method, url } = e.config; // axios의 error객체
-    const { status } = e.response;
-    Sentry.withScope((scope) => {
-      scope.setTag("api", "signUp"); // 태그 설정
-      scope.setLevel("warning"); // 레벨 설정
-      scope.setFingerprint([method, status, url]);
-      Sentry.captureException(new Error(e.response.data.message));
-    });
-    return e.response.data.message;
-  }
+  return response;
 };
