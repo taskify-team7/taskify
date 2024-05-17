@@ -1,6 +1,12 @@
-import client from "./axios";
 import baseHttpClient from "./baseHttpClient";
-import { DashboardResponse, Invutations } from "./schema/responseType";
+import {
+  DashboardListResponse,
+  DashboardResponse,
+  Invutations,
+  MemberListResponse,
+  MyDashboardInvitationsResponse,
+  MyInvitationsResponse,
+} from "./schema/responseType";
 import { CreateDashBoardRequestbody } from "./schema/requestType";
 
 interface ApiPrameterType {
@@ -13,20 +19,17 @@ interface ApiPrameterType {
 const httpClient = baseHttpClient();
 
 export const getDashboardList = async (params: ApiPrameterType) => {
-  try {
-    const { data } = await client.get("dashboards", {
-      params: {
-        navigationMethod: params.navigationMethod,
-        cursorId: params.cursorId,
-        page: params.page,
-        size: params.size,
-      },
-    });
+  const response = await httpClient.get<DashboardListResponse, ApiPrameterType>(
+    "dashboards",
+    {
+      navigationMethod: params.navigationMethod,
+      cursorId: params.cursorId,
+      page: params.page,
+      size: params.size,
+    }
+  );
 
-    return data;
-  } catch (e: any) {
-    console.log(e);
-  }
+  return response;
 };
 
 // 대시보드 생성 API
@@ -67,19 +70,18 @@ export const deleteDashboard = async (dashboardId: number) => {
 
 // 대시보드 정보를 가져오는 API
 export const getDashboard = async (id: string) => {
-  const response = await httpClient.get<DashboardResponse>(`dashboards/${id}`);
+  const response = await httpClient.get<DashboardResponse, any>(
+    `dashboards/${id}`
+  );
   return response;
 };
 
 export const getMembers = async (id: string) => {
-  try {
-    const { data } = await client.get("members", {
-      params: { dashboardId: id },
-    });
-    return data.members;
-  } catch (e: any) {
-    console.log(e);
-  }
+  const response = await httpClient.get<
+    MemberListResponse,
+    { dashboardId: string }
+  >("members", { dashboardId: id });
+  return response.members;
 };
 
 // 대시보드 멤버 목록 조회 및 삭제 기능
@@ -88,10 +90,10 @@ export const getMemberList = async (
   page?: number | null,
   size?: number | null
 ) => {
-  const { data } = await client.get("members", {
+  const response = await httpClient.get<MemberListResponse, {}>("members", {
     params: { dashboardId: id, page, size },
   });
-  return data;
+  return response;
 };
 
 export const deleteMember = async (id: number) => {
@@ -102,16 +104,13 @@ export const deleteMember = async (id: number) => {
 
 // 초대를 받은 리스트 가져오는 API와 수락 및 거절하는 API
 export const getInviteList = async () => {
-  try {
-    const { data } = await client.get("invitations", {
-      params: {
-        size: 6,
-      },
-    });
-    return data;
-  } catch (e: any) {
-    console.log(e);
-  }
+  const response = await httpClient.get<
+    MyInvitationsResponse,
+    { size: number }
+  >("invitations", {
+    size: 6,
+  });
+  return response;
 };
 
 export const updateInvitations = async (
@@ -133,10 +132,11 @@ export const getDashboardInvite = async (
   page: number = 1,
   size: number = 10
 ) => {
-  const { data } = await client.get(`dashboards/${dashboardId}/invitations`, {
-    params: { page, size },
-  });
-  return data;
+  const response = await httpClient.get<
+    MyDashboardInvitationsResponse,
+    { page: number; size: number }
+  >(`dashboards/${dashboardId}/invitations`, { page, size });
+  return response;
 };
 
 // 자신의 대시보드에 초대한 요청을 취소하는 취소하는 API

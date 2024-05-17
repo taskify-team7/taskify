@@ -5,9 +5,9 @@ export const baseHttpClient = () => {
   // T: response data type
   // P: API 통신시 필요한 Body data type
 
-  async function get<T>(url: string) {
+  async function get<T, P>(url: string, params?: P) {
     try {
-      const response = await client.get<T>(url);
+      const response = await client.get<T>(url, { params });
       return response.data;
     } catch (e) {
       const { method, url } = e.config; // axios의 error객체

@@ -34,7 +34,7 @@ export async function changePassword(data: ChangePasswordRequestbody) {
 }
 
 export async function getMyInfo() {
-  const response = await httpClient.get<UserInfoResponse>("/users/me");
+  const response = await httpClient.get<UserInfoResponse, any>("/users/me");
   return response;
 }
 

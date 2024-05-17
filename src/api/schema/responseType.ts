@@ -175,3 +175,75 @@ export interface Invutations {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface CommentListResponse {
+  cursorId: number;
+  comments: [
+    {
+      id: number;
+      content: string;
+      createdAt: string;
+      updatedAt: string;
+      cardId: number;
+      author: {
+        profileImageUrl: string;
+        nickname: string;
+        id: number;
+      };
+    }
+  ];
+}
+
+export interface MyInvitationsResponse {
+  cursorId: number;
+  invitations: [
+    {
+      id: number;
+      inviter: {
+        nickname: string;
+        email: string;
+        id: number;
+      };
+      teamId: string;
+      dashboard: {
+        title: string;
+        id: number;
+      };
+      invitee: {
+        nickname: string;
+        email: string;
+        id: number;
+      };
+      inviteAccepted: true;
+      createdAt: string;
+      updatedAt: string;
+    }
+  ];
+}
+
+export interface MyDashboardInvitationsResponse {
+  totalCount: number;
+  invitations: [
+    {
+      id: number;
+      inviter: {
+        nickname: string;
+        email: string;
+        id: number;
+      };
+      teamId: string;
+      dashboard: {
+        title: string;
+        id: number;
+      };
+      invitee: {
+        nickname: string;
+        email: string;
+        id: number;
+      };
+      inviteAccepted: true;
+      createdAt: string;
+      updatedAt: string;
+    }
+  ];
+}

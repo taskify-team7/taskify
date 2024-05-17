@@ -1,4 +1,3 @@
-import client from "./axios";
 import baseHttpClient from "./baseHttpClient";
 import { CreateColumnsRequestbody } from "./schema/requestType";
 import { ColumnListResponse, ColumnResponse } from "./schema/responseType";
@@ -18,14 +17,11 @@ export const createColumn = async (title: string, dashboardId: number) => {
 };
 
 export const getColumns = async (id: string) => {
-  try {
-    const { data } = await client.get("columns", {
-      params: { dashboardId: id },
-    });
-    return data.data;
-  } catch (e: any) {
-    console.log(e);
-  }
+  const response = await httpClient.get<
+    ColumnResponse,
+    { dashboardId: string }
+  >("columns", { dashboardId: id });
+  return response.data;
 };
 
 export const deleteColumn = async (columnId: number) => {

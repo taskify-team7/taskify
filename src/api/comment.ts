@@ -1,7 +1,6 @@
-import client from "./axios";
 import baseHttpClient from "./baseHttpClient";
 import { CreateCommentRequestbody } from "./schema/requestType";
-import { CommentnResponse } from "./schema/responseType";
+import { CommentListResponse, CommentnResponse } from "./schema/responseType";
 
 const httpClient = baseHttpClient();
 
@@ -29,16 +28,16 @@ export const getComments = async (
   columnId: number,
   cardId: number
 ) => {
-  const { data } = await client.get("comments", {
-    params: {
-      size: size,
-      cursorId: cursorId,
-      columnId: columnId,
-      cardId: cardId,
-    },
+  const response = await httpClient.get<
+    CommentListResponse,
+    { size: number; cursorId: number | null; columnId: number; cardId: number }
+  >("comments", {
+    size: size,
+    cursorId: cursorId,
+    columnId: columnId,
+    cardId: cardId,
   });
-
-  return data;
+  return response;
 };
 
 export const deleteComment = async (commentId: number) => {

@@ -1,6 +1,5 @@
-import client from "./axios";
 import baseHttpClient from "./baseHttpClient";
-import { CardResponse } from "./schema/responseType";
+import { CardListResponse, CardResponse } from "./schema/responseType";
 import {
   ChangeCardRequestbody,
   CreateCardRequestbody,
@@ -18,14 +17,11 @@ interface CardDataType {
 const httpClient = baseHttpClient();
 
 export const getCards = async (id: string) => {
-  try {
-    const { data } = await client.get("cards", {
-      params: { columnId: id, size: 100 },
-    });
-    return data.cards;
-  } catch (e: any) {
-    console.log(e);
-  }
+  const response = await httpClient.get<
+    CardListResponse,
+    { columnId: string; size: number }
+  >("cards", { columnId: id, size: 100 });
+  return response.cards;
 };
 
 export const changeCard = async (id: string, body: ChangeCardRequestbody) => {
@@ -86,7 +82,7 @@ export const updateCard = async (
   if (cardData.imageUrl && typeof cardData.imageUrl === "string") {
     requestData.imageUrl = cardData.imageUrl;
   }
-  const response = await client.put<CardResponse, ChangeCardRequestbody>(
+  const response = await httpClient.put<CardResponse, ChangeCardRequestbody>(
     `cards/${cardId}`,
     {
       ...requestData,
