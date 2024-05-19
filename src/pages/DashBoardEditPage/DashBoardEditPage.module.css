@@ -2,10 +2,8 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-
   height: 100%;
   background-color: #fafafa;
-
   overflow: auto;
 }
 .goBack {
@@ -29,6 +27,9 @@
 }
 
 @media (max-width: 767px) {
+  .container {
+    padding: 10px;
+  }
   .goBack {
     img {
       width: 18px;

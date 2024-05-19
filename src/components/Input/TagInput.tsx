@@ -26,12 +26,13 @@ function TagInput({
   };
 
   const onKeyboardAction = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.code === "Enter") {
+    // 한글 입력 오류 해결 조건문
+    if (e.code === "Enter" && e.nativeEvent.isComposing === false) {
       e.preventDefault(); // 이벤트의 기본 동작 막기
 
       const inputValue = e.currentTarget.value.trim();
-      // 한글 입력 오류 해결 조건문
-      if (inputValue.trim() !== "" && !e.nativeEvent.isComposing) {
+
+      if (inputValue.trim()) {
         //랜덤 색상 값
         const randomColor =
           colorList[Math.floor(Math.random() * colorList.length)];
