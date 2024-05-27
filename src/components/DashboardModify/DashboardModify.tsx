@@ -16,17 +16,18 @@ function DashboardModify() {
     "dashboard",
     id,
   ]);
+
   const [selectedColor, setSelectedColor] = useState<string | undefined>(
     dashboardData?.color
   );
   const [title, setTitle] = useState("");
 
   const { mutate } = useMutation({
-    mutationFn: () => updateDashboard(title, selectedColor!, Number(id)),
+    mutationFn: () => updateDashboard(title, selectedColor || "", Number(id)),
     onSettled: () => {
       const updatedDashboardData = {
         id: Number(id),
-        title,
+        title: title,
         color: selectedColor,
       };
 
@@ -57,14 +58,12 @@ function DashboardModify() {
       if (selectedColor && dashboardData) {
         mutate();
         toast.success("대시보드 이름이 수정되었습니다.");
-        setTitle(title);
         setSelectedColor(selectedColor);
       } else if (title === "") {
         toast.error("변경될 이름을 입력해주세요.");
       } else {
         toast.error("색상을 선택해주세요.");
       }
-      setTitle("");
     } catch (error) {
       console.log(error);
     }
@@ -84,6 +83,7 @@ function DashboardModify() {
             label="대시보드 이름"
             placeholder="변경할 이름을 입력해주세요"
             inputOnChange={handleTitle}
+            value={title}
           />
           <div className={style.buttonContainer}>
             <Button.Accept type="submit">변경</Button.Accept>

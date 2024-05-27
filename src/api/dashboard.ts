@@ -51,6 +51,7 @@ export const updateDashboard = async (
   color: string,
   dashboardId: number
 ) => {
+  console.log(title);
   const response = await httpClient.put<
     DashboardResponse,
     CreateDashBoardRequestbody
@@ -91,7 +92,9 @@ export const getMemberList = async (
   size?: number | null
 ) => {
   const response = await httpClient.get<MemberListResponse, {}>("members", {
-    params: { dashboardId: id, page, size },
+    dashboardId: id,
+    page: page,
+    size: size,
   });
   return response;
 };
