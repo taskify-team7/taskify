@@ -53,6 +53,11 @@
   font-weight: 400;
 }
 
+.button_list {
+  display: flex;
+  gap: 20px;
+}
+
 .login_link {
   display: flex;
   width: 280px;
@@ -280,5 +285,9 @@
 
   .settingBox > h3 {
     font-size: 22px;
+  }
+
+  .button_list {
+    flex-direction: column;
   }
 }

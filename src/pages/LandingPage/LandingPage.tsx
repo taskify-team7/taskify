@@ -2,8 +2,10 @@ import styles from "./LandingPage.module.css";
 import LandingNavbar from "../../components/LandingNavbar/LandingNavbar";
 import Footer from "../../components/LandingFooter/Footer";
 import { Link } from "react-router-dom";
+import { useDownload } from "../../hooks/useDownload";
 
 export default function Home() {
+  const { handleInstallClick } = useDownload();
   return (
     <div className={styles.container}>
       <LandingNavbar />
@@ -14,9 +16,14 @@ export default function Home() {
             새로운 일정 관리 <strong>Taskify</strong>
           </h2>
           <p>작업 일정을 손쉽게 관리하세요 !</p>
-          <Link to="/login">
-            <button className={styles.login_link}>로그인하기</button>
-          </Link>
+          <div className={styles.button_list}>
+            <button className={styles.login_link} onClick={handleInstallClick}>
+              애플리케이션 다운로드
+            </button>
+            <Link to="/login">
+              <button className={styles.login_link}>로그인하기</button>
+            </Link>
+          </div>
         </div>
         <div className={styles.explanationBox}>
           <div className={styles.explanationBox_text}>
