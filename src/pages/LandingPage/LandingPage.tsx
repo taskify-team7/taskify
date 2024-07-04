@@ -11,7 +11,7 @@ export default function Home() {
       <LandingNavbar />
       <div className={styles.main_layout}>
         <div className={styles.introBox}>
-          <img src="/Image/mainImg.svg" alt="taskify" />
+          <img className={styles.img} src="/Image/mainImg.svg" alt="taskify" />
           <h2>
             새로운 일정 관리 <strong>Taskify</strong>
           </h2>

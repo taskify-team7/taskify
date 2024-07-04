@@ -35,4 +35,8 @@
     gap: 50px;
     height: 200px;
   }
+  .company {
+    text-align: center;
+    width: 150px;
+  }
 }
