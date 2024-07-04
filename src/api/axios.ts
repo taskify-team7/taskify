@@ -25,8 +25,13 @@ client.interceptors.response.use(
         scope.setLevel("fatal"); // 레벨 설정
         Sentry.captureException(new Error("서버 500 에러 발생")); // 센트리로 보낼 에러 메세지
       });
-      return Promise.reject(err);
     }
+    if (err.response && err.response.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      alert("다시 로그인 해주세요.");
+    }
+
     return Promise.reject(err);
   }
 );
