@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function AuthPageLogo({ welcomeText }: { welcomeText: string }) {
   const navigate = useNavigate();
   return (
-    <div>
+    <div className={styles.imageBox}>
       <img
         className={styles.logoImage}
         src={LogoImageSvg}

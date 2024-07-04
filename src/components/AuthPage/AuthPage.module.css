@@ -1,36 +1,23 @@
-.container {
+.imageBox {
   display: flex;
+  align-items: center;
   flex-direction: column;
-  gap: 30px;
-  cursor: pointer;
 }
 
 .logoImage {
-  align-self: flex-end;
   width: 164.557px;
   height: 189.796px;
-  flex-shrink: 0;
-}
-
-.logoText {
-  width: 200px;
-  height: 55.186px;
-  flex-shrink: 0;
-  @media screen and (max-width: 768px) {
-    width: 119.044px;
-    height: 33.112px;
-  }
 }
 
 .welcomeText {
-  margin-top: 14px;
+  margin-top: 5px;
   color: var(--black-black_333236, #333236);
   text-align: center;
   font-size: 19px;
   font-weight: 500;
   font-style: normal;
   line-height: normal;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .redirectors {
@@ -49,4 +36,14 @@
   font-weight: 400;
   line-height: normal;
   text-decoration-line: underline;
+}
+
+@media screen and (max-width: 768px) {
+  .logoImage {
+    width: 70%;
+  }
+
+  .welcomeText {
+    margin-top: 0px;
+  }
 }
