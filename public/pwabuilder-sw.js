@@ -5,8 +5,6 @@ importScripts(
 );
 
 const CACHE = "pwabuilder-page";
-
-// TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
 const offlineFallbackPage = "offline.html";
 
 self.addEventListener("message", (event) => {
@@ -21,21 +19,7 @@ self.addEventListener("install", async (event) => {
   );
 });
 
-self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    (async function () {
-      // 네비게이션 프리로드 시작
-      const preloadResponse = event.preloadResponse;
-
-      // 네비게이션 프리로드 프로미스가 해결될 때까지 기다립니다.
-      await event.waitUntil(preloadResponse);
-
-      // 요청에 응답합니다.
-      return fetch(event.request);
-    })()
-  );
-});
-
+// 네비게이션 프리로드 활성화
 if (workbox.navigationPreload.isSupported()) {
   workbox.navigationPreload.enable();
 }
@@ -57,6 +41,26 @@ self.addEventListener("fetch", (event) => {
           const cache = await caches.open(CACHE);
           const cachedResp = await cache.match(offlineFallbackPage);
           return cachedResp;
+        }
+      })()
+    );
+  } else {
+    // 일반 fetch 이벤트 처리
+    event.respondWith(
+      (async () => {
+        const preloadResponse = await event.preloadResponse;
+
+        if (preloadResponse) {
+          return preloadResponse;
+        }
+
+        try {
+          const networkResponse = await fetch(event.request);
+          return networkResponse;
+        } catch (error) {
+          const cache = await caches.open(CACHE);
+          const cachedResponse = await cache.match(event.request);
+          return cachedResponse || fetch(event.request);
         }
       })()
     );
